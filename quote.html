@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Academia Daily Quote V3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+    <title>Classic Daily Quote</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: transparent; /* 透明背景 */
@@ -14,42 +14,47 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            color: #C5A059; /* 消光金 */
-            font-family: 'Cinzel', serif;
+            color: #C5A059; /* 消光金文字 */
+            font-family: 'Lora', serif; /* 設定全域字體 */
         }
 
         .quote-container {
             text-align: center;
-            padding: 40px 30px; /* 調整內距 */
-            max-width: 80%;
-            width: 500px;
-            border: 2px solid #C5A059; /* 金色邊框 */
-            background-color: rgba(25, 25, 25, 0.95); /* 深色半透明底 */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6); /* 更深的陰影 */
-            position: relative;
-            border-radius: 4px; /* 輕微圓角 */
+            padding: 40px 30px;
+            
+            /* 讓寬度能自動適應 Notion 欄位，最大不超過 500px */
+            width: 90%;
+            max-width: 500px;
+            
+            border: 1.5px solid #C5A059; /* 精緻的金色細邊框 */
+            background-color: rgba(25, 25, 25, 0.95); /* 深色背景 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* 柔和陰影 */
+            border-radius: 4px;
+            
+            /* 確保不會有東西跑版 */
+            box-sizing: border-box; 
         }
 
-        /* 已移除引號的 CSS 部分 (.quote-container::before) */
-
         .quote-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            line-height: 1.5;
+            font-size: 1.3rem; /* 大小適中，容易閱讀 */
+            line-height: 1.6;  /* 行距拉開，增加呼吸感 */
+            font-style: italic; /* 斜體增加語錄的優雅感 (如果不想要斜體，把這行刪掉) */
+            font-weight: 400;
             margin-bottom: 25px;
-            letter-spacing: 0.5px;
-            min-height: 80px; /* 預留高度 */
+            
+            /* 預留高度與對齊 */
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* 載入中的呼吸動畫 */
+        /* 呼吸動畫 */
         .quote-text.loading {
             animation: pulse 1.5s infinite ease-in-out;
-            font-size: 1.2rem;
-            opacity: 0.8;
+            opacity: 0.7;
+            font-style: normal;
+            font-size: 1rem;
         }
         @keyframes pulse {
             0% { opacity: 0.5; }
@@ -58,18 +63,24 @@
         }
 
         .quote-author {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px; /* 字距拉開，看起來比較高級 */
+            text-transform: uppercase; /* 全部大寫 */
             opacity: 0.8;
-            font-weight: 700;
+            font-weight: 600;
+            font-style: normal; /* 作者名維持正體 */
         }
+
+        .quote-author::before {
+            content: "— "; /* 作者名前面的破折號 */
+        }
+    </script>
     </style>
 </head>
 <body>
 
     <div class="quote-container">
-        <div class="quote-text loading" id="quote">Finding the perfect words...</div>
+        <div class="quote-text loading" id="quote">Finding wisdom...</div>
         <div class="quote-author" id="author"></div>
     </div>
 
@@ -91,8 +102,8 @@
 
             // 如果跨日了，抓取新的名言
             try {
-                // 更換為更穩定的 API
-                const response = await fetch('https://api.quotable.io/random?maxLength=100');
+                // 使用 Quotable API
+                const response = await fetch('https://api.quotable.io/random?maxLength=120');
                 const data = await response.json();
                 
                 const text = data.content;
@@ -105,19 +116,19 @@
                 localStorage.setItem('dailyQuote', text);
                 localStorage.setItem('dailyAuthor', author);
             } catch (error) {
-                // 如果 API 還是失敗，顯示這句備用名言
-                displayQuote("Wisdom begins in wonder.", "Socrates");
+                // 萬一 API 掛掉的備案
+                displayQuote("Simplicity is the ultimate sophistication.", "Leonardo da Vinci");
             }
         }
 
         function displayQuote(text, author) {
             quoteEl.innerText = text;
-            authorEl.innerText = "— " + author;
-            quoteEl.classList.remove('loading'); // 移除載入動畫
+            authorEl.innerText = author;
+            quoteEl.classList.remove('loading');
         }
 
-        // 延遲 0.5 秒執行，讓你看到漂亮的載入動畫
-        setTimeout(getQuote, 500);
+        // 稍微延遲一點點執行，確保載入順暢
+        setTimeout(getQuote, 300);
     </script>
 </body>
 </html>
