@@ -3,120 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Days - Seamless</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>Floating Gold Counter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital@1&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: transparent; /* 確保 iframe 背景透明 */
+            /* 關鍵：完全透明，不設任何底色 */
+            background-color: transparent;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            color: #C5A059; 
-            font-family: 'Lora', serif;
-        }
-
-        .outer-frame {
-            padding: 8px;
-            /* 👇 關鍵修改：改為透明，或是跟 Notion 一樣的 #191919 */
-            background-color: #191919; 
-            border: 2px solid #9E7F46; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* 陰影淡一點，比較自然 */
-            border-radius: 6px;
+            font-family: 'Cinzel', serif; /* 整體改用古典羅馬體，更霸氣 */
         }
 
         .container {
             text-align: center;
-            padding: 40px 50px;
-            min-width: 240px;
-            
-            border: 2px solid #C5A059;
-            /* 👇 關鍵修改：確保這裡也是 Notion 的顏色 */
-            background-color: #191919; 
-            position: relative;
-            
-            /* 內部微光保持，增加質感 */
-            box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.05);
+            /* 移除所有框線和背景，讓它「浮」在半空 */
+            width: 100%;
+            padding: 20px;
         }
 
-        /* 標題 */
+        /* 頂部小標 Together For */
         .title {
             font-size: 0.85rem;
+            letter-spacing: 6px; /* 字距拉超開，高級感 */
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #8A6E3D; 
-            margin-bottom: 15px;
-            font-weight: 600;
+            color: #AA8E58; /* 比較暗沉的復古金 */
+            margin-bottom: 5px;
+            opacity: 0.8;
+            font-weight: 400;
         }
 
-        /* 數字 */
+        /* 核心數字：仿金屬光澤漸層 */
         .days-count {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 5rem;
-            line-height: 1;
-            margin: 10px 0 5px;
+            font-size: 6rem; /* 超大 */
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0;
             
-            background: linear-gradient(to bottom, #E8D3A3, #C5A059);
+            /* 製作金屬反光效果 */
+            background: linear-gradient(
+                135deg, 
+                #BF953F 0%, 
+                #FCF6BA 40%, 
+                #B38728 60%, 
+                #FBF5B7 100%
+            );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+            
+            /* 加一點陰影讓它從背景跳出來 */
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
 
-        /* 單位 */
+        /* 單位 Days */
         .unit {
-            font-size: 1.4rem;
+            font-family: 'Lora', serif; /* 只有單位用草寫襯線體 */
             font-style: italic;
+            font-size: 1.5rem;
+            color: #C5A059;
+            margin-top: -10px; /* 往上吸一點 */
+            margin-bottom: 30px;
             opacity: 0.9;
-            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
-        /* 繩索分隔線 */
-        .rope-divider {
-            height: 6px;
-            background: repeating-linear-gradient(
-                45deg,
-                #9E7F46,
-                #9E7F46 4px,
-                #C5A059 4px,
-                #C5A059 8px
-            );
-            border-radius: 3px;
-            margin: 0 auto 25px;
-            width: 60%;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
-            opacity: 0.8;
+        /* 分隔線：用最簡單的細線，不做作 */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background-color: #AA8E58;
+            margin: 0 auto 20px;
+            opacity: 0.6;
+            box-shadow: 0 0 5px rgba(197, 160, 89, 0.5);
         }
 
-        /* 日期 */
+        /* 底部日期 */
         .date-start {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             color: #8A6E3D;
-            letter-spacing: 1.5px;
-            font-weight: 600;
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-    <div class="outer-frame">
-        <div class="container">
-            <div class="title">Together For</div>
-            <div class="days-count" id="days">0</div>
-            <div class="unit">Days</div>
-            
-            <div class="rope-divider"></div>
-            
-            <div class="date-start" id="startDateDisplay">Since...</div>
-        </div>
+    <div class="container">
+        <div class="title">Together</div>
+        <div class="days-count" id="days">0</div>
+        <div class="unit">days</div>
+        
+        <div class="divider"></div>
+        
+        <div class="date-start" id="startDateDisplay">Since...</div>
     </div>
 
     <script>
-        // ==========================================
-        // 👇 你的紀念日
+        // 👇 紀念日 (2023-08-10)
         const YOUR_ANNIVERSARY = "2023-08-10"; 
-        // ==========================================
 
         function updateCounter() {
             const start = new Date(YOUR_ANNIVERSARY);
@@ -126,8 +115,12 @@
 
             document.getElementById('days').innerText = diffDays;
             
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('startDateDisplay').innerText = "Since " + start.toLocaleDateString('en-US', options);
+            // 日期格式化：AUG 10 . 2023
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            let dateStr = start.toLocaleDateString('en-US', options).toUpperCase();
+            // 把逗號換成點，更有設計感
+            dateStr = dateStr.replace(',', ' .'); 
+            document.getElementById('startDateDisplay').innerText = "EST. " + dateStr;
         }
 
         updateCounter();
