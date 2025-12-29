@@ -4,45 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Daily Quote</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: transparent; /* 透明背景 */
+            /* 關鍵：完全透明背景 */
+            background-color: transparent;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            color: #C5A059; /* 消光金文字 */
-            font-family: 'Lora', serif; /* 設定全域字體 */
+            font-family: 'Lora', serif;
         }
 
         .quote-container {
             text-align: center;
-            padding: 40px 30px;
+            padding: 30px 20px;
             
-            /* 讓寬度能自動適應 Notion 欄位，最大不超過 500px */
             width: 90%;
             max-width: 500px;
             
-            border: 1.5px solid #C5A059; /* 精緻的金色細邊框 */
-            background-color: rgba(25, 25, 25, 0.95); /* 深色背景 */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* 柔和陰影 */
-            border-radius: 4px;
+            /* 移除背景色，改用透明 */
+            background-color: transparent;
             
-            /* 確保不會有東西跑版 */
+            /* 改用上下邊框設計，更有書卷氣 */
+            /* 顏色：Toasted Caramel */
+            border-top: 2px solid #84592B; 
+            border-bottom: 2px solid #84592B;
+            
+            /* 稍微加一點內光暈，讓它在深色背景更明顯 */
+            box-shadow: inset 0 0 20px rgba(132, 89, 43, 0.05);
+            
             box-sizing: border-box; 
         }
 
         .quote-text {
-            font-size: 1.3rem; /* 大小適中，容易閱讀 */
-            line-height: 1.6;  /* 行距拉開，增加呼吸感 */
-            font-style: italic; /* 斜體增加語錄的優雅感 */
-            font-weight: 400;
-            margin-bottom: 25px;
+            /* 顏色：Golden Batter (最亮，適合閱讀) */
+            color: #E8D1A7; 
             
-            /* 預留高度與對齊 */
+            font-size: 1.4rem; 
+            line-height: 1.6;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            
+            /* 文字陰影，增加立體感與可讀性 */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            
             min-height: 60px;
             display: flex;
             align-items: center;
@@ -52,34 +62,38 @@
         /* 呼吸動畫 */
         .quote-text.loading {
             animation: pulse 1.5s infinite ease-in-out;
-            opacity: 0.7;
+            opacity: 0.6;
             font-style: normal;
             font-size: 1rem;
         }
         @keyframes pulse {
-            0% { opacity: 0.5; }
+            0% { opacity: 0.4; }
             50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            100% { opacity: 0.4; }
         }
 
         .quote-author {
+            /* 顏色：Olive Harvest (次要資訊) */
+            color: #9D9167;
+            
             font-size: 0.85rem;
-            letter-spacing: 2px; /* 字距拉開，看起來比較高級 */
-            text-transform: uppercase; /* 全部大寫 */
-            opacity: 0.8;
-            font-weight: 600;
-            font-style: normal; /* 作者名維持正體 */
+            letter-spacing: 3px; 
+            text-transform: uppercase;
+            font-weight: 500;
+            font-style: normal;
+            margin-bottom: 10px;
         }
 
         .quote-author::before {
-            content: "— "; /* 作者名前面的破折號 */
+            content: "— ";
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
     <div class="quote-container">
-        <div class="quote-text loading" id="quote">Finding wisdom...</div>
+        <div class="quote-text loading" id="quote">Gathering thoughts...</div>
         <div class="quote-author" id="author"></div>
     </div>
 
@@ -93,15 +107,12 @@
             const savedQuote = localStorage.getItem('dailyQuote');
             const savedAuthor = localStorage.getItem('dailyAuthor');
 
-            // 如果日期沒變，直接讀取儲存的名言
             if (savedDate === today && savedQuote) {
                 displayQuote(savedQuote, savedAuthor);
                 return;
             }
 
-            // 如果跨日了，抓取新的名言
             try {
-                // 使用 Quotable API
                 const response = await fetch('https://api.quotable.io/random?maxLength=120');
                 const data = await response.json();
                 
@@ -110,12 +121,10 @@
 
                 displayQuote(text, author);
 
-                // 儲存到本地
                 localStorage.setItem('quoteDate', today);
                 localStorage.setItem('dailyQuote', text);
                 localStorage.setItem('dailyAuthor', author);
             } catch (error) {
-                // 萬一 API 掛掉的備案
                 displayQuote("Simplicity is the ultimate sophistication.", "Leonardo da Vinci");
             }
         }
@@ -126,7 +135,6 @@
             quoteEl.classList.remove('loading');
         }
 
-        // 稍微延遲一點點執行，確保載入順暢
         setTimeout(getQuote, 300);
     </script>
 </body>
