@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Fit Gallery</title>
+    <title>Full Width Gallery</title>
     <style>
+        html, body {
+            /* 確保外層容器也是滿的 */
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: transparent;
-            margin: 0;
-            /* 🏆 關鍵修改1：完全移除內距，讓畫作左右貼齊邊緣 */
-            padding: 0; 
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /* 🏆 關鍵修改2：間距拉大，讓它們不要擠在一起 */
+            /* 🏆 關鍵修改：移除置中，讓它自然撐滿寬度 */
+            /* align-items: center; <-- 刪除 */
+            
+            /* 間距維持 */
             gap: 35px;
             
-            /* 自動適應內容大小 */
-            height: fit-content;
-            width: fit-content;
+            /* 讓高度自動適應內容 */
+            height: auto;
             box-sizing: border-box;
-            
-            /* 確保置中 */
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .frame-container {
-            width: 180px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            /* 🏆 關鍵修改：寬度設為 100%，填滿 Notion 給的空間 */
+            width: 100%; 
+            display: block; /* 改為 block 讓它自然佔滿一行 */
             cursor: pointer;
             transition: transform 0.3s ease;
             margin: 0;
+            position: relative; /* 為絕對定位的播放器做準備 */
         }
 
         .frame-container:hover {
@@ -42,70 +43,80 @@
 
         .art-frame {
             width: 100%;
-            height: 135px; /* 維持適合橫式圖片的高度 */
+            /* 🏆 關鍵修改：高度設為自動，依圖片比例調整 */
+            height: auto; 
             
             position: relative;
             border: none;
             box-shadow: none;
             background-color: transparent;
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: block;
         }
 
         .painting-img {
+            /* 🏆 關鍵修改：圖片寬度 100%，高度自動 */
             width: 100%;
-            height: 100%;
-            object-fit: contain; 
+            height: auto;
+            
+            /* 移除 object-fit，因為現在是自然撐滿 */
+            
             /* 維持復古濾鏡 */
             filter: sepia(15%) contrast(1.1) brightness(0.9);
             transition: opacity 0.5s ease;
             
             border: none;
             box-shadow: none;
-            display: block; 
+            display: block; /* 消除底部縫隙 */
         }
 
-        .music-player {
+        /* YouTube 播放器容器 - 需要一個技巧來維持比例 */
+        .video-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             display: none;
+        }
+
+        .music-player {
+            width: 100%;
+            height: 100%;
             border: none;
             background-color: #000; 
         }
 
+        /* 播放狀態控制 */
         .playing .painting-img { opacity: 0; pointer-events: none; }
-        .playing .music-player { display: block; }
+        .playing .video-container { display: block; }
     </style>
 </head>
 <body>
 
     <div class="frame-container" onclick="playMusic(this, 'CfPxlb8-ZQ0')">
-        <div class="art-frame">
-            <img class="painting-img" src="./figures/focus.png" alt="Focus">
+        <img class="painting-img" src="./figures/focus.png" alt="Focus">
+        <div class="video-container">
             <iframe class="music-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 
     <div class="frame-container" onclick="playMusic(this, 'VUQfT3gNT3g')">
-        <div class="art-frame">
-            <img class="painting-img" src="./figures/relaxation.png" alt="Relaxation">
+        <img class="painting-img" src="./figures/relaxation.png" alt="Relaxation">
+        <div class="video-container">
             <iframe class="music-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
         function playMusic(element, videoId) {
-            const iframe = element.querySelector('.music-player');
-            const frame = element.querySelector('.art-frame');
-            if (frame.classList.contains('playing')) return;
+            // 結構改變，抓取的元素也要微調
+            const videoContainer = element.querySelector('.video-container');
+            const iframe = videoContainer.querySelector('.music-player');
+            
+            if (element.classList.contains('playing')) return;
             
             iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`;
-            frame.classList.add('playing');
+            element.classList.add('playing');
         }
     </script>
 </body>
