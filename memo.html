@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Academia Memo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* 透明背景 */
+            overflow: hidden; /* 隱藏捲軸 */
+        }
+
+        /* 核心輸入區 */
+        textarea {
+            width: 100%;
+            height: 100vh; /* 佔滿整個 iframe 高度 */
+            box-sizing: border-box;
+            
+            /* 移除所有預設醜框線 */
+            border: none;
+            outline: none;
+            resize: none; /* 禁止右下角那個拖拉圖示 */
+            background-color: transparent;
+            
+            /* 字體風格 */
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #E8D1A7; /* 你的標準奶油金 */
+            
+            /* 讓文字有一點點內距，不要貼死邊緣 */
+            padding: 15px; 
+            
+            /* 游標顏色 */
+            caret-color: #84592B; 
+        }
+
+        /* 提示文字 (Placeholder) 的樣子 */
+        textarea::placeholder {
+            color: rgba(232, 209, 167, 0.3); /* 很淡的奶油金 */
+            font-style: italic;
+        }
+
+        /* 自訂捲軸 (萬一寫太多字) - 讓他很低調 */
+        textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: rgba(132, 89, 43, 0.3);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <textarea id="memo-area" placeholder="Scribble your thoughts here..."></textarea>
+
+    <script>
+        const memoArea = document.getElementById('memo-area');
+        const STORAGE_KEY = 'notion_dark_memo_v1';
+
+        // 1. 載入：一打開網頁，就把上次存的字抓回來
+        window.addEventListener('load', () => {
+            const savedText = localStorage.getItem(STORAGE_KEY);
+            if (savedText) {
+                memoArea.value = savedText;
+            }
+        });
+
+        // 2. 儲存：每打一個字，就自動存到瀏覽器裡
+        memoArea.addEventListener('input', () => {
+            localStorage.setItem(STORAGE_KEY, memoArea.value);
+        });
+    </script>
+</body>
+</html>
