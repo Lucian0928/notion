@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Magic Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* 關鍵：背景透明，讓它直接融入 Notion 的深色背景 */
+            background-color: transparent;
+            margin: 0;
+            /* 調整 padding，適合窄欄位 */
+            padding: 30px 10px; 
+            display: flex;
+            /* 🏆 關鍵修改：改成垂直方向排列 */
+            flex-direction: column;
+            align-items: center; /* 水平置中 */
+            gap: 50px; /* 畫與畫之間的垂直距離 */
+            font-family: 'Lora', serif;
+            /* 確保高度足夠，避免被截斷 */
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* 畫框容器 */
+        .frame-container {
+            /* 稍微縮小一點寬度，更適合側邊欄 */
+            width: 180px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .frame-container:hover {
+            transform: translateY(-5px); /* 滑鼠碰到會微微浮起 */
+        }
+
+        /* 核心畫框設計 */
+        .art-frame {
+            width: 100%;
+            /* 高度按比例調整 */
+            height: 250px; 
+            position: relative;
+            overflow: hidden;
+            
+            /* Dark Academia 配色邊框 */
+            border: 5px solid #442D1C; /* 深咖啡外框 */
+            outline: 2px solid #84592B; /* 焦糖金內框 */
+            outline-offset: -7px;
+            
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7); /* 更深的陰影增加立體感 */
+            /* 畫框內部底色，萬一圖片沒載入時顯示 */
+            background-color: #191919; 
+        }
+
+        /* 油畫圖片 */
+        .painting-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 微調濾鏡，讓顏色更沉穩 */
+            filter: sepia(15%) contrast(1.1) brightness(0.9);
+            transition: opacity 0.5s ease;
+        }
+
+        /* YouTube 播放器 */
+        .music-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            border: none;
+        }
+
+        /* 下方的文字標籤 */
+        .label {
+            margin-top: 15px;
+            color: #E8D1A7; /* 奶油金文字 */
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            
+            /* 裝飾線 */
+            border-top: 1px solid #743014;
+            padding-top: 8px;
+            width: 70%;
+        }
+
+        /* 播放中的狀態 */
+        .playing .painting-img { opacity: 0; pointer-events: none; }
+        .playing .music-player { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="frame-container" onclick="playMusic(this, 'CfPxlb8-ZQ0')">
+        <div class="art-frame">
+            <img class="painting-img" src="./figures/focus.png" alt="Focus">
+            <iframe class="music-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="label">Focus</div>
+    </div>
+
+    <div class="frame-container" onclick="playMusic(this, 'VUQfT3gNT3g')">
+        <div class="art-frame">
+            <img class="painting-img" src="./figures/relaxation.png" alt="Relaxation">
+            <iframe class="music-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="label">Relaxation</div>
+    </div>
+
+    <script>
+        function playMusic(element, videoId) {
+            const iframe = element.querySelector('.music-player');
+            const frame = element.querySelector('.art-frame');
+            if (frame.classList.contains('playing')) return;
+            
+            // 載入 YouTube (自動播放)
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1`;
+            frame.classList.add('playing');
+        }
+    </script>
+</body>
+</html>
