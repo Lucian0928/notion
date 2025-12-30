@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalist Magic Gallery</title>
+    <title>Ultra-Clean Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,7 +13,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px; /* 稍微拉近一點距離 */
+            gap: 40px;
             font-family: 'Lora', serif;
             min-height: 100vh;
             box-sizing: border-box;
@@ -29,28 +29,20 @@
         }
 
         .frame-container:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px); /* 懸浮互動保留 */
         }
 
-        /* 核心畫框設計 - 極簡化 */
+        /* 核心畫框設計 - 徹底移除所有框線與陰影 */
         .art-frame {
             width: 100%;
             height: 250px;
             position: relative;
             
-            /* 🏆 關鍵修改：移除所有厚重的裝飾邊框 */
-            /* border: 5px solid #442D1C;  <-- 刪除 */
-            /* outline: 2px solid #84592B; <-- 刪除 */
-            /* outline-offset: -7px;       <-- 刪除 */
+            /* 🏆 關鍵修改：這裡什麼都不留 */
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
             
-            /* 改用一個極細微的邊線界定範圍，看起來像無框畫布 */
-            border: 1px solid rgba(132, 89, 43, 0.3);
-            border-radius: 2px; /* 極輕微的圓角，比較不刺眼 */
-            
-            /* 保留陰影增加立體感，但稍微柔和一點 */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            
-            background-color: transparent; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,11 +51,15 @@
         .painting-img {
             width: 100%;
             height: 100%;
-            /* 確保完整顯示 */
+            /* 確保完整顯示圖片本身 */
             object-fit: contain; 
-            /* 濾鏡維持，保持復古感 */
+            /* 保留一點復古濾鏡，讓它融入背景，如果你希望完全原圖，把下面這行刪掉 */
             filter: sepia(15%) contrast(1.1) brightness(0.9);
             transition: opacity 0.5s ease;
+            
+            /* 這裡也沒有任何邊框 */
+            border: none;
+            box-shadow: none;
         }
 
         .music-player {
@@ -75,23 +71,20 @@
             display: none;
             border: none;
             background-color: #000; 
-            border-radius: 2px; /* 配合外框 */
         }
 
         .label {
-            margin-top: 12px;
-            color: #E8D1A7;
+            margin-top: 15px; /* 增加一點距離 */
+            color: #E8D1A7; /* 奶油金文字 */
             font-size: 0.9rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             text-align: center;
             font-weight: 600;
+            /* 文字本身的輕微陰影保留，增加可讀性，但沒有邊框 */
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            
-            /* 🏆 關鍵修改：移除上方的裝飾橫線 (黑槓來源) */
-            /* border-top: 1px solid #743014; <-- 刪除 */
-            /* padding-top: 8px;              <-- 刪除 */
             width: 100%;
+            border: none; /* 確保沒有邊框 */
         }
 
         .playing .painting-img { opacity: 0; pointer-events: none; }
