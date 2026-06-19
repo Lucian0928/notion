@@ -24,7 +24,7 @@ export default async function handler(req, res) {
                 filter: {
                     and: [
                         {
-                            property: 'Type(類型)', // 🟢 完美對齊你的專屬欄位名稱
+                            property: 'Type', // 🟢 完美對齊你的專屬欄位名稱
                             select: {
                                 equals: 'Expense' // 🟢 對齊你的支出標籤
                             }
