@@ -60,29 +60,47 @@
         <div></div>
     </aside>
 
-    <main class="flex-1 p-10 space-y-24 overflow-y-auto scroll-smooth">
+    <main class="flex-1 p-10 space-y-16 overflow-y-auto scroll-smooth">
         
-        <div id="section-overview" class="space-y-4">
-            <h2 class="text-xl font-bold text-white tracking-wide">Overview Dashboard</h2>
-            <p class="text-sm text-gray-600">這是首頁預留區。未來用來放你還在構思的數據大卡片和當月核心摘要。</p>
+        <div id="section-overview" class="space-y-8">
+            
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl hover:border-gray-700 transition-all">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">This Month Expenses</div>
+                    <div class="text-3xl font-bold text-white tracking-tight">$8,320.00</div>
+                </div>
+
+                <div class="bg-cardBg border border-orange-500/10 p-6 rounded-2xl hover:border-orange-500/20 transition-all shadow-lg shadow-orange-500/[0.02]">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-brand mb-2">Settlement Status</div>
+                    <div class="text-2xl font-bold text-brand tracking-tight">我應補給女友 $1,200</div>
+                </div>
+            </section>
+
+            <section class="bg-cardBg border border-gray-800 rounded-2xl p-8 max-w-xl min-h-[300px] flex flex-col justify-between">
+                <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">Expense Structure</div>
+                <div class="flex-1 flex items-center justify-center text-gray-600 border border-dashed border-gray-800 rounded-xl">
+                    [ 當月消費分類圓環圖 ]
+                </div>
+            </section>
+
         </div>
 
-        <div id="section-transactions" class="space-y-4">
+        <div id="section-transactions" class="space-y-4 pt-8 border-t border-gray-900">
             <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
             <p class="text-sm text-gray-600">這是記帳明細頁。未來我們會在這裡做出記帳輸入欄位，並把 Notion 的記帳表格拉到這裡顯示。</p>
         </div>
 
-        <div id="section-wishlist" class="space-y-4">
+        <div id="section-wishlist" class="space-y-4 pt-8 border-t border-gray-900">
             <h2 class="text-xl font-bold text-white tracking-wide">Wishlist Goals</h2>
             <p class="text-sm text-gray-600">這是願望清單頁。可以連接到你們的願望 Notion 資料庫，顯示兩人共同想達成的目標。</p>
         </div>
 
-        <div id="section-inventory" class="space-y-4">
+        <div id="section-inventory" class="space-y-4 pt-8 border-t border-gray-900">
             <h2 class="text-xl font-bold text-white tracking-wide">Inventory Assets</h2>
             <p class="text-sm text-gray-600">這是資產庫存頁。未來用來管理你們的重要實體物品、設備或資產明細。</p>
         </div>
 
-        <div id="section-analytics" class="space-y-4">
+        <div id="section-analytics" class="space-y-4 pt-8 border-t border-gray-900">
             <h2 class="text-xl font-bold text-white tracking-wide">Analytics Insights</h2>
             <p class="text-sm text-gray-600">這是圖表分析頁。未來我們會在這裡引入 Chart.js，渲染出發光的漸層折線圖和消費比例圓餅圖。</p>
         </div>
