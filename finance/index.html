@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    // 背景設為極致黑，襯托光暈
+                    // 背景維持極致黑，確保光暈效果
                     colors: { brand: '#FF7A00', darkBg: '#030303', cardBg: '#09090B' }
                 }
             }
@@ -19,26 +19,27 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            /* 3. 字體發光層次：雙層白色 text-shadow 創造霓虹管發光感 */
+            /* 字體發光層次 */
             .text-glow {
                 text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2);
             }
 
-            /* 4. 頂級噪點質地：利用 SVG Fractal Noise 疊加 */
+            /* 頂級噪點質地 */
             .noise-bg::after {
                 content: "";
                 position: absolute;
                 inset: 0;
                 background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-                opacity: 0.035; /* 極低透明度，要有似無 */
+                opacity: 0.035; 
                 pointer-events: none;
                 mix-blend-mode: overlay;
                 z-index: 5;
             }
 
-            /* 1 & 2. 粉紅卡：帶紫調的冷玫瑰光 + 左上角光源 */
+            /* 1. 粉紅卡：完美揉合你提供的色碼 */
             .card-pink {
-                background: #0A080D; /* 帶紫調的極深黑 */
+                /* 🔥 使用你的色碼：#5a3139, #472c35, 到底部壓暗一點點維持對比 */
+                background: linear-gradient(145deg, #572f33 0%, #472c35 45%, #251419 100%);
                 box-shadow:
                     0 0 0 1px rgba(210,60,170,0.25),      /* 邊框光 */
                     0 0 30px 0 rgba(210,60,170,0.18),     /* 近距光暈 */
@@ -49,14 +50,15 @@
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(circle at top left, rgba(210,60,170,0.18), transparent 60%);
+                /* 🔥 使用你提供的最亮色 #9b5f66 (轉為rgba: 155,95,102) 作為內部主光源 */
+                background: radial-gradient(circle at top left, rgba(155,95,102,0.4), transparent 65%);
                 pointer-events: none;
                 z-index: 1;
             }
 
-            /* 1 & 2. 橘色卡：金屬冷黃光 + 右上角光源 */
+            /* 2. 橘色卡：對應粉紅卡的新亮度，調配溫暖金屬棕 */
             .card-orange {
-                background: #0D0A06; /* 帶暖調的極深黑 */
+                background: linear-gradient(145deg, #5a3c1f 0%, #422a15 45%, #1c1007 100%);
                 box-shadow:
                     0 0 0 1px rgba(255,122,0,0.25),       /* 邊框光 */
                     0 0 30px 0 rgba(255,122,0,0.18),      /* 近距光暈 */
@@ -67,8 +69,7 @@
                 content: "";
                 position: absolute;
                 inset: 0;
-                /* 依照你的要求，光源從右上角打下來 */
-                background: radial-gradient(circle at top right, rgba(255,200,80,0.12), transparent 60%);
+                background: radial-gradient(circle at top right, rgba(230,160,80,0.25), transparent 65%);
                 pointer-events: none;
                 z-index: 1;
             }
