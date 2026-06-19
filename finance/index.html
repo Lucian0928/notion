@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA.OS // FINANCE</title>
+    <title>FINANCE DASHBOARD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        // 🌟 把全域預設字體改成這款圓潤的現代科技字體
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
                     colors: {
                         brand: '#FF7A00', /* 科技橘 */
                         darkBg: '#0D0E12', /* 純黑底色 */
@@ -18,54 +26,63 @@
             }
         }
     </script>
-    <style>
-        body { font-family: 'Courier New', Courier, monospace; }
-    </style>
 </head>
-<body class="bg-darkBg text-gray-300 min-h-screen flex">
+<body class="bg-darkBg text-gray-300 min-h-screen flex font-sans">
 
     <aside class="w-64 h-screen bg-darkBg border-r border-gray-800 p-6 flex flex-col justify-between sticky top-0">
         <div>
-            <div class="text-lg font-bold tracking-wider text-brand mb-10 flex items-center gap-2">
-                <span>❖</span> AURA.OS // FIN
-            </div>
-
-            <nav class="space-y-2">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/20 font-medium transition-all duration-200">
+            <nav class="space-y-2 mt-4">
+                <a href="#section-overview" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/20 font-semibold tracking-wide transition-all duration-200">
                     <span class="text-xl">📊</span> Overview
                 </a>
                 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-800/40 hover:text-white transition-all duration-200 group">
+                <a href="#section-transactions" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <span class="text-xl opacity-60 group-hover:opacity-100">💸</span> Transactions
                 </a>
                 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-800/40 hover:text-white transition-all duration-200 group">
+                <a href="#section-wishlist" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <span class="text-xl opacity-60 group-hover:opacity-100">🛒</span> Wishlist
                 </a>
                 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-800/40 hover:text-white transition-all duration-200 group">
+                <a href="#section-inventory" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <span class="text-xl opacity-60 group-hover:opacity-100">📦</span> Inventory
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-800/40 hover:text-white transition-all duration-200 group">
+                <a href="#section-analytics" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <span class="text-xl opacity-60 group-hover:opacity-100">📈</span> Analytics
                 </a>
             </nav>
         </div>
-
-        <div class="space-y-2">
-            <div class="text-xs text-gray-600 font-bold px-4 mb-2 tracking-widest">QUICK ACTION</div>
-            <button class="w-full bg-brand hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/10 active:scale-95">
-                <span>🍔</span> 記共同餐飲
-            </button>
-        </div>
+        <div></div>
     </aside>
 
-    <main class="flex-1 p-10">
-        <header>
-            <h1 class="text-2xl font-bold text-white tracking-tight">Workspace // Overview</h1>
-            <p class="text-xs text-gray-500 mt-1">Left sidebar updated with custom modules.</p>
-        </header>
+    <main class="flex-1 p-10 space-y-24 overflow-y-auto scroll-smooth">
+        
+        <div id="section-overview" class="space-y-4">
+            <h2 class="text-xl font-bold text-white tracking-wide">Overview Dashboard</h2>
+            <p class="text-sm text-gray-600">這是首頁預留區。未來用來放你還在構思的數據大卡片和當月核心摘要。</p>
+        </div>
+
+        <div id="section-transactions" class="space-y-4">
+            <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
+            <p class="text-sm text-gray-600">這是記帳明細頁。未來我們會在這裡做出記帳輸入欄位，並把 Notion 的記帳表格拉到這裡顯示。</p>
+        </div>
+
+        <div id="section-wishlist" class="space-y-4">
+            <h2 class="text-xl font-bold text-white tracking-wide">Wishlist Goals</h2>
+            <p class="text-sm text-gray-600">這是願望清單頁。可以連接到你們的願望 Notion 資料庫，顯示兩人共同想達成的目標。</p>
+        </div>
+
+        <div id="section-inventory" class="space-y-4">
+            <h2 class="text-xl font-bold text-white tracking-wide">Inventory Assets</h2>
+            <p class="text-sm text-gray-600">這是資產庫存頁。未來用來管理你們的重要實體物品、設備或資產明細。</p>
+        </div>
+
+        <div id="section-analytics" class="space-y-4">
+            <h2 class="text-xl font-bold text-white tracking-wide">Analytics Insights</h2>
+            <p class="text-sm text-gray-600">這是圖表分析頁。未來我們會在這裡引入 Chart.js，渲染出發光的漸層折線圖和消費比例圓餅圖。</p>
+        </div>
+
     </main>
 
 </body>
