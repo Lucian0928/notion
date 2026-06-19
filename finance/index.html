@@ -20,68 +20,47 @@
 <body class="bg-darkBg text-gray-300 min-h-screen flex font-sans">
 
     <aside class="w-64 h-screen bg-darkBg border-r border-neutral-800 p-6 flex flex-col justify-between sticky top-0">
-        <div>
-            <nav class="space-y-2 mt-4" id="sidebar-nav">
-                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]">
-                    <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
-                    <span>Overview</span>
-                </a>
-                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 transition-all duration-200">
-                    <svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                    <span>Transactions</span>
-                </a>
-            </nav>
-        </div>
+        <nav class="space-y-2 mt-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold shadow-[0_0_10px_rgba(255,122,0,0.1)]">
+                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
+                <span>Overview</span>
+            </a>
+        </nav>
     </aside>
 
     <main class="flex-1 p-10 overflow-y-auto">
         <div id="page-overview" class="content-page space-y-8">
-            
-            <section class="max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section class="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative p-5 rounded-2xl bg-gradient-to-b from-[#482B30] to-[#392226] border border-[#88424E] shadow-xl">
-                    <div class="flex justify-between items-center mb-2.5">
-                        <span class="text-[14px] font-medium text-[#B29CA0]">Monthly Expense</span>
-                        <div id="trend-icon" class="text-[#B29CA0]"><div class="w-5 h-5 animate-pulse bg-neutral-700 rounded-full"></div></div>
+                <div class="relative p-6 rounded-3xl border border-white/5 shadow-2xl overflow-hidden group">
+                    <div class="absolute inset-0 opacity-40 blur-[40px]" style="background: radial-gradient(circle at 10% 10%, #FF2B6D 0%, transparent 50%), radial-gradient(circle at 90% 90%, #88424E 0%, transparent 50%);"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-[14px] font-medium text-[#D4B6BB]">Monthly Expense</span>
+                            <div id="trend-icon"></div>
+                        </div>
+                        <div id="expense-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
+                        <div id="mom-text" class="text-[13px] font-medium text-[#B29CA0]">Calculating...</div>
                     </div>
-                    <div id="expense-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
-                    <div id="mom-text" class="text-[13px] font-medium text-[#B29CA0] animate-pulse">Calculating...</div>
                 </div>
 
-                <div class="relative p-5 rounded-2xl bg-gradient-to-b from-[#332A1D] to-[#1F1B16] border border-[#5D4E36] shadow-xl">
-                    <div class="flex justify-between items-center mb-2.5">
-                        <span class="text-[14px] font-medium text-[#BCA683]">Available Balance</span>
-                        <svg class="w-5 h-5 text-[#E6B97A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div class="relative p-6 rounded-3xl border border-white/5 shadow-2xl overflow-hidden group">
+                    <div class="absolute inset-0 opacity-40 blur-[40px]" style="background: radial-gradient(circle at 10% 10%, #FF7A00 0%, transparent 50%), radial-gradient(circle at 90% 90%, #E6B97A 0%, transparent 50%);"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-[14px] font-medium text-[#D9CAB3]">Available Balance</span>
+                            <svg class="w-5 h-5 text-[#FF7A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div id="balance-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
+                        <div class="text-[13px] font-medium text-[#FF7A00]/80">Liquid Funds</div>
                     </div>
-                    <div id="balance-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
-            
                 </div>
 
             </section>
         </div>
-        
-        <div id="page-transactions" class="content-page space-y-4 hidden">
-            <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
-        </div>
     </main>
 
     <script>
-        // 1. 分頁切換邏輯
-        const navItems = document.querySelectorAll('.nav-item');
-        const contentPages = document.querySelectorAll('.content-page');
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                navItems.forEach(nav => {
-                    nav.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 transition-all duration-200";
-                });
-                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]";
-                contentPages.forEach(p => p.classList.add('hidden'));
-                document.getElementById(item.getAttribute('data-target')).classList.remove('hidden');
-            });
-        });
-
-        // 2. 獲取支出數據 (綠色箭頭版)
         async function fetchExpenseData() {
             const amountEl = document.getElementById('expense-amount');
             const momEl = document.getElementById('mom-text');
@@ -90,14 +69,11 @@
             try {
                 const res = await fetch('/api/get-expense');
                 const data = await res.json();
-                
                 if (data.total !== undefined) {
                     amountEl.classList.remove('animate-pulse');
                     amountEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
                     
-                    momEl.classList.remove('animate-pulse');
                     const formattedMom = Math.abs(data.mom).toFixed(1);
-
                     const upArrow = `<svg class="w-5 h-5 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
                     const downArrow = `<svg class="w-5 h-5 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
 
@@ -109,37 +85,23 @@
                         momEl.innerText = `(-${formattedMom}% MoM)`;
                         momEl.className = 'text-[13px] font-medium text-[#76A88A]';
                         iconEl.innerHTML = downArrow;
-                    } else {
-                        momEl.innerText = `(0.0% MoM)`;
-                        momEl.className = 'text-[13px] font-medium text-[#B29CA0]';
-                        iconEl.innerHTML = ''; 
                     }
                 }
-            } catch (e) {
-                amountEl.innerText = '讀取錯誤';
-                momEl.innerText = 'N/A';
-            }
+            } catch (e) { amountEl.innerText = '讀取錯誤'; }
         }
 
-        // 3. 獲取餘額數據 (修正這裡：現在加上了函數定義)
         async function fetchBalanceData() {
             const balanceEl = document.getElementById('balance-amount');
             try {
                 const res = await fetch('/api/get-balance');
                 const data = await res.json();
-                
                 if (data.total !== undefined) {
                     balanceEl.classList.remove('animate-pulse');
                     balanceEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-                } else {
-                    balanceEl.innerText = '讀取錯誤';
                 }
-            } catch (e) {
-                balanceEl.innerText = '連線失敗';
-            }
+            } catch (e) { balanceEl.innerText = '錯誤'; }
         }
 
-        // 執行
         fetchExpenseData();
         fetchBalanceData();
     </script>
