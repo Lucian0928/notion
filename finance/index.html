@@ -18,8 +18,8 @@
                     },
                     colors: {
                         brand: '#FF7A00', /* 科技橘 */
-                        notionBg: '#191919', /* 🌟 Notion 官方正統暗黑底色 */
-                        notionCard: '#202020', /* 🌟 Notion 官方正統卡片/側邊欄底色 */
+                        notionBg: '#191919', /* Notion 官方正統暗黑底色 */
+                        notionCard: '#202020', /* Notion 官方正統卡片底色 */
                     }
                 }
             }
@@ -63,39 +63,78 @@
     <main class="flex-1 p-10 overflow-y-auto bg-notionBg">
         
         <div id="page-overview" class="content-page space-y-8">
-            <section class="max-w-xl">
-                <div class="bg-notionCard border border-neutral-800 p-6 rounded-2xl hover:border-neutral-700 transition-all">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-2">This Month Expenses</div>
-                    <div class="text-3xl font-bold text-white tracking-tight">$8,320.00</div>
+            
+            <section class="max-w-2xl bg-notionCard border border-neutral-800 rounded-3xl p-8 hover:border-neutral-700 transition-all">
+                <div class="flex flex-col sm:flex-row items-center gap-12">
+                    
+                    <div class="relative w-56 h-56 flex items-center justify-center">
+                        <div class="absolute inset-0 rounded-full border-4 border-dashed border-neutral-800 flex items-center justify-center"></div>
+                        
+                        <div class="text-center z-10">
+                            <span class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-1">Monthly Expense</span>
+                            <span class="block text-3xl font-bold text-white tracking-tight">$8,320.00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 w-full space-y-4">
+                        <div class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 border-b border-neutral-800 pb-2">Structure</div>
+                        
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                                <span class="font-medium text-neutral-300">🍔 Food & Dining</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500">42%</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                                <span class="font-medium text-neutral-300">🛒 Groceries</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500">28%</span>
+                        </div>
+
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                <span class="font-medium text-neutral-300">🎬 Entertainment</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500">18%</span>
+                        </div>
+
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                                <span class="font-medium text-neutral-300">🏠 Others</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500">12%</span>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
-            <section class="bg-notionCard border border-neutral-800 rounded-2xl p-8 max-w-xl min-h-[300px] flex flex-col justify-between">
-                <div class="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-4">Expense Structure</div>
-                <div class="flex-1 flex items-center justify-center text-neutral-600 border border-dashed border-neutral-800 rounded-xl">
-                    [ 當月消費分類圓環圖 ]
-                </div>
-            </section>
         </div>
 
         <div id="page-transactions" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
-            <p class="text-sm text-neutral-500">這是獨立的記帳明細頁。未來點到這一頁時，右邊只會出現這裡的記帳欄位與資料庫表格。</p>
+            <p class="text-sm text-neutral-500">這是獨立的記帳明細頁。</p>
         </div>
 
         <div id="page-wishlist" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Wishlist Goals</h2>
-            <p class="text-sm text-neutral-500">這是獨立的願望清單頁。可以連接到你們的願望 Notion 資料庫，顯示兩人共同想達成的目標。</p>
+            <p class="text-sm text-neutral-500">這是獨立的願望清單頁。</p>
         </div>
 
         <div id="page-inventory" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Inventory Assets</h2>
-            <p class="text-sm text-neutral-500">這是獨立的資產庫存頁。未來用來管理你們的重要實體物品、設備或資產明細。</p>
+            <p class="text-sm text-neutral-500">這是獨立的資產庫存頁。</p>
         </div>
 
         <div id="page-analytics" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Analytics Insights</h2>
-            <p class="text-sm text-neutral-500">這是獨立的圖表分析頁。未來我們會在這裡引入 Chart.js，渲染出發光的漸層折線圖和消費比例圓餅圖。</p>
+            <p class="text-sm text-neutral-500">這是獨立的圖表分析頁。</p>
         </div>
 
     </main>
