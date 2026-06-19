@@ -13,14 +13,8 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: '#FF7A00',
-                        darkBg: '#0D0E12',
-                        cardBg: '#191919',
-                    }
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: { brand: '#FF7A00', darkBg: '#0D0E12', cardBg: '#191919' }
                 }
             }
         }
@@ -45,26 +39,26 @@
 
     <main class="flex-1 p-10 overflow-y-auto">
         <div id="page-overview" class="content-page space-y-8">
-            
             <section class="max-w-sm">
                 <div class="relative p-5 w-72 rounded-2xl bg-gradient-to-b from-[#482B30] to-[#392226] border border-[#88424E] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.15),inset_0_-1.5px_3px_rgba(255,255,255,0.1),0_8px_30px_rgba(139,70,83,0.25)] transition-all duration-300">
 
                     <div class="flex justify-between items-center mb-2.5">
                         <span class="text-[14px] font-medium text-[#B29CA0]">Monthly Expense</span>
-                        <svg class="w-4 h-4 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
+                        <div id="trend-icon" class="text-[#B29CA0]">
+                            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="32" stroke-dashoffset="32" stroke-linecap="round"></circle></svg>
+                        </div>
                     </div>
 
                     <div id="expense-amount" class="text-[34px] font-bold text-white tracking-tight leading-tight mb-1 animate-pulse">
-                        loading...
+                        Loading...
                     </div>
 
-                    <div class="text-[13px] font-medium text-[#D46F7B]">
-                        (+0.0% MoM)
+                    <div id="mom-text" class="text-[13px] font-medium text-[#B29CA0] animate-pulse">
+                        Calculating...
                     </div>
 
                 </div>
             </section>
-
         </div>
         
         <div id="page-transactions" class="content-page space-y-4 hidden">
@@ -74,7 +68,7 @@
     </main>
 
     <script>
-        // 1. 分頁切換邏輯
+        // 分頁切換邏輯
         const navItems = document.querySelectorAll('.nav-item');
         const contentPages = document.querySelectorAll('.content-page');
 
@@ -92,36 +86,64 @@
                 if(activeSvg) activeSvg.className = "w-5 h-5 text-brand";
 
                 contentPages.forEach(page => page.classList.add('hidden'));
-
-                const targetId = item.getAttribute('data-target');
-                document.getElementById(targetId).classList.remove('hidden');
+                document.getElementById(item.getAttribute('data-target')).classList.remove('hidden');
             });
         });
 
-        // 2. 串接 API 讀取 Notion 資料
+        // 串接 API 讀取 Notion 資料與渲染 UI
         async function fetchExpenseData() {
             const amountElement = document.getElementById('expense-amount');
+            const momElement = document.getElementById('mom-text');
+            const trendIcon = document.getElementById('trend-icon');
             
             try {
-                // 呼叫我們寫好的後端 API
                 const response = await fetch('/api/get-expense');
                 const data = await response.json();
                 
                 if (data.total !== undefined) {
-                    // 移除閃爍特效
+                    // 更新主金額
                     amountElement.classList.remove('animate-pulse');
-                    // 將數字格式化 (例如：283 變成 $283.00)
                     amountElement.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    
+                    // 移除 MoM 的載入動畫
+                    momElement.classList.remove('animate-pulse');
+                    
+                    // 定義兩折線箭頭的 SVG
+                    const upArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                    const downArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+                    
+                    const formattedMom = Math.abs(data.mom).toFixed(1);
+
+                    if (data.mom > 0) {
+                        // 超支：粉紅色 + 向上折線箭頭
+                        momElement.innerText = `(+${formattedMom}% MoM)`;
+                        momElement.className = 'text-[13px] font-medium text-[#D46F7B]';
+                        trendIcon.className = 'text-[#D46F7B]';
+                        trendIcon.innerHTML = upArrowSvg;
+                    } else if (data.mom < 0) {
+                        // 省錢：莫蘭迪綠色 + 向下折線箭頭
+                        momElement.innerText = `(-${formattedMom}% MoM)`;
+                        momElement.className = 'text-[13px] font-medium text-[#76A88A]';
+                        trendIcon.className = 'text-[#76A88A]';
+                        trendIcon.innerHTML = downArrowSvg;
+                    } else {
+                        // 持平：原中性色
+                        momElement.innerText = `(0.0% MoM)`;
+                        momElement.className = 'text-[13px] font-medium text-[#B29CA0]';
+                        trendIcon.className = 'text-[#B29CA0]';
+                        // 橫線箭頭
+                        trendIcon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+                    }
                 } else {
                     amountElement.innerText = '讀取錯誤';
+                    momElement.innerText = 'N/A';
                 }
             } catch (error) {
-                console.error('前端獲取資料失敗:', error);
                 amountElement.innerText = '連線失敗';
+                momElement.innerText = 'N/A';
             }
         }
 
-        // 網頁載入時立刻執行這個函數
         fetchExpenseData();
     </script>
 
