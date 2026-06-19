@@ -30,28 +30,28 @@
 
     <aside class="w-64 h-screen bg-darkBg border-r border-gray-800 p-6 flex flex-col justify-between sticky top-0">
         <div>
-            <nav class="space-y-2 mt-4">
-                <a href="#section-overview" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/20 font-semibold tracking-wide transition-all duration-200">
+            <nav class="space-y-2 mt-4" id="sidebar-nav">
+                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/20 font-semibold tracking-wide transition-all duration-200">
                     <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                     <span>Overview</span>
                 </a>
                 
-                <a href="#section-transactions" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
+                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                     <span>Transactions</span>
                 </a>
                 
-                <a href="#section-wishlist" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
+                <a href="#" data-target="page-wishlist" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     <span>Wishlist</span>
                 </a>
                 
-                <a href="#section-inventory" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
+                <a href="#" data-target="page-inventory" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14v10l-8-4m0 0v10l8 4"></path></svg>
                     <span>Inventory</span>
                 </a>
 
-                <a href="#section-analytics" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
+                <a href="#" data-target="page-analytics" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     <span>Analytics</span>
                 </a>
@@ -60,13 +60,12 @@
         <div></div>
     </aside>
 
-    <main class="flex-1 p-10 space-y-16 overflow-y-auto scroll-smooth">
+    <main class="flex-1 p-10 overflow-y-auto">
         
-        <div id="section-overview" class="space-y-8">
-            
+        <div id="page-overview" class="content-page space-y-8">
             <section class="max-w-xl">
                 <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl hover:border-gray-700 transition-all">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Monthly Expenses</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">This Month Expenses</div>
                     <div class="text-3xl font-bold text-white tracking-tight">$8,320.00</div>
                 </div>
             </section>
@@ -77,30 +76,59 @@
                     [ 當月消費分類圓環圖 ]
                 </div>
             </section>
-
         </div>
 
-        <div id="section-transactions" class="space-y-4 pt-8 border-t border-gray-900">
+        <div id="page-transactions" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
-            <p class="text-sm text-gray-600">這是記帳明細頁。未來我們會在這裡做出記帳輸入欄位，並把 Notion 的記帳表格拉到這裡顯示。</p>
+            <p class="text-sm text-gray-600">這是獨立的記帳明細頁。未來點到這一頁時，右邊只會出現這裡的記帳欄位與資料庫表格。</p>
         </div>
 
-        <div id="section-wishlist" class="space-y-4 pt-8 border-t border-gray-900">
+        <div id="page-wishlist" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Wishlist Goals</h2>
-            <p class="text-sm text-gray-600">這是願望清單頁。可以連接到你們的願望 Notion 資料庫，顯示兩人共同想達成的目標。</p>
+            <p class="text-sm text-gray-600">這是獨立的願望清單頁。可以連接到你們的願望 Notion 資料庫，顯示兩人共同想達成的目標。</p>
         </div>
 
-        <div id="section-inventory" class="space-y-4 pt-8 border-t border-gray-900">
+        <div id="page-inventory" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Inventory Assets</h2>
-            <p class="text-sm text-gray-600">這是資產庫存頁。未來用來管理你們的重要實體物品、設備或資產明細。</p>
+            <p class="text-sm text-gray-600">這是獨立的資產庫存頁。未來用來管理你們的重要實體物品、設備或資產明細。</p>
         </div>
 
-        <div id="section-analytics" class="space-y-4 pt-8 border-t border-gray-900">
+        <div id="page-analytics" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Analytics Insights</h2>
-            <p class="text-sm text-gray-600">這是圖表分析頁。未來我們會在這裡引入 Chart.js，渲染出發光的漸層折線圖和消費比例圓餅圖。</p>
+            <p class="text-sm text-gray-600">這是獨立的圖表分析頁。未來我們會在這裡引入 Chart.js，渲染出發光的漸層折線圖和消費比例圓餅圖。</p>
         </div>
 
     </main>
+
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentPages = document.querySelectorAll('.content-page');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // 1. 先把所有按鈕全部打回原形（灰色未選中樣式）
+                navItems.forEach(nav => {
+                    const svg = nav.querySelector('svg');
+                    nav.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800/40 hover:text-white font-medium tracking-wide transition-all duration-200 group";
+                    if(svg) svg.className = "w-5 h-5 text-gray-500 group-hover:text-white transition-colors duration-200";
+                });
+                
+                // 2. 把點擊的那顆按鈕高亮（橘色選中樣式）
+                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/20 font-semibold tracking-wide transition-all duration-200";
+                const activeSvg = item.querySelector('svg');
+                if(activeSvg) activeSvg.className = "w-5 h-5 text-brand";
+
+                // 3. 把右側所有分頁全部藏起來
+                contentPages.forEach(page => page.classList.add('hidden'));
+
+                // 4. 只把點擊對應的那一頁 hidden 拿掉，秀出乾淨的內容
+                const targetId = item.getAttribute('data-target');
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
