@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
     if (!NOTION_API_KEY || !NOTION_DATABASE_ID) {
-        return res.status(500).json({ error: '找不到 Notion 金鑰' });
+        return res.status(500).json({ error: '找不到 Notion 金鑰，請檢查 Vercel 環境變數。' });
     }
 
     try {
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
         const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).toISOString();
 
-        // 去敲 Notion 的門
+        // 帶上鑰匙，去敲 Notion 的門
         const response = await fetch(`https://api.notion.com/v1/databases/${NOTION_DATABASE_ID}/query`, {
             method: 'POST',
             headers: {
@@ -24,13 +24,13 @@ export default async function handler(req, res) {
                 filter: {
                     and: [
                         {
-                            property: 'Type', // ⚠️ 你的「支出/收入」欄位名稱
+                            property: 'Type(類型)', // 🟢 完美對齊你的專屬欄位名稱
                             select: {
-                                equals: 'Expense' // ⚠️ 你標示支出的「標籤名稱」
+                                equals: 'Expense' // 🟢 對齊你的支出標籤
                             }
                         },
                         {
-                            property: 'Date', // ⚠️ 你的「日期」欄位名稱
+                            property: 'Date', // 🟢 對齊日期
                             date: {
                                 on_or_after: firstDay
                             }
@@ -47,21 +47,26 @@ export default async function handler(req, res) {
         });
 
         if (!response.ok) {
-            return res.status(response.status).json({ error: '無法讀取 Notion' });
+            const errorText = await response.text();
+            console.error('Notion API 拒絕訪問:', errorText);
+            return res.status(response.status).json({ error: '無法讀取 Notion 資料庫', details: errorText });
         }
 
         const data = await response.json();
 
-        // 算出總金額
+        // 把抓回來的資料，用 for 迴圈算出總金額
         let totalAmount = 0;
         data.results.forEach(page => {
-            const amount = page.properties.Amount?.number || 0; // ⚠️ 你的「金額」欄位名稱
+            // 🟢 對齊金額欄位 'Amount'
+            const amount = page.properties.Amount?.number || 0;
             totalAmount += amount;
         });
 
+        // 成功！把算好的總金額丟出去
         return res.status(200).json({ total: totalAmount });
 
     } catch (error) {
+        console.error('後端程式發生錯誤:', error);
         return res.status(500).json({ error: '伺服器內部錯誤' });
     }
 }
