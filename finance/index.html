@@ -17,9 +17,9 @@
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        brand: '#FF7A00', /* 科技橘 */
-                        darkBg: '#0D0E12', /* 極致暗黑底色 */
-                        cardBg: '#191919', /* 高級墨黑卡片底色 */
+                        brand: '#FF7A00',
+                        darkBg: '#0D0E12',
+                        cardBg: '#191919',
                     }
                 }
             }
@@ -35,33 +35,15 @@
                     <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                     <span>Overview</span>
                 </a>
-                
                 <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                     <span>Transactions</span>
                 </a>
-                
-                <a href="#" data-target="page-wishlist" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
-                    <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <span>Wishlist</span>
-                </a>
-                
-                <a href="#" data-target="page-inventory" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
-                    <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14v10l-8-4m0 0v10l8 4"></path></svg>
-                    <span>Inventory</span>
-                </a>
-
-                <a href="#" data-target="page-analytics" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
-                    <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    <span>Analytics</span>
-                </a>
             </nav>
         </div>
-        <div></div>
     </aside>
 
     <main class="flex-1 p-10 overflow-y-auto">
-        
         <div id="page-overview" class="content-page space-y-8">
             
             <section class="max-w-sm">
@@ -72,31 +54,27 @@
                         <svg class="w-4 h-4 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
                     </div>
 
-                    <div class="text-[34px] font-bold text-white tracking-tight leading-tight mb-1">
-                        $8,320.00
+                    <div id="expense-amount" class="text-[34px] font-bold text-white tracking-tight leading-tight mb-1 animate-pulse">
+                        讀取中...
                     </div>
 
                     <div class="text-[13px] font-medium text-[#D46F7B]">
-                        (+9.3% MoM)
+                        (+0.0% MoM)
                     </div>
 
                 </div>
             </section>
 
         </div>
-
+        
         <div id="page-transactions" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
             <p class="text-sm text-neutral-500">這是獨立的記帳明細頁。</p>
         </div>
-
-        <div id="page-wishlist" class="content-page hidden"></div>
-        <div id="page-inventory" class="content-page hidden"></div>
-        <div id="page-analytics" class="content-page hidden"></div>
-
     </main>
 
     <script>
+        // 1. 分頁切換邏輯
         const navItems = document.querySelectorAll('.nav-item');
         const contentPages = document.querySelectorAll('.content-page');
 
@@ -119,6 +97,32 @@
                 document.getElementById(targetId).classList.remove('hidden');
             });
         });
+
+        // 2. 串接 API 讀取 Notion 資料
+        async function fetchExpenseData() {
+            const amountElement = document.getElementById('expense-amount');
+            
+            try {
+                // 呼叫我們寫好的後端 API
+                const response = await fetch('/api/get-expense');
+                const data = await response.json();
+                
+                if (data.total !== undefined) {
+                    // 移除閃爍特效
+                    amountElement.classList.remove('animate-pulse');
+                    // 將數字格式化 (例如：283 變成 $283.00)
+                    amountElement.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                } else {
+                    amountElement.innerText = '讀取錯誤';
+                }
+            } catch (error) {
+                console.error('前端獲取資料失敗:', error);
+                amountElement.innerText = '連線失敗';
+            }
+        }
+
+        // 網頁載入時立刻執行這個函數
+        fetchExpenseData();
     </script>
 
 </body>
