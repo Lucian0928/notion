@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA.OS // FINANCE</title>
+    <title>FINANCE DASHBOARD</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,14 +19,7 @@
                     colors: {
                         brand: '#FF7A00', /* 科技橘 */
                         darkBg: '#0D0E12', /* 極致暗黑底色 */
-                        cardBg: '#191919', /* 高級墨黑卡片底色 (基底) */
-                        notionCard: '#1E1F26', /* 🌟 調整後的 Notion 卡片底色，增加暖透明度 */
-                    },
-                    boxShadow: {
-                        /* 🌟 核心魔術：定義 Pinterest 風的柔和發光光暈 */
-                        'glow': '0 0 10px rgba(255, 122, 0, 0.1), 0 0 15px rgba(255, 122, 0, 0.05)',
-                        /* 🌟 紅葡萄酒色賽博龐克光暈 */
-                        'glow-warm': '0 0 10px rgba(255, 122, 0, 0.1), 0 0 20px rgba(255, 122, 0, 0.05), 0 0 30px rgba(153, 61, 61, 0.03)',
+                        cardBg: '#191919', /* 高級墨黑卡片底色 */
                     }
                 }
             }
@@ -37,32 +30,28 @@
 
     <aside class="w-64 h-screen bg-darkBg border-r border-neutral-800 p-6 flex flex-col justify-between sticky top-0">
         <div>
-            <div class="text-xs font-bold uppercase tracking-widest text-brand mb-10 flex items-center gap-2">
-                <span>◆</span> AURA.OS // FIN
-            </div>
-
-            <nav class="space-y-2" id="sidebar-nav">
-                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide transition-all duration-200 shadow-glow">
+            <nav class="space-y-2 mt-4" id="sidebar-nav">
+                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]">
                     <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                     <span>Overview</span>
                 </a>
                 
-                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group group">
+                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                     <span>Transactions</span>
                 </a>
                 
-                <a href="#" data-target="page-wishlist" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group group">
+                <a href="#" data-target="page-wishlist" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     <span>Wishlist</span>
                 </a>
                 
-                <a href="#" data-target="page-inventory" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group group">
+                <a href="#" data-target="page-inventory" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14v10l-8-4m0 0v10l8 4"></path></svg>
                     <span>Inventory</span>
                 </a>
 
-                <a href="#" data-target="page-analytics" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group group">
+                <a href="#" data-target="page-analytics" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
                     <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     <span>Analytics</span>
                 </a>
@@ -71,51 +60,68 @@
         <div></div>
     </aside>
 
-    <main class="flex-1 p-10 space-y-12 overflow-y-auto bg-darkBg">
+    <main class="flex-1 p-10 overflow-y-auto">
         
-        <header class="flex justify-between items-center max-w-2xl">
-            <h1 class="text-xl font-bold text-white tracking-wide">Workspace // Overview</h1>
-            <div class="text-[11px] font-bold text-neutral-600 tracking-widest bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">SYSTEM_LIVE // 2026</div>
-        </header>
-
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+        <div id="page-overview" class="content-page space-y-8">
             
-            <div class="bg-notionCard border border-orange-500/10 rounded-2xl p-6 relative overflow-hidden group shadow-glow-warm min-h-[300px]">
-                <div class="absolute -inset-10 bg-brand/5 rounded-full blur-3xl -z-10 opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                
-                <div class="flex items-center gap-6">
-                    <div class="relative w-40 h-40 flex items-center justify-center flex-shrink-0">
-                        <div class="absolute inset-0 rounded-full border border-dashed border-neutral-800 flex items-center justify-center animate-pulse"></div>
-                    </div>
+            <section class="max-w-sm">
+                <div class="relative p-6 rounded-2xl bg-gradient-to-br from-[#3a1d24] to-[#241116] border border-[#8a3f4b] shadow-[0_0_25px_rgba(215,80,95,0.15)] hover:shadow-[0_0_35px_rgba(215,80,95,0.25)] transition-shadow duration-300">
                     
-                    <div class="flex-1 space-y-2">
-                        <span class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500">Monthly Expense</span>
-                        <span class="block text-4xl font-bold text-white tracking-tight">$8,320.00</span>
+                    <div class="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none"></div>
+
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-[15px] font-medium text-[#b59a9e]">Monthly Expense</span>
+                        <svg class="w-5 h-5 text-[#d86f7b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
                     </div>
-                </div>
-                
-                </div>
 
-            <div class="bg-notionCard border border-orange-500/10 rounded-2xl p-6 relative overflow-hidden group shadow-glow-warm">
-                <div class="absolute -inset-10 bg-brand/5 rounded-full blur-3xl -z-10 opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500">SETTLEMENT STATUS</span>
-                    <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                </div>
+                    <div class="text-[38px] font-bold text-white tracking-tight mb-1">
+                        $8,320.00
+                    </div>
 
-                <div class="text-3xl font-bold tracking-tight text-brand mb-1">
-                    我應補給女友 $1,200
-                </div>
+                    <div class="text-[15px] font-medium text-[#d86f7b]">
+                        (+9.3% MoM)
+                    </div>
 
-                <div class="text-xs text-neutral-600 font-mono">
-                    (+1.2% MoM)
                 </div>
-            </div>
+            </section>
 
-        </section>
+        </div>
+
+        <div id="page-transactions" class="content-page space-y-4 hidden">
+            <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
+            <p class="text-sm text-neutral-500">這是獨立的記帳明細頁。</p>
+        </div>
+
+        <div id="page-wishlist" class="content-page hidden"></div>
+        <div id="page-inventory" class="content-page hidden"></div>
+        <div id="page-analytics" class="content-page hidden"></div>
 
     </main>
+
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentPages = document.querySelectorAll('.content-page');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                navItems.forEach(nav => {
+                    const svg = nav.querySelector('svg');
+                    nav.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group";
+                    if(svg) svg.className = "w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200";
+                });
+                
+                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]";
+                const activeSvg = item.querySelector('svg');
+                if(activeSvg) activeSvg.className = "w-5 h-5 text-brand";
+
+                contentPages.forEach(page => page.classList.add('hidden'));
+
+                const targetId = item.getAttribute('data-target');
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
