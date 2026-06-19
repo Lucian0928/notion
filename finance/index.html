@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    // 🔥 關鍵 1：背景改為純粹的黑，這是凸顯漸層透光邊框的秘密
-                    colors: { brand: '#FF7A00', darkBg: '#000000', cardBg: '#0F0F0F' }
+                    // 🔥 背景改為真正的深空黑 #050505，卡片底色為極深的灰 #09090B
+                    colors: { brand: '#FF7A00', darkBg: '#050505', cardBg: '#09090B' }
                 }
             }
         }
@@ -38,10 +38,11 @@
             
             <section class="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-b from-white/20 via-white/5 to-transparent shadow-[0_15px_40px_-10px_rgba(255,43,109,0.15)] group">
-                    <div class="relative h-full w-full rounded-[23px] bg-[#0A0A0A] p-6 overflow-hidden">
+                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-br from-[#FF2B6D]/50 via-white/5 to-white/5 shadow-[0_20px_40px_-10px_rgba(255,43,109,0.08)] group">
+                    
+                    <div class="relative h-full w-full rounded-[23px] bg-cardBg p-6 overflow-hidden">
                         
-                        <div class="absolute -top-[80px] -left-[20px] w-[200px] h-[200px] bg-[#FF2B6D]/20 blur-[50px] rounded-full pointer-events-none group-hover:bg-[#FF2B6D]/30 transition-colors duration-500"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#FF2B6D]/15 via-transparent to-transparent pointer-events-none"></div>
                         
                         <div class="relative z-10 flex flex-col justify-between h-full">
                             <div class="flex justify-between items-center mb-4">
@@ -56,10 +57,11 @@
                     </div>
                 </div>
 
-                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-b from-white/20 via-white/5 to-transparent shadow-[0_15px_40px_-10px_rgba(255,122,0,0.15)] group">
-                    <div class="relative h-full w-full rounded-[23px] bg-[#0A0A0A] p-6 overflow-hidden">
+                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-br from-[#FF7A00]/50 via-white/5 to-white/5 shadow-[0_20px_40px_-10px_rgba(255,122,0,0.08)] group">
+                    
+                    <div class="relative h-full w-full rounded-[23px] bg-cardBg p-6 overflow-hidden">
                         
-                        <div class="absolute -top-[80px] -left-[20px] w-[200px] h-[200px] bg-[#FF7A00]/20 blur-[50px] rounded-full pointer-events-none group-hover:bg-[#FF7A00]/30 transition-colors duration-500"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#FF7A00]/15 via-transparent to-transparent pointer-events-none"></div>
                         
                         <div class="relative z-10 flex flex-col justify-between h-full">
                             <div class="flex justify-between items-center mb-4">
