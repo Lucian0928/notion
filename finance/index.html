@@ -82,23 +82,38 @@
             const amountEl = document.getElementById('expense-amount');
             const momEl = document.getElementById('mom-text');
             const iconEl = document.getElementById('trend-icon');
+            
             try {
                 const res = await fetch('/api/get-expense');
                 const data = await res.json();
+                
                 amountEl.classList.remove('animate-pulse');
                 amountEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                
                 momEl.classList.remove('animate-pulse');
                 const formattedMom = Math.abs(data.mom).toFixed(1);
+
+                // 修正後的 SVG 程式碼
+                const upArrow = `<svg class="w-5 h-5 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                const downArrow = `<svg class="w-5 h-5 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+
                 if (data.mom > 0) {
                     momEl.innerText = `(+${formattedMom}% MoM)`;
                     momEl.className = 'text-[13px] font-medium text-[#D46F7B]';
-                    iconEl.innerHTML = `<svg class="w-5 h-5 text-[#D46F7B]" ... ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                    iconEl.innerHTML = upArrow;
                 } else if (data.mom < 0) {
                     momEl.innerText = `(-${formattedMom}% MoM)`;
                     momEl.className = 'text-[13px] font-medium text-[#76A88A]';
-                    iconEl.innerHTML = `<svg class="w-5 h-5 text-[#76A88A]" ... ><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+                    iconEl.innerHTML = downArrow;
+                } else {
+                    momEl.innerText = `(0.0% MoM)`;
+                    momEl.className = 'text-[13px] font-medium text-[#B29CA0]';
+                    iconEl.innerHTML = ''; // 持平則不顯示箭頭
                 }
-            } catch (e) { amountEl.innerText = '錯誤'; }
+            } catch (e) {
+                amountEl.innerText = '讀取錯誤';
+                console.error(e);
+            }
         }
 
         // 獲取餘額數據 (新功能)
