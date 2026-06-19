@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
-    const NOTION_API_KEY = process.env.NOTION_API_KEY;
-    const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
+    const NOTION_API_KEY = process.env.notion_api_key;
+    const NOTION_DATABASE_ID = process.env.transactions_database_id;
 
     if (!NOTION_API_KEY || !NOTION_DATABASE_ID) {
         return res.status(500).json({ error: '找不到 Notion 金鑰，請檢查 Vercel 環境變數。' });
