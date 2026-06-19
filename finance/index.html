@@ -79,57 +79,107 @@
 
         // 獲取支出數據
         async function fetchExpenseData() {
-            const amountEl = document.getElementById('expense-amount');
-            const momEl = document.getElementById('mom-text');
-            const iconEl = document.getElementById('trend-icon');
-            
-            try {
-                const res = await fetch('/api/get-expense');
-                const data = await res.json();
-                
-                amountEl.classList.remove('animate-pulse');
-                amountEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-                
-                momEl.classList.remove('animate-pulse');
-                const formattedMom = Math.abs(data.mom).toFixed(1);
 
-                // 修正後的 SVG 程式碼
-                const upArrow = `<svg class="w-5 h-5 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
-                const downArrow = `<svg class="w-5 h-5 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+const amountElement = document.getElementById('expense-amount');
 
-                if (data.mom > 0) {
-                    momEl.innerText = `(+${formattedMom}% MoM)`;
-                    momEl.className = 'text-[13px] font-medium text-[#D46F7B]';
-                    iconEl.innerHTML = upArrow;
-                } else if (data.mom < 0) {
-                    momEl.innerText = `(-${formattedMom}% MoM)`;
-                    momEl.className = 'text-[13px] font-medium text-[#76A88A]';
-                    iconEl.innerHTML = downArrow;
-                } else {
-                    momEl.innerText = `(0.0% MoM)`;
-                    momEl.className = 'text-[13px] font-medium text-[#B29CA0]';
-                    iconEl.innerHTML = ''; // 持平則不顯示箭頭
-                }
-            } catch (e) {
-                amountEl.innerText = '讀取錯誤';
-                console.error(e);
-            }
-        }
+const momElement = document.getElementById('mom-text');
 
-        // 獲取餘額數據 (新功能)
-        async function fetchBalanceData() {
-            const balanceEl = document.getElementById('balance-amount');
-            try {
-                const res = await fetch('/api/get-balance');
-                const data = await res.json();
-                balanceEl.classList.remove('animate-pulse');
-                balanceEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            } catch (e) {
-                balanceEl.innerText = '讀取失敗';
-            }
-        }
+const trendIcon = document.getElementById('trend-icon');
 
-        fetchExpenseData();
+
+try {
+
+const response = await fetch('/api/get-expense');
+
+const data = await response.json();
+
+
+if (data.total !== undefined) {
+
+// 更新主金額
+
+amountElement.classList.remove('animate-pulse');
+
+amountElement.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+
+// 移除 MoM 的載入動畫
+
+momElement.classList.remove('animate-pulse');
+
+
+// 定義兩折線箭頭的 SVG
+
+const upArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+
+const downArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+
+
+const formattedMom = Math.abs(data.mom).toFixed(1);
+
+
+
+if (data.mom > 0) {
+
+// 超支：粉紅色 + 向上折線箭頭
+
+momElement.innerText = `(+${formattedMom}% MoM)`;
+
+momElement.className = 'text-[13px] font-medium text-[#D46F7B]';
+
+trendIcon.className = 'text-[#D46F7B]';
+
+trendIcon.innerHTML = upArrowSvg;
+
+} else if (data.mom < 0) {
+
+// 省錢：莫蘭迪綠色 + 向下折線箭頭
+
+momElement.innerText = `(-${formattedMom}% MoM)`;
+
+momElement.className = 'text-[13px] font-medium text-[#76A88A]';
+
+trendIcon.className = 'text-[#76A88A]';
+
+trendIcon.innerHTML = downArrowSvg;
+
+} else {
+
+// 持平：原中性色
+
+momElement.innerText = `(0.0% MoM)`;
+
+momElement.className = 'text-[13px] font-medium text-[#B29CA0]';
+
+trendIcon.className = 'text-[#B29CA0]';
+
+// 橫線箭頭
+
+trendIcon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
+}
+
+} else {
+
+amountElement.innerText = '讀取錯誤';
+
+momElement.innerText = 'N/A';
+
+}
+
+} catch (error) {
+
+amountElement.innerText = '連線失敗';
+
+momElement.innerText = 'N/A';
+
+}
+
+}
+
+
+
+fetchExpenseData();
         fetchBalanceData();
     </script>
 </body>
