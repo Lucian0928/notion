@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FINANCE DASHBOARD // AURA.OS</title>
+    <title>AURA.OS // FINANCE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,13 +17,13 @@
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        brand: '#FF7A00', /* 🌟 你的科技橘色碼 */
-                        darkBg: '#090A0D', /* 極致暗黑底色 */
-                        cardBg: '#191919', /* 🌟 Notion 級高級墨黑卡片底色 */
+                        brand: '#FF7A00', /* 科技橘 */
+                        darkBg: '#0D0E12', /* 極致暗黑底色 */
+                        cardBg: '#191919', /* 高級墨黑卡片底色 */
                     },
                     boxShadow: {
-                        /* 🌟 核心魔術：定義 Pinterest 風的科技發光光暈 */
-                        'glow': '0 0 10px 1px rgba(255, 122, 0, 0.15), 0 0 20px 2px rgba(255, 122, 0, 0.05)',
+                        /* 定義 Pinterest 風的柔和發光光暈 */
+                        'glow': '0 0 10px rgba(255, 122, 0, 0.1), 0 0 15px rgba(255, 122, 0, 0.05)',
                     }
                 }
             }
@@ -34,7 +34,11 @@
 
     <aside class="w-64 h-screen bg-darkBg border-r border-neutral-800 p-6 flex flex-col justify-between sticky top-0">
         <div>
-            <nav class="space-y-2 mt-4">
+            <div class="text-xs font-bold uppercase tracking-widest text-brand mb-10 flex items-center gap-2">
+                <span>◆</span> AURA.OS // FIN
+            </div>
+
+            <nav class="space-y-2">
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide shadow-glow">
                     <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                     <span>Overview</span>
@@ -66,60 +70,23 @@
 
     <main class="flex-1 p-10 space-y-12 overflow-y-auto">
         
-        <div id="page-overview" class="content-page space-y-10">
+        <header class="flex justify-between items-center max-w-2xl">
+            <h1 class="text-xl font-bold text-white tracking-wide">Workspace // Overview</h1>
+            <div class="text-[11px] font-bold text-neutral-600 tracking-widest bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">SYSTEM_LIVE // 2026</div>
+        </header>
+
+        <section class="max-w-2xl bg-cardBg border border-orange-500/10 rounded-3xl p-10 shadow-glow flex flex-col items-center justify-center min-h-[400px]">
             
-            <section class="max-w-2xl bg-cardBg border border-orange-500/10 rounded-3xl p-8 shadow-glow hover:border-orange-500/20 transition-all duration-300">
-                <div class="flex flex-col sm:flex-row items-center gap-12">
-                    
-                    <div class="relative w-56 h-56 flex items-center justify-center">
-                        <div class="absolute inset-0 rounded-full border-4 border-dashed border-orange-500/10 flex items-center justify-center animate-pulse"></div>
-                        
-                        <div class="text-center z-10">
-                            <span class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-1">Monthly Expense</span>
-                            <span class="block text-3xl font-bold text-white tracking-tight">$8,320.00</span>
-                        </div>
-                    </div>
-
-                    <div class="flex-1 w-full space-y-4">
-                        <div class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 border-b border-neutral-800 pb-2">Structure</div>
-                        
-                        <div class="flex justify-between items-center text-sm group">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-glow"></span>
-                                <span class="font-medium text-neutral-300 group-hover:text-white transition-colors">🍔 Food & Dining</span>
-                            </div>
-                            <span class="font-mono text-xs text-neutral-500">42%</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center text-sm group">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 shadow-glow"></span>
-                                <span class="font-medium text-neutral-300 group-hover:text-white transition-colors">🛒 Groceries</span>
-                            </div>
-                            <span class="font-mono text-xs text-neutral-500">28%</span>
-                        </div>
-
-                        <div class="flex justify-between items-center text-sm group">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-glow"></span>
-                                <span class="font-medium text-neutral-300 group-hover:text-white transition-colors">🎬 Entertainment</span>
-                            </div>
-                            <span class="font-mono text-xs text-neutral-500">18%</span>
-                        </div>
-
-                        <div class="flex justify-between items-center text-sm group">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-glow"></span>
-                                <span class="font-medium text-neutral-300 group-hover:text-white transition-colors">🏠 Others</span>
-                            </div>
-                            <span class="font-mono text-xs text-neutral-500">12%</span>
-                        </div>
-                    </div>
-
+            <div class="relative w-72 h-72 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full border-2 border-dashed border-neutral-800 flex items-center justify-center animate-pulse"></div>
+                
+                <div class="text-center z-10">
+                    <span class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2">Monthly Expense</span>
+                    <span class="block text-5xl font-bold text-white tracking-tight">$8,320.00</span>
                 </div>
+            </div>
+            
             </section>
-
-        </div>
 
     </main>
 
