@@ -11,7 +11,6 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    // 🔥 修改這裡：將 darkBg 從帶藍調的 #0D0E12 改為純粹的暗灰/黑 #0A0A0A
                     colors: { brand: '#FF7A00', darkBg: '#0A0A0A', cardBg: '#141414' }
                 }
             }
@@ -22,7 +21,7 @@
 
     <aside class="w-64 h-screen bg-darkBg border-r border-neutral-900 p-6 flex flex-col justify-between sticky top-0">
         <nav class="space-y-2 mt-4" id="sidebar-nav">
-            <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.05)]">
+            <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200">
                 <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
                 <span>Overview</span>
             </a>
@@ -38,13 +37,11 @@
             
             <section class="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative p-6 rounded-3xl bg-gradient-to-b from-[#482B30] to-[#241518] border border-white/5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.7)] overflow-hidden">
+                <div class="relative p-6 rounded-3xl bg-gradient-to-b from-[#3D2226] to-[#1C1012] border border-[#FF2B6D]/15 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] overflow-hidden"
+                     style="filter: drop-shadow(0 0 25px rgba(235, 64, 93, 0.08));">
                     
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/70 to-transparent"></div>
-                    <div class="absolute -top-[15px] left-1/2 -translate-x-1/2 w-[120px] h-[25px] bg-white/10 blur-[12px] rounded-full pointer-events-none"></div>
-
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40%] h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                    <div class="absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-[80px] h-[20px] bg-white/5 blur-[10px] rounded-full pointer-events-none"></div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
+                    <div class="absolute -top-[15px] left-1/2 -translate-x-1/2 w-[120px] h-[25px] bg-white/10 blur-[10px] rounded-full pointer-events-none"></div>
 
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-3">
@@ -56,13 +53,11 @@
                     </div>
                 </div>
 
-                <div class="relative p-6 rounded-3xl bg-gradient-to-b from-[#332A1D] to-[#17120c] border border-white/5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.7)] overflow-hidden">
+                <div class="relative p-6 rounded-3xl bg-gradient-to-b from-[#2B2318] to-[#14100B] border border-[#FF7A00]/15 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] overflow-hidden"
+                     style="filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.06));">
                     
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/70 to-transparent"></div>
-                    <div class="absolute -top-[15px] left-1/2 -translate-x-1/2 w-[120px] h-[25px] bg-white/10 blur-[12px] rounded-full pointer-events-none"></div>
-
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40%] h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                    <div class="absolute -bottom-[15px] left-1/2 -translate-x-1/2 w-[80px] h-[20px] bg-white/5 blur-[10px] rounded-full pointer-events-none"></div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
+                    <div class="absolute -top-[15px] left-1/2 -translate-x-1/2 w-[120px] h-[25px] bg-white/10 blur-[10px] rounded-full pointer-events-none"></div>
 
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-3">
