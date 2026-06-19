@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FINANCE DASHBOARD</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,12 +22,12 @@
     <aside class="w-64 h-screen bg-darkBg border-r border-neutral-800 p-6 flex flex-col justify-between sticky top-0">
         <div>
             <nav class="space-y-2 mt-4" id="sidebar-nav">
-                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]">
-                    <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]">
+                    <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
                     <span>Overview</span>
                 </a>
-                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group">
-                    <svg class="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                <a href="#" data-target="page-transactions" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 transition-all duration-200">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                     <span>Transactions</span>
                 </a>
             </nav>
@@ -39,113 +36,86 @@
 
     <main class="flex-1 p-10 overflow-y-auto">
         <div id="page-overview" class="content-page space-y-8">
-            <section class="max-w-sm">
-                <div class="relative p-5 w-72 rounded-2xl bg-gradient-to-b from-[#482B30] to-[#392226] border border-[#88424E] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.15),inset_0_-1.5px_3px_rgba(255,255,255,0.1),0_8px_30px_rgba(139,70,83,0.25)] transition-all duration-300">
-
+            
+            <section class="max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="relative p-5 rounded-2xl bg-gradient-to-b from-[#482B30] to-[#392226] border border-[#88424E] shadow-xl">
                     <div class="flex justify-between items-center mb-2.5">
                         <span class="text-[14px] font-medium text-[#B29CA0]">Monthly Expense</span>
-                        <div id="trend-icon" class="text-[#B29CA0]">
-                            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="32" stroke-dashoffset="32" stroke-linecap="round"></circle></svg>
-                        </div>
+                        <div id="trend-icon" class="text-[#B29CA0]"><div class="w-5 h-5 animate-pulse bg-neutral-700 rounded-full"></div></div>
                     </div>
-
-                    <div id="expense-amount" class="text-[34px] font-bold text-white tracking-tight leading-tight mb-1 animate-pulse">
-                        Loading...
-                    </div>
-
-                    <div id="mom-text" class="text-[13px] font-medium text-[#B29CA0] animate-pulse">
-                        Calculating...
-                    </div>
-
+                    <div id="expense-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
+                    <div id="mom-text" class="text-[13px] font-medium text-[#B29CA0] animate-pulse">Calculating...</div>
                 </div>
+
+                <div class="relative p-5 rounded-2xl bg-gradient-to-b from-[#332A1D] to-[#1F1B16] border border-[#5D4E36] shadow-xl">
+                    <div class="flex justify-between items-center mb-2.5">
+                        <span class="text-[14px] font-medium text-[#BCA683]">Available Balance</span>
+                        <svg class="w-5 h-5 text-[#E6B97A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div id="balance-amount" class="text-[34px] font-bold text-white mb-1 animate-pulse">Loading...</div>
+                    <div class="text-[13px] font-medium text-[#E6B97A]">Liquid Funds</div>
+                </div>
+
             </section>
         </div>
         
         <div id="page-transactions" class="content-page space-y-4 hidden">
             <h2 class="text-xl font-bold text-white tracking-wide">Transactions Ledger</h2>
-            <p class="text-sm text-neutral-500">這是獨立的記帳明細頁。</p>
         </div>
     </main>
 
     <script>
-        // 分頁切換邏輯
+        // 分頁切換 (保持原邏輯)
         const navItems = document.querySelectorAll('.nav-item');
         const contentPages = document.querySelectorAll('.content-page');
-
         navItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                navItems.forEach(nav => {
-                    const svg = nav.querySelector('svg');
-                    nav.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:bg-neutral-800/60 hover:text-white font-medium tracking-wide transition-all duration-200 group";
-                    if(svg) svg.className = "w-5 h-5 text-neutral-500 group-hover:text-white transition-colors duration-200";
-                });
-                
-                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold tracking-wide transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.1)]";
-                const activeSvg = item.querySelector('svg');
-                if(activeSvg) activeSvg.className = "w-5 h-5 text-brand";
-
-                contentPages.forEach(page => page.classList.add('hidden'));
+                contentPages.forEach(p => p.classList.add('hidden'));
                 document.getElementById(item.getAttribute('data-target')).classList.remove('hidden');
             });
         });
 
-        // 串接 API 讀取 Notion 資料與渲染 UI
+        // 獲取支出數據
         async function fetchExpenseData() {
-            const amountElement = document.getElementById('expense-amount');
-            const momElement = document.getElementById('mom-text');
-            const trendIcon = document.getElementById('trend-icon');
-            
+            const amountEl = document.getElementById('expense-amount');
+            const momEl = document.getElementById('mom-text');
+            const iconEl = document.getElementById('trend-icon');
             try {
-                const response = await fetch('/api/get-expense');
-                const data = await response.json();
-                
-                if (data.total !== undefined) {
-                    // 更新主金額
-                    amountElement.classList.remove('animate-pulse');
-                    amountElement.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-                    
-                    // 移除 MoM 的載入動畫
-                    momElement.classList.remove('animate-pulse');
-                    
-                    // 定義兩折線箭頭的 SVG
-                    const upArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
-                    const downArrowSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
-                    
-                    const formattedMom = Math.abs(data.mom).toFixed(1);
-
-                    if (data.mom > 0) {
-                        // 超支：粉紅色 + 向上折線箭頭
-                        momElement.innerText = `(+${formattedMom}% MoM)`;
-                        momElement.className = 'text-[13px] font-medium text-[#D46F7B]';
-                        trendIcon.className = 'text-[#D46F7B]';
-                        trendIcon.innerHTML = upArrowSvg;
-                    } else if (data.mom < 0) {
-                        // 省錢：莫蘭迪綠色 + 向下折線箭頭
-                        momElement.innerText = `(-${formattedMom}% MoM)`;
-                        momElement.className = 'text-[13px] font-medium text-[#76A88A]';
-                        trendIcon.className = 'text-[#76A88A]';
-                        trendIcon.innerHTML = downArrowSvg;
-                    } else {
-                        // 持平：原中性色
-                        momElement.innerText = `(0.0% MoM)`;
-                        momElement.className = 'text-[13px] font-medium text-[#B29CA0]';
-                        trendIcon.className = 'text-[#B29CA0]';
-                        // 橫線箭頭
-                        trendIcon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
-                    }
-                } else {
-                    amountElement.innerText = '讀取錯誤';
-                    momElement.innerText = 'N/A';
+                const res = await fetch('/api/get-expense');
+                const data = await res.json();
+                amountEl.classList.remove('animate-pulse');
+                amountEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                momEl.classList.remove('animate-pulse');
+                const formattedMom = Math.abs(data.mom).toFixed(1);
+                if (data.mom > 0) {
+                    momEl.innerText = `(+${formattedMom}% MoM)`;
+                    momEl.className = 'text-[13px] font-medium text-[#D46F7B]';
+                    iconEl.innerHTML = `<svg class="w-5 h-5 text-[#D46F7B]" ... ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                } else if (data.mom < 0) {
+                    momEl.innerText = `(-${formattedMom}% MoM)`;
+                    momEl.className = 'text-[13px] font-medium text-[#76A88A]';
+                    iconEl.innerHTML = `<svg class="w-5 h-5 text-[#76A88A]" ... ><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
                 }
-            } catch (error) {
-                amountElement.innerText = '連線失敗';
-                momElement.innerText = 'N/A';
+            } catch (e) { amountEl.innerText = '錯誤'; }
+        }
+
+        // 獲取餘額數據 (新功能)
+        async function fetchBalanceData() {
+            const balanceEl = document.getElementById('balance-amount');
+            try {
+                const res = await fetch('/api/get-balance');
+                const data = await res.json();
+                balanceEl.classList.remove('animate-pulse');
+                balanceEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            } catch (e) {
+                balanceEl.innerText = '讀取失敗';
             }
         }
 
         fetchExpenseData();
+        fetchBalanceData();
     </script>
-
 </body>
 </html>
