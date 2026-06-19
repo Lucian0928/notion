@@ -4,19 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FINANCE DASHBOARD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    // 🔥 背景改為真正的深空黑 #050505，卡片底色為極深的灰 #09090B
-                    colors: { brand: '#FF7A00', darkBg: '#050505', cardBg: '#09090B' }
+                    // 背景設為極致黑，襯托光暈
+                    colors: { brand: '#FF7A00', darkBg: '#030303', cardBg: '#09090B' }
                 }
             }
         }
     </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            /* 3. 字體發光層次：雙層白色 text-shadow 創造霓虹管發光感 */
+            .text-glow {
+                text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2);
+            }
+
+            /* 4. 頂級噪點質地：利用 SVG Fractal Noise 疊加 */
+            .noise-bg::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                opacity: 0.035; /* 極低透明度，要有似無 */
+                pointer-events: none;
+                mix-blend-mode: overlay;
+                z-index: 5;
+            }
+
+            /* 1 & 2. 粉紅卡：帶紫調的冷玫瑰光 + 左上角光源 */
+            .card-pink {
+                background: #0A080D; /* 帶紫調的極深黑 */
+                box-shadow:
+                    0 0 0 1px rgba(210,60,170,0.25),      /* 邊框光 */
+                    0 0 30px 0 rgba(210,60,170,0.18),     /* 近距光暈 */
+                    0 0 80px -10px rgba(160,40,220,0.15), /* 遠距藍紫漫射 */
+                    inset 0 1px 0 rgba(210,60,170,0.25);  /* 頂邊 inset 亮線 */
+            }
+            .card-pink::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at top left, rgba(210,60,170,0.18), transparent 60%);
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            /* 1 & 2. 橘色卡：金屬冷黃光 + 右上角光源 */
+            .card-orange {
+                background: #0D0A06; /* 帶暖調的極深黑 */
+                box-shadow:
+                    0 0 0 1px rgba(255,122,0,0.25),       /* 邊框光 */
+                    0 0 30px 0 rgba(255,122,0,0.18),      /* 近距光暈 */
+                    0 0 80px -10px rgba(255,122,0,0.12),  /* 遠距漫射 */
+                    inset 0 1px 0 rgba(255,200,80,0.25);  /* 頂邊 inset 偏冷黃光 */
+            }
+            .card-orange::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                /* 依照你的要求，光源從右上角打下來 */
+                background: radial-gradient(circle at top right, rgba(255,200,80,0.12), transparent 60%);
+                pointer-events: none;
+                z-index: 1;
+            }
+        }
+    </style>
 </head>
 <body class="bg-darkBg text-gray-300 min-h-screen flex font-sans selection:bg-brand/30">
 
@@ -36,42 +93,34 @@
     <main class="flex-1 p-10 overflow-y-auto">
         <div id="page-overview" class="content-page space-y-8">
             
-            <section class="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-br from-[#FF2B6D]/50 via-white/5 to-white/5 shadow-[0_20px_40px_-10px_rgba(255,43,109,0.08)] group">
+                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-pink noise-bg transition-transform hover:-translate-y-1 duration-300">
                     
-                    <div class="relative h-full w-full rounded-[23px] bg-cardBg p-6 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-sm font-medium text-[#E5C3D5] tracking-wide">Monthly Expense</span>
+                            <div id="trend-icon"></div>
+                        </div>
                         
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#FF2B6D]/15 via-transparent to-transparent pointer-events-none"></div>
-                        
-                        <div class="relative z-10 flex flex-col justify-between h-full">
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-sm font-medium text-neutral-400">Monthly Expense</span>
-                                <div id="trend-icon"></div>
-                            </div>
-                            <div>
-                                <div id="expense-amount" class="text-4xl font-bold text-white mb-1 tracking-tight animate-pulse">Loading...</div>
-                                <div id="mom-text" class="text-sm font-medium text-neutral-500">Calculating...</div>
-                            </div>
+                        <div>
+                            <div id="expense-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
+                            <div id="mom-text" class="text-sm font-semibold text-[#D4B6BB]">Calculating...</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative p-[1px] rounded-[24px] bg-gradient-to-br from-[#FF7A00]/50 via-white/5 to-white/5 shadow-[0_20px_40px_-10px_rgba(255,122,0,0.08)] group">
+                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-orange noise-bg transition-transform hover:-translate-y-1 duration-300">
                     
-                    <div class="relative h-full w-full rounded-[23px] bg-cardBg p-6 overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-sm font-medium text-[#E6D5B8] tracking-wide">Available Balance</span>
+                            <svg class="w-6 h-6 text-[#FFC850]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
                         
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#FF7A00]/15 via-transparent to-transparent pointer-events-none"></div>
-                        
-                        <div class="relative z-10 flex flex-col justify-between h-full">
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-sm font-medium text-neutral-400">Available Balance</span>
-                                <svg class="w-5 h-5 text-[#FF7A00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <div>
-                                <div id="balance-amount" class="text-4xl font-bold text-white mb-1 tracking-tight animate-pulse">Loading...</div>
-                                <div class="text-sm font-medium text-[#FF7A00]/80">Liquid Funds</div>
-                            </div>
+                        <div>
+                            <div id="balance-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
+                            <div class="text-sm font-semibold text-[#FFC850]/80">Liquid Funds</div>
                         </div>
                     </div>
                 </div>
@@ -115,20 +164,20 @@
                     momEl.classList.remove('animate-pulse');
                     const formattedMom = Math.abs(data.mom).toFixed(1);
 
-                    const upArrow = `<svg class="w-5 h-5 text-[#D46F7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
-                    const downArrow = `<svg class="w-5 h-5 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+                    const upArrow = `<svg class="w-6 h-6 text-[#E460B0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                    const downArrow = `<svg class="w-6 h-6 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
 
                     if (data.mom > 0) {
                         momEl.innerText = `(+${formattedMom}% MoM)`;
-                        momEl.className = 'text-sm font-medium text-[#D46F7B]';
+                        momEl.className = 'text-sm font-semibold text-[#E460B0]';
                         iconEl.innerHTML = upArrow;
                     } else if (data.mom < 0) {
                         momEl.innerText = `(-${formattedMom}% MoM)`;
-                        momEl.className = 'text-sm font-medium text-[#76A88A]';
+                        momEl.className = 'text-sm font-semibold text-[#76A88A]';
                         iconEl.innerHTML = downArrow;
                     } else {
                         momEl.innerText = `(0.0% MoM)`;
-                        momEl.className = 'text-sm font-medium text-neutral-500';
+                        momEl.className = 'text-sm font-semibold text-neutral-500';
                         iconEl.innerHTML = ''; 
                     }
                 }
