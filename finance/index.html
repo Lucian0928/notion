@@ -65,20 +65,22 @@
         <div id="page-overview" class="content-page space-y-8">
             
             <section class="max-w-sm">
-                <div class="relative p-6 rounded-2xl bg-gradient-to-br from-[#3a1d24] to-[#241116] border border-[#8a3f4b] shadow-[0_0_25px_rgba(215,80,95,0.15)] hover:shadow-[0_0_35px_rgba(215,80,95,0.25)] transition-shadow duration-300">
+                <div class="relative p-6 rounded-2xl bg-gradient-to-br from-[#3a1d24] to-[#1a0c10] border border-[#8a3f4b] shadow-[0_0_25px_rgba(215,80,95,0.15)] hover:shadow-[0_0_35px_rgba(215,80,95,0.25)] transition-shadow duration-300 overflow-hidden group">
                     
-                    <div class="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none"></div>
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
 
-                    <div class="flex justify-between items-start mb-3">
+                    <div class="absolute inset-0 rounded-2xl border-t border-white/20 pointer-events-none"></div>
+
+                    <div class="relative z-10 flex justify-between items-start mb-3">
                         <span class="text-[15px] font-medium text-[#b59a9e]">Monthly Expense</span>
                         <svg class="w-5 h-5 text-[#d86f7b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
                     </div>
 
-                    <div class="text-[38px] font-bold text-white tracking-tight mb-1">
+                    <div class="relative z-10 text-[38px] font-bold text-white tracking-tight mb-1">
                         $8,320.00
                     </div>
 
-                    <div class="text-[15px] font-medium text-[#d86f7b]">
+                    <div class="relative z-10 text-[15px] font-medium text-[#d86f7b]">
                         (+9.3% MoM)
                     </div>
 
