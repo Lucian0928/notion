@@ -11,7 +11,8 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: { brand: '#FF7A00', cardBg: '#09090B' }
+                    /* 深空灰背景，完美襯托高純度金屬卡片 */
+                    colors: { brand: '#FF7A00', darkBg: '#0E0E12', cardBg: '#09090B' }
                 }
             }
         }
@@ -31,34 +32,38 @@
                 text-shadow: 0 0 12px rgba(255,255,255,0.3), 0 0 24px rgba(255,255,255,0.1);
             }
 
-            .metal-grain::after {
-                content: ""; position: absolute; inset: 0; border-radius: inherit;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-                opacity: 0.025; pointer-events: none; mix-blend-mode: overlay; z-index: 5;
-            }
+            /* =========================================
+               🚀 THE PURE METALLIC ENGINE (純淨金屬渲染器)
+               ========================================= */
             
-            /* --- 1. Monthly Expense (提亮版冷酒紅金屬卡) --- */
+            /* --- 1. Monthly Expense (純淨冷玫瑰酒紅金屬卡) --- */
             .card-premium-pink {
-                /* 🔥 調整重點：將起點從 #472c35 提亮為 #6B3B48，中段提亮為 #42232D */
-                background: linear-gradient(145deg, #6B3B48 0%, #42232D 50%, #1F1015 100%);
+                /* 🔥 關鍵修正：拋棄導致混濁的深色漸層！整塊卡片採用均勻、純淨的高飽和冷酒紅底色 */
+                background: linear-gradient(135deg, #5E323E 0%, #4D212E 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
+                
                 box-shadow: 
-                    inset 0 1px 1px rgba(255, 255, 255, 0.08),
-                    0 0 0 1px rgba(228, 96, 176, 0.12),
-                    0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                    0 0 35px -5px rgba(228, 96, 176, 0.08);
+                    /* 內部上方微弱物理邊緣高光 */
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                    /* 1px 微弱霓虹修邊線，維持邊界清晰 */
+                    0 0 0 1px rgba(228, 96, 176, 0.15),
+                    /* 實體向下投影，建立完美的空間浮空感 */
+                    0 25px 50px -12px rgba(0, 0, 0, 0.75),
+                    /* 極致克制的外漫射環境彩光 */
+                    0 0 35px -5px rgba(228, 96, 176, 0.1);
             }
 
-            /* --- 2. Available Balance (提亮版冷黃金屬卡) --- */
+            /* --- 2. Available Balance (純淨金屬暖橘卡) --- */
             .card-premium-orange {
-                /* 🔥 調整重點：將起點從 #422a15 提亮為 #6B421C，中段提亮為 #452810 */
-                background: linear-gradient(145deg, #6B421C 0%, #452810 50%, #211207 100%);
+                /* 🔥 關鍵修正：整塊卡片採用均勻、純淨的高飽和暖銅橘底色，消滅霧黑 */
+                background: linear-gradient(135deg, #5A351A 0%, #452611 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
+                
                 box-shadow: 
-                    inset 0 1px 1px rgba(255, 255, 255, 0.08),
-                    0 0 0 1px rgba(255, 157, 0, 0.12),
-                    0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                    0 0 35px -5px rgba(255, 157, 0, 0.08);
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                    0 0 0 1px rgba(255, 157, 0, 0.15),
+                    0 25px 50px -12px rgba(0, 0, 0, 0.75),
+                    0 0 35px -5px rgba(255, 157, 0, 0.1);
             }
         }
     </style>
@@ -87,7 +92,7 @@
 
             <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative card-premium-pink metal-grain p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative card-premium-pink p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
@@ -95,7 +100,7 @@
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
 
-                    <div class="absolute inset-0 bg-gradient-to-br from-[#b06573]/25 via-transparent to-transparent pointer-events-none z-1"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
@@ -110,7 +115,7 @@
                     </div>
                 </div>
 
-                <div class="relative card-premium-orange metal-grain p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative card-premium-orange p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
@@ -118,7 +123,7 @@
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
 
-                    <div class="absolute inset-0 bg-gradient-to-bl from-[#FFC850]/20 via-transparent to-transparent pointer-events-none z-1"></div>
+                    <div class="absolute inset-0 bg-gradient-to-bl from-white/10 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
