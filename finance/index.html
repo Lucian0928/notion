@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: { brand: '#FF7A00', darkBg: '#030303', cardBg: '#09090B' }
+                    colors: { brand: '#FF7A00', darkBg: '#050505', cardBg: '#09090B' }
                 }
             }
         }
@@ -23,78 +23,81 @@
                 text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2);
             }
 
-            /* 噪點質地 */
-            .noise-bg::after {
-                content: "";
+            /* --- 1. 粉紅玻璃卡片 (完美融合你找的玻璃參數) --- */
+            .glass-pink {
+                /* 背景：極深色微透明 + 左上角粉紅光源打光 */
+                background: radial-gradient(circle at 0% 0%, rgba(210, 60, 170, 0.15), transparent 60%), rgba(20, 12, 16, 0.65);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-radius: 24px;
+                position: relative;
+                overflow: hidden;
+                
+                /* 融合你的 inset 高光與我們的外圍光暈 */
+                box-shadow: 
+                    /* 你的：玻璃內部邊緣的高光反射 */
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+                    /* 你的：內部漫射光 (改為極淡的粉紅色) */
+                    inset 0 0 40px 10px rgba(210, 60, 170, 0.05),
+                    /* 我們的：外圍向外散發的環境光暈 */
+                    0 15px 35px -5px rgba(0, 0, 0, 0.8),
+                    0 0 30px 0 rgba(210, 60, 170, 0.12);
+            }
+
+            /* 你的：頂部漸層白光線 (加入一點粉紅讓光澤融合) */
+            .glass-pink::before {
+                content: '';
                 position: absolute;
-                inset: 0;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-                opacity: 0.035; 
-                pointer-events: none;
-                mix-blend-mode: overlay;
-                z-index: 5;
+                top: 0; left: 0; right: 0;
+                height: 1.5px;
+                /* 從左上角的極亮白，往右滑順淡出成透明 */
+                background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(210, 60, 170, 0.4), transparent 80%);
             }
 
-            /* 🔥 1. 粉紅卡：多圈漸層邊框大升級 */
-            .card-pink {
-                background: linear-gradient(145deg, #572f33 0%, #472c35 45%, #251419 100%);
-                box-shadow:
-                    /* --- 內側高光 (製造立體厚度) --- */
-                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-
-                    /* --- 🔥 你的要求：多圈漸層邊框 (從最深到最淺) --- */
-                    /* 第 1 圈：最亮、最細的實體邊界 */
-                    0 0 0 1px rgba(210, 60, 170, 0.35),
-                    /* 第 2 圈：微距暈染，透明度減半 */
-                    0 0 0 2px rgba(210, 60, 170, 0.15),
-                    /* 第 3 圈：擴大一倍，顏色轉柔 */
-                    0 0 0 4px rgba(160, 40, 220, 0.08),
-                    /* 第 4 圈：最外圍的邊界氣息，完美融入光暈 */
-                    0 0 0 6px rgba(160, 40, 220, 0.03),
-
-                    /* --- 原本的環境漫射光暈 --- */
-                    0 0 30px 0 rgba(210, 60, 170, 0.15),     /* 近光暈 */
-                    0 0 80px -10px rgba(160, 40, 220, 0.15); /* 遠光暈 */
-            }
-            .card-pink::before {
-                content: "";
+            /* 你的：左側漸層白光線 */
+            .glass-pink::after {
+                content: '';
                 position: absolute;
-                inset: 0;
-                background: radial-gradient(circle at top left, rgba(155,95,102,0.4), transparent 65%);
-                pointer-events: none;
-                z-index: 1;
+                top: 0; left: 0;
+                width: 1.5px; height: 100%;
+                /* 從左上角往下淡出 */
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(210, 60, 170, 0.2), transparent 80%);
             }
 
-            /* 🔥 2. 橘色卡：多圈漸層邊框大升級 */
-            .card-orange {
-                background: linear-gradient(145deg, #5a3c1f 0%, #422a15 45%, #1c1007 100%);
-                box-shadow:
-                    /* --- 內側高光 --- */
-                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-
-                    /* --- 🔥 多圈漸層邊框 --- */
-                    /* 第 1 圈 */
-                    0 0 0 1px rgba(255, 150, 50, 0.35),
-                    /* 第 2 圈 */
-                    0 0 0 2px rgba(255, 122, 0, 0.15),
-                    /* 第 3 圈 */
-                    0 0 0 4px rgba(255, 122, 0, 0.08),
-                    /* 第 4 圈 */
-                    0 0 0 6px rgba(255, 122, 0, 0.03),
-
-                    /* --- 環境漫射光暈 --- */
-                    0 0 30px 0 rgba(255, 122, 0, 0.15),
-                    0 0 80px -10px rgba(255, 122, 0, 0.12);
+            /* --- 2. 橘色玻璃卡片 --- */
+            .glass-orange {
+                background: radial-gradient(circle at 100% 0%, rgba(255, 150, 50, 0.15), transparent 60%), rgba(20, 14, 8, 0.65);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-radius: 24px;
+                position: relative;
+                overflow: hidden;
+                
+                box-shadow: 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+                    inset 0 0 40px 10px rgba(255, 122, 0, 0.05),
+                    0 15px 35px -5px rgba(0, 0, 0, 0.8),
+                    0 0 30px 0 rgba(255, 122, 0, 0.12);
             }
-            .card-orange::before {
-                content: "";
+
+            /* 頂部漸層光線 (光源在右上角，所以從右邊往左淡出) */
+            .glass-orange::before {
+                content: '';
                 position: absolute;
-                inset: 0;
-                background: radial-gradient(circle at top right, rgba(230,160,80,0.25), transparent 65%);
-                pointer-events: none;
-                z-index: 1;
+                top: 0; left: 0; right: 0;
+                height: 1.5px;
+                background: linear-gradient(270deg, rgba(255, 255, 255, 0.7), rgba(255, 150, 50, 0.4), transparent 80%);
+            }
+
+            /* 右側漸層光線 */
+            .glass-orange::after {
+                content: '';
+                position: absolute;
+                top: 0; right: 0; /* 注意這裡改到了右邊 */
+                width: 1.5px; height: 100%;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 150, 50, 0.2), transparent 80%);
             }
         }
     </style>
@@ -119,7 +122,7 @@
             
             <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-pink noise-bg transition-transform hover:-translate-y-1 duration-300">
+                <div class="glass-pink p-8 min-h-[220px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-6">
@@ -134,7 +137,7 @@
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-orange noise-bg transition-transform hover:-translate-y-1 duration-300">
+                <div class="glass-orange p-8 min-h-[220px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-6">
