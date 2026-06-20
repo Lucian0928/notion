@@ -65,12 +65,21 @@ body {
     background: radial-gradient(115% 80% at 50% -18%, rgba(255, 178, 64, 0.22), transparent 60%);
   }
 
-  /* --- Monthly Expense card (magenta) --- */
+  /* --- Monthly Expense card (coral red) ---
+     Color recipe adapted from a glassmorphism snippet the user found.
+     Kept the hue family (251,9,9 / 236,111,111 / 255,117,117 / 253,78,78)
+     but scaled the inset glow down from the source's 140px (tuned for a
+     400x300px card) to ~70px so it doesn't wash out our ~160px-tall card. */
   .card-premium-pink {
-    background: linear-gradient(165deg, rgba(228, 96, 176, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: rgba(251, 9, 9, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(236, 111, 111, 0.2);
+    box-shadow: 0 0 30px rgba(255, 117, 117, 0.35), inset 0 0 70px rgba(253, 78, 78, 0.4),
+      inset 0 0 4px 2px rgba(255, 255, 255, 0.8);
   }
   .card-premium-pink::before {
-    background: radial-gradient(115% 80% at 50% -18%, rgba(244, 128, 200, 0.22), transparent 60%);
+    background: none;
   }
 
   /* --- Monthly Income card (teal) --- */
