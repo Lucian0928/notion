@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FINANCE DASHBOARD - Blue-Violet Neon Perfected</title>
+    <title>FINANCE DASHBOARD</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    // 🔥 用戶的新截圖背景為純極致黑，襯托隔離的發光
+                    // 🔥 背景恢復為純粹的極致黑，這是凸顯柔和光暈的祕密
                     colors: { brand: '#FF7A00', darkBg: '#000000', cardBg: '#09090B' }
                 }
             }
@@ -24,33 +24,85 @@
                 text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2);
             }
 
-            /* 🔥 靈魂修復：你的新截圖：隔離、未填充的藍紫霓虹卡片系統 */
-            /* 1 & 2. 卡片本體：純黑到極深灰漸層 + 左上角冷白光 + 隔離的藍紫霓虹發光 */
-            .card-perfect-glow {
-                /* 背景：深灰到黑的純色漸層 (不再是酒紅或暖橘) */
-                background: linear-gradient(145deg, #252528 0%, #101012 45%, #000000 100%);
-                
-                box-shadow:
-                    /* --- 內側高光：左上角 cool white 光源 (乾淨無痕) --- */
-                    inset 0 1px 1px rgba(255, 255, 255, 0.15),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-
-                    /* --- 🔥 你的要求：隔離、未填充的藍紫霓虹發光邊邊 (取代實體 border) --- */
-                    /* 第一圈：隔離、乾淨的 blue-violet 發光線 */
-                    0 0 0 1px rgba(110, 60, 240, 0.35),
-                    /* 第二圈：藍紫霓虹光暈 */
-                    0 0 30px 0 rgba(110, 60, 240, 0.15),
-                    /* 第三圈：遠距藍紫漫射 */
-                    0 0 80px -10px rgba(160, 40, 220, 0.12);
-            }
-            .card-perfect-glow::before {
+            /* 頂級噪點質地 (Texture)：保留，但透明度調回極低 */
+            .noise-bg::after {
                 content: "";
                 position: absolute;
                 inset: 0;
-                /* 隔離的左上角冷白光源，乾淨無痕 */
-                background: radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 60%);
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                opacity: 0.035; 
                 pointer-events: none;
-                z-index: 1;
+                mix-blend-mode: overlay;
+                z-index: 5;
+            }
+
+            /* --- 🔥 1. 粉紅玻璃卡片：多層 Smooth Glow 大升級 --- */
+            .glass-pink {
+                /* 背景：使用高飽和度底色，讓顏色飽滿深邃 (不透明酒紅) */
+                background: linear-gradient(145deg, #572f33 0%, #472c35 45%, #251419 100%);
+                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-radius: 24px; position: relative; overflow: hidden;
+                
+                box-shadow: 
+                    /* 內側高光 (製造物理厚度) */
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+
+                    /* 🔥 關鍵魔法：聽你的多圈疊加柔和邊界 (透明度從重到輕，多圈擴展) --- */
+                    /* 第 1 圈：銳利模擬邊界 (透明度 0.35) */
+                    0 0 0 1px rgba(210, 60, 170, 0.35),
+                    /* 第 2 圈：微距暈染，透明度降低 (0.15) */
+                    0 0 0 2px rgba(210, 60, 170, 0.15),
+                    /* 第 3-4 圈：透明度極低 擴展 (0.08, 0.03) */
+                    0 0 0 4px rgba(160, 40, 220, 0.08),
+                    0 0 0 6px rgba(160, 40, 220, 0.03),
+
+                    /* 原本的環境漫射光暈 */
+                    0 0 30px 0 rgba(210, 60, 170, 0.15),
+                    0 0 80px -10px rgba(160, 40, 220, 0.15);
+            }
+            /* 上下左右的微弱玻璃切線 */
+            .glass-pink::before {
+                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+                z-index: 2; pointer-events: none;
+            }
+            .glass-pink::after {
+                content: ''; position: absolute; top: 0; left: 0; width: 1px; height: 100%;
+                background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
+                z-index: 2; pointer-events: none;
+            }
+
+            /* --- 🔥 2. 橘色玻璃卡片：多層 Smooth Glow 大升級 --- */
+            .glass-orange {
+                background: linear-gradient(145deg, #5a3c1f 0%, #422a15 45%, #1c1007 100%);
+                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-radius: 24px; position: relative; overflow: hidden;
+                
+                box-shadow: 
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+
+                    /* 🔥 多圈漸層邊框 (從重到輕) */
+                    /* 第 1 圈 */
+                    0 0 0 1px rgba(255, 122, 0, 0.35),
+                    /* 第 2 圈 */
+                    0 0 0 2px rgba(255, 122, 0, 0.15),
+                    /* 第 3-4 圈 */
+                    0 0 0 4px rgba(255, 122, 0, 0.08),
+                    0 0 0 6px rgba(255, 122, 0, 0.03),
+
+                    /* 環境漫射光暈 */
+                    0 0 30px 0 rgba(255, 122, 0, 0.15),
+                    0 0 80px -10px rgba(255, 122, 0, 0.12);
+            }
+            .glass-orange::before {
+                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+                z-index: 2; pointer-events: none;
+            }
+            .glass-orange::after {
+                content: ''; position: absolute; top: 0; right: 0; width: 1px; height: 100%;
+                background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
+                z-index: 2; pointer-events: none;
             }
         }
     </style>
@@ -59,7 +111,7 @@
 
     <aside class="w-64 h-screen bg-darkBg border-r border-white/5 p-6 flex flex-col justify-between sticky top-0">
         <nav class="space-y-2 mt-4" id="sidebar-nav">
-            <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.05)]">
+            <a href="#" data-target="page-overview" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200">
                 <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
                 <span>Overview</span>
             </a>
@@ -74,16 +126,16 @@
         <div id="page-overview" class="content-page space-y-12">
             
             <div class="max-w-4xl flex items-center justify-between">
-                <h1 class="text-3xl font-bold text-white tracking-tight">Finance Overview</h1>
+                <h1 class="text-3xl font-bold text-white tracking-tight">Finance Dashboard</h1>
             </div>
 
             <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-perfect-glow transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden glass-pink transition-transform hover:-translate-y-1 duration-300 noise-bg">
                     
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-6">
-                            <span class="text-sm font-medium text-white/80 tracking-wide uppercase">Monthly Expense</span>
+                            <span class="text-sm font-medium text-[#E5C3D5] tracking-wide uppercase">Monthly Expense</span>
                             <div id="trend-icon"></div>
                         </div>
                         
@@ -94,11 +146,11 @@
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden card-perfect-glow transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative rounded-3xl p-8 min-h-[220px] flex flex-col justify-between overflow-hidden glass-orange transition-transform hover:-translate-y-1 duration-300 noise-bg">
                     
                     <div class="relative z-10">
                         <div class="flex justify-between items-center mb-6">
-                            <span class="text-sm font-medium text-white/80 tracking-wide uppercase">Available Balance</span>
+                            <span class="text-sm font-medium text-[#E6D5B8] tracking-wide uppercase">Available Balance</span>
                             <svg class="w-6 h-6 text-[#FFC850]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         
@@ -127,7 +179,7 @@
                 navItems.forEach(nav => {
                     nav.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-500 hover:bg-white/5 transition-all duration-200";
                 });
-                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200 shadow-[0_0_10px_rgba(255,122,0,0.05)]";
+                item.className = "nav-item flex items-center gap-3 px-4 py-3 rounded-xl bg-cardBg text-brand border border-orange-500/10 font-semibold transition-all duration-200";
                 contentPages.forEach(p => p.classList.add('hidden'));
                 document.getElementById(item.getAttribute('data-target')).classList.remove('hidden');
             });
