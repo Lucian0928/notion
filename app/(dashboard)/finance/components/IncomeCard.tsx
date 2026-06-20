@@ -19,7 +19,7 @@ export function IncomeCard() {
 
       <div className="relative z-10 h-full flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-bold text-[#9FE8CF] tracking-widest uppercase opacity-80">
+          <span className="text-xs font-bold text-white/50 tracking-widest uppercase">
             Monthly Income
           </span>
           <svg
@@ -42,7 +42,7 @@ export function IncomeCard() {
             <div className="text-2xl font-black text-white tracking-tighter">讀取錯誤</div>
           ) : (
             <div
-              className={`text-4xl font-black text-white tracking-tighter text-glow ${
+              className={`text-5xl font-black text-white tracking-tighter text-glow ${
                 isLoading ? "animate-pulse" : ""
               }`}
             >

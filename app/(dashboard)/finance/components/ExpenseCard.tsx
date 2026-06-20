@@ -23,7 +23,7 @@ export function ExpenseCard() {
 
       <div className="relative z-10 h-full flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-bold text-[#E5C3D5] tracking-widest uppercase opacity-80">
+          <span className="text-xs font-bold text-white/50 tracking-widest uppercase">
             Monthly Expense
           </span>
           {!isLoading && !isError && <TrendIcon direction={direction} />}
@@ -35,7 +35,7 @@ export function ExpenseCard() {
           ) : (
             <>
               <div
-                className={`text-4xl font-black text-white mb-1 tracking-tighter text-glow ${
+                className={`text-5xl font-black text-white mb-1 tracking-tighter text-glow ${
                   isLoading ? "animate-pulse" : ""
                 }`}
               >
