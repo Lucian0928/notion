@@ -57,12 +57,19 @@ body {
     pointer-events: none;
   }
 
-  /* --- Available Balance card (amber) --- */
+  /* --- Available Balance card (amber) ---
+     Same source recipe family as the Expense card, scaled the same way
+     (inset glow 140px -> 70px for our card size). */
   .card-premium-orange {
-    background: linear-gradient(165deg, rgba(255, 157, 0, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: rgba(227, 133, 2, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 115, 0, 0.2);
+    box-shadow: 0 0 30px rgba(242, 147, 69, 0.35), inset 0 0 70px rgba(255, 174, 82, 0.4),
+      inset 0 0 4px 2px rgba(255, 255, 255, 0.8);
   }
   .card-premium-orange::before {
-    background: radial-gradient(115% 80% at 50% -18%, rgba(255, 178, 64, 0.22), transparent 60%);
+    background: none;
   }
 
   /* --- Monthly Expense card (coral red) ---
@@ -82,12 +89,19 @@ body {
     background: none;
   }
 
-  /* --- Monthly Income card (teal) --- */
+  /* --- Monthly Income card (green) ---
+     Same source recipe family as the Expense card, scaled the same way
+     (inset glow 140px -> 70px for our card size). */
   .card-premium-teal {
-    background: linear-gradient(165deg, rgba(86, 214, 170, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: rgba(52, 157, 73, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(217, 251, 208, 0.2);
+    box-shadow: 0 0 30px rgba(70, 160, 80, 0.35), inset 0 0 70px rgba(82, 255, 110, 0.4),
+      inset 0 0 4px 2px rgba(255, 255, 255, 0.8);
   }
   .card-premium-teal::before {
-    background: radial-gradient(115% 80% at 50% -18%, rgba(118, 232, 196, 0.22), transparent 60%);
+    background: none;
   }
 
   /* --- Neutral dark-glass panel for charts --- */
