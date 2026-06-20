@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getMonthRange } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type { ApiErrorResponse, ExpenseResponse } from "@/types/notion";
 import type { NotionPage } from "@/types/notion";
@@ -25,17 +26,12 @@ export async function GET() {
   const databaseId = process.env.transactions_database_id ?? "";
 
   try {
-    const now = new Date();
-    // 本月範圍
-    const firstDayThis = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-    const lastDayThis = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).toISOString();
-    // 上月範圍
-    const firstDayLast = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
-    const lastDayLast = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59).toISOString();
+    const thisMonth = getMonthRange(0);
+    const lastMonth = getMonthRange(-1);
 
     const [pagesThis, pagesLast] = await Promise.all([
-      queryNotionDatabase(databaseId, expenseFilter(firstDayThis, lastDayThis)),
-      queryNotionDatabase(databaseId, expenseFilter(firstDayLast, lastDayLast)),
+      queryNotionDatabase(databaseId, expenseFilter(thisMonth.start, thisMonth.end)),
+      queryNotionDatabase(databaseId, expenseFilter(lastMonth.start, lastMonth.end)),
     ]);
 
     const totalThis = sumAmount(pagesThis);

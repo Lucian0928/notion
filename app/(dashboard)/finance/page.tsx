@@ -1,0 +1,26 @@
+import { BalanceCard } from "./components/BalanceCard";
+import { CashflowSparkline } from "./components/CashflowSparkline";
+import { ExpenseCard } from "./components/ExpenseCard";
+import { IncomeCard } from "./components/IncomeCard";
+
+export default function FinancePage() {
+  return (
+    <main className="flex-1 p-10 overflow-y-auto relative z-10">
+      <div className="space-y-12">
+        <div className="max-w-5xl flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-white tracking-tight">Finance Overview</h1>
+        </div>
+
+        <section className="max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8">
+          <BalanceCard />
+          <ExpenseCard />
+          <IncomeCard />
+        </section>
+
+        <section className="max-w-5xl">
+          <CashflowSparkline />
+        </section>
+      </div>
+    </main>
+  );
+}

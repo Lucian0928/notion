@@ -24,3 +24,39 @@ export interface ExpenseResponse {
 export interface ApiErrorResponse {
   error: string;
 }
+
+export interface IncomeResponse {
+  total: number;
+}
+
+export interface CashflowDay {
+  date: string;
+  income: number;
+  expense: number;
+  net: number;
+}
+
+export interface CashflowResponse {
+  days: CashflowDay[];
+}
+
+export interface TrendMonth {
+  month: string;
+  income: number;
+  expense: number;
+}
+
+export interface TrendResponse {
+  months: TrendMonth[];
+}
+
+export interface CategoryBreakdownItem {
+  name: string;
+  total: number;
+}
+
+export interface CategoryBreakdownResponse {
+  categories: CategoryBreakdownItem[];
+}
+
+export type CategoryBreakdownRange = "this_month" | "last_month" | "last_3_months";
