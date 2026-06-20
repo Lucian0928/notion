@@ -29,15 +29,16 @@ export interface IncomeResponse {
   total: number;
 }
 
-export interface CashflowDay {
+export interface RecentTransaction {
+  id: string;
+  name: string;
+  amount: number;
   date: string;
-  income: number;
-  expense: number;
-  net: number;
+  type: string;
 }
 
-export interface CashflowResponse {
-  days: CashflowDay[];
+export interface RecentTransactionsResponse {
+  transactions: RecentTransaction[];
 }
 
 export interface TrendMonth {

@@ -1,7 +1,7 @@
 import { BalanceCard } from "./components/BalanceCard";
-import { CashflowSparkline } from "./components/CashflowSparkline";
 import { ExpenseCard } from "./components/ExpenseCard";
 import { IncomeCard } from "./components/IncomeCard";
+import { RecentTransactionsTable } from "./components/RecentTransactionsTable";
 
 export default function FinancePage() {
   return (
@@ -18,7 +18,7 @@ export default function FinancePage() {
         </section>
 
         <section className="max-w-5xl">
-          <CashflowSparkline />
+          <RecentTransactionsTable />
         </section>
       </div>
     </main>
