@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FINANCE DASHBOARD - Premium Metal</title>
+    <title>FINANCE DASHBOARD - PERFECT METALLIC</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,68 +11,57 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    /* 完美的純黑背景，用來襯托金屬邊緣的反光 */
-                    colors: { brand: '#FF7A00', darkBg: '#000000' }
+                    /* 純黑背景，完美將金屬邊緣的微光反光逼出極限 */
+                    colors: { brand: '#FF7A00', darkBg: '#000000', cardBg: '#09090B' }
                 }
             }
         }
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            /* 數字金屬發光 */
+            /* 數字頂級發光效果：白光的精緻自發光 */
             .text-glow {
-                text-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1);
+                text-shadow: 0 0 12px rgba(255,255,255,0.3), 0 0 24px rgba(255,255,255,0.1);
             }
 
-            /* 極致微弱的陽極氧化金屬顆粒感 (0.02 透明度) */
+            /* 高級金屬微細顆粒（陽極氧化鋁質地，絕不混濁） */
             .metal-grain::after {
                 content: ""; position: absolute; inset: 0; border-radius: inherit;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-                opacity: 0.02; pointer-events: none; mix-blend-mode: overlay; z-index: 5;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+                opacity: 0.025; pointer-events: none; mix-blend-mode: overlay; z-index: 5;
             }
 
             /* =========================================
-               🚀 THE METAL ENGINE (高級金屬渲染器)
+               🚀 THE PREMIUM SPECULAR METALLIC ENGINE
                ========================================= */
-            .card-metal {
-                /* 1. 金屬本體：極深的霧面微光底色 */
-                background: linear-gradient(145deg, #120A0D 0%, #050304 100%);
-                border-radius: 24px; position: relative;
+            
+            /* --- 1. Monthly Expense (頂級冷酒紅金屬卡) --- */
+            .card-premium-pink {
+                /* 使用你指定的精準色碼漸層，飽滿且具有深度 */
+                background: linear-gradient(145deg, #472c35 0%, #311b22 50%, #170d11 100%);
+                border-radius: 24px; position: relative; overflow: hidden;
                 
-                /* 2. 物理厚度：只有極微弱的頂部內陰影與向下的純黑實體陰影，絕對不要往外散發彩色光暈！ */
                 box-shadow: 
-                    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-                    0 25px 50px -12px rgba(0, 0, 0, 1);
+                    /* 內部上方微弱物理邊緣高光 */
+                    inset 0 1px 1px rgba(255, 255, 255, 0.08),
+                    /* 1px 無痕冷光邊界圈 (極低不透明度，徹底拋拒廉價死硬粗線) */
+                    0 0 0 1px rgba(228, 96, 176, 0.12),
+                    /* 實體向下陰影，建立浮空感 */
+                    0 20px 40px -10px rgba(0, 0, 0, 0.9),
+                    /* 極致克制的外漫射環境彩光 */
+                    0 0 35px -5px rgba(228, 96, 176, 0.08);
             }
 
-            /* 3. 金屬表面漫射反光 (Surface Sheen) - 決定卡片的色調 */
-            .card-metal-pink-sheen {
-                position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
-                /* 左上角的微弱粉紅金屬光澤 */
-                background: radial-gradient(circle at 0% 0%, rgba(255, 43, 109, 0.12) 0%, transparent 60%);
-            }
-            .card-metal-orange-sheen {
-                position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
-                /* 左上角的微弱橘金金屬光澤 */
-                background: radial-gradient(circle at 0% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 60%);
-            }
-
-            /* 4. 頂級邊緣銳利高光 (Sharp Specular Rim Light) - 這是金屬高級感的靈魂！ */
-            .card-metal-pink-rim::before {
-                content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2;
-                padding: 1px; /* 1px 銳利邊緣 */
-                /* 從粉紅色過渡到微弱白色，再完全消失 */
-                background: linear-gradient(135deg, rgba(255, 43, 109, 0.6) 0%, rgba(255, 255, 255, 0.1) 30%, transparent 70%);
-                /* CSS 神級遮罩：掏空內部，只留下 padding 的 1px 邊線 */
-                -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                -webkit-mask-composite: xor; mask-composite: exclude;
-            }
-            .card-metal-orange-rim::before {
-                content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2;
-                padding: 1px;
-                background: linear-gradient(135deg, rgba(255, 122, 0, 0.6) 0%, rgba(255, 255, 255, 0.1) 30%, transparent 70%);
-                -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                -webkit-mask-composite: xor; mask-composite: exclude;
+            /* --- 2. Available Balance (頂級冷黃金屬卡) --- */
+            .card-premium-orange {
+                background: linear-gradient(145deg, #422a15 0%, #2b1a0c 50%, #140d05 100%);
+                border-radius: 24px; position: relative; overflow: hidden;
+                
+                box-shadow: 
+                    inset 0 1px 1px rgba(255, 255, 255, 0.08),
+                    0 0 0 1px rgba(255, 157, 0, 0.12),
+                    0 20px 40px -10px rgba(0, 0, 0, 0.9),
+                    0 0 35px -5px rgba(255, 157, 0, 0.08);
             }
         }
     </style>
@@ -80,48 +69,69 @@
 <body class="bg-darkBg text-gray-300 min-h-screen flex font-sans selection:bg-brand/30">
 
     <aside class="w-64 h-screen bg-darkBg border-r border-white/5 p-6 flex flex-col justify-between sticky top-0 shrink-0">
-        <nav class="space-y-2 mt-4">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0A0A0A] text-brand border border-white/5 font-semibold">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
+        <nav class="space-y-2 mt-4" id="sidebar-nav">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0F0F11] text-brand border border-white/5 font-semibold shadow-[0_0_10px_rgba(255,122,0,0.02)]">
+                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path></svg>
                 <span>Overview</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-500 hover:bg-white/5 transition-all duration-200">
+                <svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                <span>Transactions</span>
             </a>
         </nav>
     </aside>
 
-    <main class="flex-1 p-10 overflow-y-auto relative">
-        <div id="page-overview" class="max-w-5xl space-y-8 relative z-10">
-            <div class="flex items-center justify-between mb-8">
+    <main class="flex-1 p-10 overflow-y-auto">
+        <div id="page-overview" class="content-page space-y-12">
+            
+            <div class="max-w-4xl flex items-center justify-between">
                 <h1 class="text-3xl font-bold text-white tracking-tight">Finance Overview</h1>
             </div>
 
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="card-metal card-metal-pink-rim metal-grain p-8 min-h-[240px] flex flex-col justify-between group transition-transform hover:-translate-y-1 duration-300">
-                    <div class="card-metal-pink-sheen group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative card-premium-pink metal-grain p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
+
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
+
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#9b5f66]/20 via-transparent to-transparent pointer-events-none z-1"></div>
+
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
-                            <span class="text-sm font-semibold text-white/60 tracking-wider uppercase">Monthly Expense</span>
+                            <span class="text-xs font-bold text-[#E5C3D5] tracking-widest uppercase opacity-80">Monthly Expense</span>
                             <div id="trend-icon"></div>
                         </div>
+                        
                         <div>
-                            <div id="expense-amount" class="text-[56px] leading-none font-black text-white mb-3 tracking-tighter text-glow animate-pulse">Loading...</div>
-                            <div id="mom-text" class="text-sm font-bold text-[#FF2B6D]">Calculating...</div>
+                            <div id="expense-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
+                            <div id="mom-text" class="text-xs font-bold text-[#E460B0] tracking-wide">Calculating...</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card-metal card-metal-orange-rim metal-grain p-8 min-h-[240px] flex flex-col justify-between group transition-transform hover:-translate-y-1 duration-300">
-                    <div class="card-metal-orange-sheen group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div class="relative card-premium-orange metal-grain p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
+
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
+
+                    <div class="absolute inset-0 bg-gradient-to-bl from-[#FFC850]/10 via-transparent to-transparent pointer-events-none z-1"></div>
+
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
-                            <span class="text-sm font-semibold text-white/60 tracking-wider uppercase">Available Balance</span>
-                            <svg class="w-6 h-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-xs font-bold text-[#E6D5B8] tracking-widest uppercase opacity-80">Available Balance</span>
+                            <svg class="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
+                        
                         <div>
-                            <div id="balance-amount" class="text-[56px] leading-none font-black text-white mb-3 tracking-tighter text-glow animate-pulse">Loading...</div>
-                            <div class="text-sm font-bold text-[#FF7A00] uppercase tracking-wider">Liquid Funds</div>
+                            <div id="balance-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
+                            <div class="text-xs font-bold text-[#FF9D00] tracking-wide uppercase">Liquid Funds</div>
                         </div>
                     </div>
                 </div>
@@ -131,41 +141,59 @@
     </main>
 
     <script>
+        // 獲取支出數據
         async function fetchExpenseData() {
             const amountEl = document.getElementById('expense-amount');
             const momEl = document.getElementById('mom-text');
             const iconEl = document.getElementById('trend-icon');
+            
             try {
                 const res = await fetch('/api/get-expense');
                 const data = await res.json();
+                
                 if (data.total !== undefined) {
                     amountEl.classList.remove('animate-pulse');
                     amountEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    
                     momEl.classList.remove('animate-pulse');
-                    const momVal = Math.abs(data.mom).toFixed(1);
+                    const formattedMom = Math.abs(data.mom).toFixed(1);
+
+                    const upArrow = `<svg class="w-5 h-5 text-[#E460B0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                    const downArrow = `<svg class="w-5 h-5 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+
                     if (data.mom > 0) {
-                        momEl.innerText = `(+${momVal}% MoM)`; 
-                        iconEl.innerHTML = `<svg class="w-6 h-6 text-[#FF2B6D]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                        momEl.innerText = `(+${formattedMom}% MoM)`;
+                        momEl.className = 'text-xs font-bold text-[#E460B0] tracking-wide';
+                        iconEl.innerHTML = upArrow;
                     } else {
-                        momEl.innerText = `(-${momVal}% MoM)`; momEl.className = 'text-sm font-bold text-[#76A88A]';
-                        iconEl.innerHTML = `<svg class="w-6 h-6 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+                        momEl.innerText = `(-${formattedMom}% MoM)`;
+                        momEl.className = 'text-xs font-bold text-[#76A88A] tracking-wide';
+                        iconEl.innerHTML = downArrow;
                     }
                 }
-            } catch (e) { amountEl.innerText = 'Error'; }
+            } catch (e) {
+                amountEl.innerText = '讀取錯誤';
+            }
         }
 
+        // 獲取餘額數據
         async function fetchBalanceData() {
             const balanceEl = document.getElementById('balance-amount');
             try {
                 const res = await fetch('/api/get-balance');
                 const data = await res.json();
+                
                 if (data.total !== undefined) {
                     balanceEl.classList.remove('animate-pulse');
                     balanceEl.innerText = '$' + data.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-                } else { balanceEl.innerText = 'Error'; }
-            } catch (e) { balanceEl.innerText = 'Error'; }
+                }
+            } catch (e) {
+                balanceEl.innerText = '連線失敗';
+            }
         }
-        fetchExpenseData(); fetchBalanceData();
+
+        fetchExpenseData();
+        fetchBalanceData();
     </script>
 </body>
 </html>
