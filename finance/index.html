@@ -11,7 +11,6 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    /* 深空灰背景，完美襯托高純度金屬卡片 */
                     colors: { brand: '#FF7A00', darkBg: '#0E0E12', cardBg: '#09090B' }
                 }
             }
@@ -38,24 +37,18 @@
             
             /* --- 1. Monthly Expense (純淨冷玫瑰酒紅金屬卡) --- */
             .card-premium-pink {
-                /* 🔥 關鍵修正：拋棄導致混濁的深色漸層！整塊卡片採用均勻、純淨的高飽和冷酒紅底色 */
                 background: linear-gradient(135deg, #5E323E 0%, #4D212E 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
                 
                 box-shadow: 
-                    /* 內部上方微弱物理邊緣高光 */
                     inset 0 1px 1px rgba(255, 255, 255, 0.1),
-                    /* 1px 微弱霓虹修邊線，維持邊界清晰 */
                     0 0 0 1px rgba(228, 96, 176, 0.15),
-                    /* 實體向下投影，建立完美的空間浮空感 */
                     0 25px 50px -12px rgba(0, 0, 0, 0.75),
-                    /* 極致克制的外漫射環境彩光 */
                     0 0 35px -5px rgba(228, 96, 176, 0.1);
             }
 
             /* --- 2. Available Balance (純淨金屬暖橘卡) --- */
             .card-premium-orange {
-                /* 🔥 關鍵修正：整塊卡片採用均勻、純淨的高飽和暖銅橘底色，消滅霧黑 */
                 background: linear-gradient(135deg, #5A351A 0%, #452611 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
                 
@@ -92,7 +85,7 @@
 
             <section class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="relative card-premium-pink p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative card-premium-pink p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
@@ -103,19 +96,19 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-4">
                             <span class="text-xs font-bold text-[#E5C3D5] tracking-widest uppercase opacity-80">Monthly Expense</span>
                             <div id="trend-icon"></div>
                         </div>
                         
                         <div>
-                            <div id="expense-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
+                            <div id="expense-amount" class="text-4xl font-black text-white mb-1 tracking-tighter text-glow animate-pulse">Loading...</div>
                             <div id="mom-text" class="text-xs font-bold text-[#E460B0] tracking-wide">Calculating...</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative card-premium-orange p-8 min-h-[230px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+                <div class="relative card-premium-orange p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
                     
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-[1.5px] bg-gradient-to-r from-transparent via-white/90 to-transparent z-10"></div>
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[10px] bg-white/20 blur-[5px] rounded-full pointer-events-none z-10"></div>
@@ -126,15 +119,14 @@
                     <div class="absolute inset-0 bg-gradient-to-bl from-white/10 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-4">
                             <span class="text-xs font-bold text-[#E6D5B8] tracking-widest uppercase opacity-80">Available Balance</span>
                             <svg class="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         
                         <div>
-                            <div id="balance-amount" class="text-5xl font-black text-white mb-2 tracking-tighter text-glow animate-pulse">Loading...</div>
-                            <div class="text-xs font-bold text-[#FF9D00] tracking-wide uppercase">Liquid Funds</div>
-                        </div>
+                            <div id="balance-amount" class="text-4xl font-black text-white tracking-tighter text-glow animate-pulse">Loading...</div>
+                            </div>
                     </div>
                 </div>
 
