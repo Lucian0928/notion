@@ -19,108 +19,105 @@
     <style type="text/tailwindcss">
         /* 🔥 Figma 級別的動態 CSS 變數系統 */
         :root {
-            /* 全局噪點 */
-            --noise-op: 0.04;
+            --noise-op: 0.05;
 
-            /* Card 1 (Expense) 參數 */
-            --c1-color: #e83893;
-            --c1-glow-op: 20%;
-            --c1-spread: 50px;
-            --c1-inner-op: 15%;
-            --c1-edge-op: 80%;
-            --c1-blur: 20px;
-            --c1-bg-op: 90%;
+            /* --- Card 1 (Expense) 預設參數 --- */
+            --c1-neon: #E460B0;       /* 霓虹發光色 */
+            --c1-bg-start: #572f33;   /* 左上角底色 */
+            --c1-bg-end: #251419;     /* 右下角底色 (不再是死黑！) */
+            --c1-glow-op: 25%;        /* 外光暈強度 */
+            --c1-spread: 40px;        /* 外光暈擴散 */
+            --c1-inner-op: 25%;       /* 內部漫射光強度 */
+            --c1-edge-op: 60%;        /* 邊緣反光強度 */
 
-            /* Card 2 (Balance) 參數 */
-            --c2-color: #ff9d00;
-            --c2-glow-op: 20%;
-            --c2-spread: 50px;
-            --c2-inner-op: 15%;
-            --c2-edge-op: 80%;
-            --c2-blur: 20px;
-            --c2-bg-op: 90%;
+            /* --- Card 2 (Balance) 預設參數 --- */
+            --c2-neon: #FFC850;
+            --c2-bg-start: #5a3c1f;
+            --c2-bg-end: #1c1007;
+            --c2-glow-op: 25%;
+            --c2-spread: 40px;
+            --c2-inner-op: 25%;
+            --c2-edge-op: 60%;
         }
 
         @layer utilities {
-            .text-glow {
-                text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2);
-            }
+            .text-glow { text-shadow: 0 0 12px rgba(255,255,255,0.4), 0 0 24px rgba(255,255,255,0.2); }
 
             .noise-bg::after {
                 content: ""; position: absolute; inset: 0;
                 background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-                opacity: var(--noise-op); 
-                pointer-events: none; mix-blend-mode: overlay; z-index: 5;
+                opacity: var(--noise-op); pointer-events: none; mix-blend-mode: overlay; z-index: 5;
             }
 
-            /* --- 可編輯卡片共用效果 --- */
-            .editable-card {
-                cursor: pointer;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            .editable-card { cursor: pointer; transition: transform 0.3s ease; }
+            .editable-card:hover { transform: translateY(-4px); }
+            .editable-card::after {
+                content: "Click to Edit 🛠️"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+                padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; color: white;
+                opacity: 0; transition: opacity 0.2s; z-index: 20; pointer-events: none; border: 1px solid rgba(255,255,255,0.1);
             }
-            .editable-card:hover {
-                transform: translateY(-4px) scale(1.01);
-            }
-            /* Hover 時顯示編輯提示 */
-            .editable-card::before {
-                content: "Click to Edit Design";
-                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
-                padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white;
-                opacity: 0; transition: opacity 0.2s; z-index: 20; pointer-events: none;
-                border: 1px solid rgba(255,255,255,0.2);
-            }
-            .editable-card:hover::before { opacity: 1; }
+            .editable-card:hover::after { opacity: 1; }
 
-            /* --- Card 1 (Expense) --- */
+            /* =========================================
+               CARD 1 (Expense) 
+               ========================================= */
             .card-c1 {
-                background: color-mix(in srgb, #000 var(--c1-bg-op), transparent);
-                backdrop-filter: blur(var(--c1-blur)); -webkit-backdrop-filter: blur(var(--c1-blur));
+                /* 🔥 關鍵修復：背景恢復成你想要的漸層，徹底消滅死黑 */
+                background: linear-gradient(145deg, var(--c1-bg-start) 0%, var(--c1-bg-end) 100%);
+                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
                 border-radius: 24px; position: relative; overflow: hidden;
                 box-shadow: 
-                    inset 0 1px 1px rgba(255, 255, 255, 0.05), /* 極細內高光 */
-                    0 15px 35px -5px rgba(0, 0, 0, 0.8), /* 深度陰影 */
-                    0 0 var(--c1-spread) 0 color-mix(in srgb, var(--c1-color) var(--c1-glow-op), transparent); /* 動態外光暈 */
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                    0 15px 35px -5px rgba(0, 0, 0, 0.6),
+                    0 0 var(--c1-spread) 0 color-mix(in srgb, var(--c1-neon) var(--c1-glow-op), transparent);
             }
-            /* 內部漫射光 (左上角) */
             .card-c1-inner {
                 position: absolute; inset: 0; pointer-events: none; z-index: 1;
-                background: radial-gradient(circle at top left, color-mix(in srgb, var(--c1-color) var(--c1-inner-op), transparent), transparent 60%);
+                background: radial-gradient(circle at top left, color-mix(in srgb, var(--c1-neon) var(--c1-inner-op), transparent) 0%, transparent 65%);
             }
-            /* 邊緣極致切線 (左上角) */
-            .card-c1-edge {
-                position: absolute; inset: 0; pointer-events: none; z-index: 2; border-radius: 24px;
-                border-top: 1.5px solid color-mix(in srgb, var(--c1-color) var(--c1-edge-op), transparent);
-                border-left: 1.5px solid color-mix(in srgb, var(--c1-color) calc(var(--c1-edge-op) / 2), transparent);
-                mask-image: linear-gradient(135deg, black 0%, transparent 50%);
-                -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 50%);
+            /* 頂部反光線 */
+            .card-c1-edge-top {
+                position: absolute; top: 0; left: 0; right: 0; height: 1.5px; z-index: 2; pointer-events: none;
+                background: linear-gradient(90deg, rgba(255,255,255,0.8), color-mix(in srgb, var(--c1-neon) var(--c1-edge-op), transparent), transparent 70%);
+            }
+            /* 左側反光線 */
+            .card-c1-edge-side {
+                position: absolute; top: 0; left: 0; bottom: 0; width: 1.5px; z-index: 2; pointer-events: none;
+                background: linear-gradient(180deg, rgba(255,255,255,0.6), color-mix(in srgb, var(--c1-neon) var(--c1-edge-op), transparent), transparent 70%);
             }
 
-            /* --- Card 2 (Balance) --- */
+            /* =========================================
+               CARD 2 (Balance) 
+               ========================================= */
             .card-c2 {
-                background: color-mix(in srgb, #000 var(--c2-bg-op), transparent);
-                backdrop-filter: blur(var(--c2-blur)); -webkit-backdrop-filter: blur(var(--c2-blur));
+                /* 🔥 關鍵修復：漸層背景 */
+                background: linear-gradient(145deg, var(--c2-bg-start) 0%, var(--c2-bg-end) 100%);
+                backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
                 border-radius: 24px; position: relative; overflow: hidden;
                 box-shadow: 
-                    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-                    0 15px 35px -5px rgba(0, 0, 0, 0.8),
-                    0 0 var(--c2-spread) 0 color-mix(in srgb, var(--c2-color) var(--c2-glow-op), transparent);
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                    0 15px 35px -5px rgba(0, 0, 0, 0.6),
+                    0 0 var(--c2-spread) 0 color-mix(in srgb, var(--c2-neon) var(--c2-glow-op), transparent);
             }
-            /* 內部漫射光 (右上角) */
             .card-c2-inner {
                 position: absolute; inset: 0; pointer-events: none; z-index: 1;
-                background: radial-gradient(circle at top right, color-mix(in srgb, var(--c2-color) var(--c2-inner-op), transparent), transparent 60%);
+                /* 右上角打光 */
+                background: radial-gradient(circle at top right, color-mix(in srgb, var(--c2-neon) var(--c2-inner-op), transparent) 0%, transparent 65%);
             }
-            /* 邊緣極致切線 (右上角) */
-            .card-c2-edge {
-                position: absolute; inset: 0; pointer-events: none; z-index: 2; border-radius: 24px;
-                border-top: 1.5px solid color-mix(in srgb, var(--c2-color) var(--c2-edge-op), transparent);
-                border-right: 1.5px solid color-mix(in srgb, var(--c2-color) calc(var(--c2-edge-op) / 2), transparent);
-                mask-image: linear-gradient(225deg, black 0%, transparent 50%);
-                -webkit-mask-image: linear-gradient(225deg, black 0%, transparent 50%);
+            /* 頂部反光線 */
+            .card-c2-edge-top {
+                position: absolute; top: 0; left: 0; right: 0; height: 1.5px; z-index: 2; pointer-events: none;
+                /* 從右邊亮過來 */
+                background: linear-gradient(270deg, rgba(255,255,255,0.8), color-mix(in srgb, var(--c2-neon) var(--c2-edge-op), transparent), transparent 70%);
+            }
+            /* 右側反光線 */
+            .card-c2-edge-side {
+                position: absolute; top: 0; right: 0; bottom: 0; width: 1.5px; z-index: 2; pointer-events: none;
+                background: linear-gradient(180deg, rgba(255,255,255,0.6), color-mix(in srgb, var(--c2-neon) var(--c2-edge-op), transparent), transparent 70%);
             }
 
-            /* 編輯器滑出動畫 */
+            /* 面板動畫 */
             .editor-panel { transform: translateX(110%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
             .editor-panel.open { transform: translateX(0); }
         }
@@ -139,17 +136,16 @@
 
     <main class="flex-1 p-10 overflow-y-auto relative">
         <div id="page-overview" class="max-w-5xl space-y-8">
-            
             <div class="flex items-center justify-between mb-8">
                 <h1 class="text-3xl font-bold text-white tracking-tight">Finance Overview</h1>
-                <span class="text-sm text-neutral-500">Click any card to open the Pro Editor ✨</span>
             </div>
 
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 <div class="card-c1 editable-card p-8 min-h-[240px] flex flex-col justify-between noise-bg" data-target="c1">
                     <div class="card-c1-inner"></div>
-                    <div class="card-c1-edge"></div>
+                    <div class="card-c1-edge-top"></div>
+                    <div class="card-c1-edge-side"></div>
                     
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
@@ -165,7 +161,8 @@
 
                 <div class="card-c2 editable-card p-8 min-h-[240px] flex flex-col justify-between noise-bg" data-target="c2">
                     <div class="card-c2-inner"></div>
-                    <div class="card-c2-edge"></div>
+                    <div class="card-c2-edge-top"></div>
+                    <div class="card-c2-edge-side"></div>
                     
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
@@ -178,68 +175,75 @@
                         </div>
                     </div>
                 </div>
-
             </section>
         </div>
     </main>
 
-    <div id="editor-panel" class="editor-panel fixed top-6 right-6 bottom-6 w-80 bg-[#0c0c0e]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 flex flex-col">
-        <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-            <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                Pro Editor
-            </h2>
-            <button id="close-editor" class="text-neutral-400 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors">
+    <div id="editor-panel" class="editor-panel fixed top-6 right-6 bottom-6 w-[340px] bg-[#121214]/95 backdrop-blur-3xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 flex flex-col">
+        <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">🎨 Pro Editor</h2>
+            <button id="close-editor" class="text-neutral-400 hover:text-white p-1 bg-white/5 rounded-full hover:bg-white/10 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
-        <div class="text-sm text-brand font-semibold mb-4 bg-brand/10 p-2 rounded-lg text-center" id="editing-label">Editing: Expense Card</div>
+        <div class="text-sm font-bold mb-6 px-3 py-2 rounded-lg text-center bg-white/5 border border-white/5" id="editing-label">Editing Card</div>
 
         <div class="space-y-6 overflow-y-auto pr-2 custom-scrollbar">
             
-            <div class="flex items-center justify-between">
-                <label class="text-sm font-medium text-neutral-300">Base Light Color</label>
-                <input type="color" id="ctrl-color" class="w-10 h-10 rounded-lg bg-transparent border border-white/20 cursor-pointer">
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Outer Glow Intensity</label><span id="val-glow-op" class="text-xs text-white">20%</span></div>
-                <input type="range" id="ctrl-glow-op" min="0" max="100" class="w-full accent-brand">
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Outer Glow Spread (px)</label><span id="val-spread" class="text-xs text-white">50</span></div>
-                <input type="range" id="ctrl-spread" min="0" max="150" class="w-full accent-brand">
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Inner Wash Intensity</label><span id="val-inner-op" class="text-xs text-white">15%</span></div>
-                <input type="range" id="ctrl-inner-op" min="0" max="100" class="w-full accent-brand">
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Edge Highlight Sharpness</label><span id="val-edge-op" class="text-xs text-white">80%</span></div>
-                <input type="range" id="ctrl-edge-op" min="0" max="100" class="w-full accent-brand">
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Background Darkness</label><span id="val-bg-op" class="text-xs text-white">90%</span></div>
-                <input type="range" id="ctrl-bg-op" min="0" max="100" class="w-full accent-brand">
+            <div class="space-y-3">
+                <h3 class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">1. Color System</h3>
+                <div class="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-white/5">
+                    <label class="text-xs text-neutral-300">Neon / Glow Color</label>
+                    <input type="color" id="ctrl-neon" class="w-8 h-8 rounded cursor-pointer border-0 bg-transparent">
+                </div>
+                <div class="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-white/5">
+                    <label class="text-xs text-neutral-300">Bg Gradient <span class="text-white/40">(Start)</span></label>
+                    <input type="color" id="ctrl-bg-start" class="w-8 h-8 rounded cursor-pointer border-0 bg-transparent">
+                </div>
+                <div class="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-white/5">
+                    <label class="text-xs text-neutral-300">Bg Gradient <span class="text-white/40">(End)</span></label>
+                    <input type="color" id="ctrl-bg-end" class="w-8 h-8 rounded cursor-pointer border-0 bg-transparent">
+                </div>
             </div>
 
             <hr class="border-white/10">
 
-            <div class="space-y-2">
-                <div class="flex justify-between"><label class="text-xs text-neutral-400">Global Noise Texture</label><span id="val-noise-op" class="text-xs text-brand">4%</span></div>
-                <input type="range" id="ctrl-noise-op" min="0" max="15" class="w-full accent-brand">
+            <div class="space-y-4">
+                <h3 class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">2. Light & Glow</h3>
+                <div class="space-y-1">
+                    <div class="flex justify-between"><label class="text-xs text-neutral-400">Outer Glow Intensity</label><span id="val-glow-op" class="text-xs text-white"></span></div>
+                    <input type="range" id="ctrl-glow-op" min="0" max="100" class="w-full accent-white">
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between"><label class="text-xs text-neutral-400">Outer Glow Spread (px)</label><span id="val-spread" class="text-xs text-white"></span></div>
+                    <input type="range" id="ctrl-spread" min="0" max="150" class="w-full accent-white">
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between"><label class="text-xs text-neutral-400">Inner Wash Intensity</label><span id="val-inner-op" class="text-xs text-white"></span></div>
+                    <input type="range" id="ctrl-inner-op" min="0" max="100" class="w-full accent-white">
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between"><label class="text-xs text-neutral-400">Edge Highlight Brightness</label><span id="val-edge-op" class="text-xs text-white"></span></div>
+                    <input type="range" id="ctrl-edge-op" min="0" max="100" class="w-full accent-white">
+                </div>
+            </div>
+
+            <hr class="border-white/10">
+
+            <div class="space-y-4">
+                <h3 class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">3. Texture</h3>
+                <div class="space-y-1">
+                    <div class="flex justify-between"><label class="text-xs text-neutral-400">Global Noise Grain</label><span id="val-noise-op" class="text-xs text-white"></span></div>
+                    <input type="range" id="ctrl-noise-op" min="0" max="15" class="w-full accent-white">
+                </div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // --- 核心 API 抓取邏輯 (維持不變) ---
+        // API 獲取資料
         async function fetchExpenseData() {
             const amountEl = document.getElementById('expense-amount');
             const momEl = document.getElementById('mom-text');
@@ -253,11 +257,11 @@
                     momEl.classList.remove('animate-pulse');
                     const momVal = Math.abs(data.mom).toFixed(1);
                     if (data.mom > 0) {
-                        momEl.innerText = `(+${momVal}% MoM)`; momEl.className = 'text-sm font-semibold text-rose-400';
-                        iconEl.innerHTML = `<svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
+                        momEl.innerText = `(+${momVal}% MoM)`; momEl.className = 'text-sm font-semibold text-[#E460B0]';
+                        iconEl.innerHTML = `<svg class="w-6 h-6 text-[#E460B0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>`;
                     } else if (data.mom < 0) {
-                        momEl.innerText = `(-${momVal}% MoM)`; momEl.className = 'text-sm font-semibold text-emerald-400';
-                        iconEl.innerHTML = `<svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
+                        momEl.innerText = `(-${momVal}% MoM)`; momEl.className = 'text-sm font-semibold text-[#76A88A]';
+                        iconEl.innerHTML = `<svg class="w-6 h-6 text-[#76A88A]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>`;
                     } else {
                         momEl.innerText = `(0.0% MoM)`; momEl.className = 'text-sm font-semibold text-neutral-500'; iconEl.innerHTML = ''; 
                     }
@@ -278,44 +282,47 @@
         }
         fetchExpenseData(); fetchBalanceData();
 
-        // --- 🛠️ Pro Editor 控制邏輯 ---
+        // 🛠️ 專業編輯器邏輯
         const editorPanel = document.getElementById('editor-panel');
         const closeBtn = document.getElementById('close-editor');
         const cards = document.querySelectorAll('.editable-card');
-        let currentCard = 'c1'; // 'c1' 或是 'c2'
+        let currentCard = 'c1';
 
-        // 定義每一張卡的 State
+        // 儲存兩張卡片的狀態 (這就是一開始預設的參數)
         const state = {
-            noise: 4,
-            c1: { color: '#e83893', glowOp: 20, spread: 50, innerOp: 15, edgeOp: 80, bgOp: 90 },
-            c2: { color: '#ff9d00', glowOp: 20, spread: 50, innerOp: 15, edgeOp: 80, bgOp: 90 }
+            noise: 5,
+            c1: { neon: '#E460B0', bgStart: '#572f33', bgEnd: '#251419', glowOp: 25, spread: 40, innerOp: 25, edgeOp: 60 },
+            c2: { neon: '#FFC850', bgStart: '#5a3c1f', bgEnd: '#1c1007', glowOp: 25, spread: 40, innerOp: 25, edgeOp: 60 }
         };
 
-        // 綁定 UI 元素
-        const ctrlColor = document.getElementById('ctrl-color');
+        const ctrlNeon = document.getElementById('ctrl-neon');
+        const ctrlBgStart = document.getElementById('ctrl-bg-start');
+        const ctrlBgEnd = document.getElementById('ctrl-bg-end');
+        
         const ctrlGlowOp = document.getElementById('ctrl-glow-op');
         const ctrlSpread = document.getElementById('ctrl-spread');
         const ctrlInnerOp = document.getElementById('ctrl-inner-op');
         const ctrlEdgeOp = document.getElementById('ctrl-edge-op');
-        const ctrlBgOp = document.getElementById('ctrl-bg-op');
         const ctrlNoiseOp = document.getElementById('ctrl-noise-op');
 
-        // 更新面板顯示的數值與滑桿位置
         function updatePanelUI() {
             const s = state[currentCard];
-            document.getElementById('editing-label').innerText = currentCard === 'c1' ? 'Editing: Expense Card' : 'Editing: Balance Card';
-            document.getElementById('editing-label').style.color = s.color;
-            
-            ctrlColor.value = s.color;
+            const label = document.getElementById('editing-label');
+            label.innerText = currentCard === 'c1' ? 'Currently Editing: Expense Card' : 'Currently Editing: Balance Card';
+            label.style.color = s.neon;
+
+            // 寫入 Input 數值
+            ctrlNeon.value = s.neon;
+            ctrlBgStart.value = s.bgStart;
+            ctrlBgEnd.value = s.bgEnd;
+
             ctrlGlowOp.value = s.glowOp; document.getElementById('val-glow-op').innerText = s.glowOp + '%';
-            ctrlSpread.value = s.spread; document.getElementById('val-spread').innerText = s.spread;
+            ctrlSpread.value = s.spread; document.getElementById('val-spread').innerText = s.spread + 'px';
             ctrlInnerOp.value = s.innerOp; document.getElementById('val-inner-op').innerText = s.innerOp + '%';
             ctrlEdgeOp.value = s.edgeOp; document.getElementById('val-edge-op').innerText = s.edgeOp + '%';
-            ctrlBgOp.value = s.bgOp; document.getElementById('val-bg-op').innerText = s.bgOp + '%';
             ctrlNoiseOp.value = state.noise; document.getElementById('val-noise-op').innerText = state.noise + '%';
         }
 
-        // 開啟面板
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 currentCard = card.getAttribute('data-target');
@@ -324,24 +331,22 @@
             });
         });
 
-        // 關閉面板
-        closeBtn.addEventListener('click', () => {
-            editorPanel.classList.remove('open');
-        });
+        closeBtn.addEventListener('click', () => { editorPanel.classList.remove('open'); });
 
-        // 監聽修改並即時寫入 CSS 變數
         function updateCSSVar(prop, value, unit = '') {
             document.documentElement.style.setProperty(`--${currentCard}-${prop}`, value + unit);
         }
 
-        ctrlColor.addEventListener('input', (e) => { state[currentCard].color = e.target.value; updateCSSVar('color', e.target.value); updatePanelUI(); });
+        // 綁定所有 Input 事件
+        ctrlNeon.addEventListener('input', (e) => { state[currentCard].neon = e.target.value; updateCSSVar('neon', e.target.value); updatePanelUI(); });
+        ctrlBgStart.addEventListener('input', (e) => { state[currentCard].bgStart = e.target.value; updateCSSVar('bg-start', e.target.value); });
+        ctrlBgEnd.addEventListener('input', (e) => { state[currentCard].bgEnd = e.target.value; updateCSSVar('bg-end', e.target.value); });
+        
         ctrlGlowOp.addEventListener('input', (e) => { state[currentCard].glowOp = e.target.value; updateCSSVar('glow-op', e.target.value, '%'); updatePanelUI(); });
         ctrlSpread.addEventListener('input', (e) => { state[currentCard].spread = e.target.value; updateCSSVar('spread', e.target.value, 'px'); updatePanelUI(); });
         ctrlInnerOp.addEventListener('input', (e) => { state[currentCard].innerOp = e.target.value; updateCSSVar('inner-op', e.target.value, '%'); updatePanelUI(); });
         ctrlEdgeOp.addEventListener('input', (e) => { state[currentCard].edgeOp = e.target.value; updateCSSVar('edge-op', e.target.value, '%'); updatePanelUI(); });
-        ctrlBgOp.addEventListener('input', (e) => { state[currentCard].bgOp = e.target.value; updateCSSVar('bg-op', e.target.value, '%'); updatePanelUI(); });
         
-        // 全局噪點獨立控制
         ctrlNoiseOp.addEventListener('input', (e) => { 
             state.noise = e.target.value; 
             document.documentElement.style.setProperty('--noise-op', e.target.value / 100); 
