@@ -17,38 +17,30 @@
         }
     </script>
     <style type="text/tailwindcss">
-        /* 🔥 這次絕對有變化的關鍵：網頁全局環境光 */
+        /* 全局環境光 */
         body {
-            /* 1. 明顯的深空灰底色，絕對不再是死黑 */
             background-color: #0E0E12 !important;
-            /* 2. 螢幕頂部打下一道極為明顯的冷白色聚光燈，讓背景呈現立體漸層 */
             background-image: 
                 radial-gradient(ellipse 80% 60% at 50% -10%, rgba(65, 65, 80, 0.4) 0%, transparent 100%),
-                /* 底部壓暗，創造無限延伸的空間感 */
                 radial-gradient(ellipse 100% 40% at 50% 110%, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
             background-attachment: fixed;
         }
 
         @layer utilities {
-            /* 數字頂級發光效果 */
             .text-glow {
                 text-shadow: 0 0 12px rgba(255,255,255,0.3), 0 0 24px rgba(255,255,255,0.1);
             }
 
-            /* 高級金屬微細顆粒 */
             .metal-grain::after {
                 content: ""; position: absolute; inset: 0; border-radius: inherit;
                 background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
                 opacity: 0.025; pointer-events: none; mix-blend-mode: overlay; z-index: 5;
             }
-
-            /* =========================================
-               🚀 THE PREMIUM SPECULAR METALLIC ENGINE
-               ========================================= */
             
-            /* --- 1. Monthly Expense (頂級冷酒紅金屬卡) --- */
+            /* --- 1. Monthly Expense (提亮版冷酒紅金屬卡) --- */
             .card-premium-pink {
-                background: linear-gradient(145deg, #472c35 0%, #311b22 50%, #170d11 100%);
+                /* 🔥 調整重點：將起點從 #472c35 提亮為 #6B3B48，中段提亮為 #42232D */
+                background: linear-gradient(145deg, #6B3B48 0%, #42232D 50%, #1F1015 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
                 box-shadow: 
                     inset 0 1px 1px rgba(255, 255, 255, 0.08),
@@ -57,9 +49,10 @@
                     0 0 35px -5px rgba(228, 96, 176, 0.08);
             }
 
-            /* --- 2. Available Balance (頂級冷黃金屬卡) --- */
+            /* --- 2. Available Balance (提亮版冷黃金屬卡) --- */
             .card-premium-orange {
-                background: linear-gradient(145deg, #422a15 0%, #2b1a0c 50%, #140d05 100%);
+                /* 🔥 調整重點：將起點從 #422a15 提亮為 #6B421C，中段提亮為 #452810 */
+                background: linear-gradient(145deg, #6B421C 0%, #452810 50%, #211207 100%);
                 border-radius: 24px; position: relative; overflow: hidden;
                 box-shadow: 
                     inset 0 1px 1px rgba(255, 255, 255, 0.08),
@@ -102,7 +95,7 @@
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
 
-                    <div class="absolute inset-0 bg-gradient-to-br from-[#9b5f66]/20 via-transparent to-transparent pointer-events-none z-1"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#b06573]/25 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
@@ -125,7 +118,7 @@
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"></div>
                     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40px] h-[6px] bg-white/10 blur-[4px] rounded-full pointer-events-none z-10"></div>
 
-                    <div class="absolute inset-0 bg-gradient-to-bl from-[#FFC850]/10 via-transparent to-transparent pointer-events-none z-1"></div>
+                    <div class="absolute inset-0 bg-gradient-to-bl from-[#FFC850]/20 via-transparent to-transparent pointer-events-none z-1"></div>
 
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-center mb-6">
