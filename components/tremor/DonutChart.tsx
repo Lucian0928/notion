@@ -15,6 +15,7 @@ export interface DonutChartProps<T extends object> {
   colors?: AvailableChartColorsKeys[];
   variant?: "donut" | "pie";
   valueFormatter?: (value: number) => string;
+  label?: string;
   className?: string;
 }
 
@@ -43,13 +44,19 @@ export function DonutChart<T extends object>({
   colors = DEFAULT_COLORS,
   variant = "donut",
   valueFormatter = (v) => v.toString(),
+  label,
   className,
 }: DonutChartProps<T>) {
   const categories = data.map((d) => String(d[category]));
   const categoryColors = constructCategoryColors(categories, colors);
 
   return (
-    <div className={cx("h-56 w-full min-w-0", className)}>
+    <div className={cx("relative h-56 w-full min-w-0", className)}>
+      {label ? (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-lg font-bold text-white">{label}</span>
+        </div>
+      ) : null}
       <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
         <PieChart>
           <Pie
