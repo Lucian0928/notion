@@ -33,12 +33,12 @@ export function MonthlyCategoryDonut() {
         </div>
 
         {isError ? (
-          <div className="text-sm text-white">讀取錯誤</div>
+          <div className="text-sm text-white">Failed to load</div>
         ) : isLoading || !data ? (
           <div className="h-56 animate-pulse rounded-xl bg-white/5" />
         ) : data.categories.length === 0 ? (
           <div className="h-56 flex items-center justify-center text-sm text-neutral-500">
-            這個月還沒有支出資料
+            No expenses this month
           </div>
         ) : (
           <div className="flex flex-col gap-4">

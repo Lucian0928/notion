@@ -8,7 +8,7 @@ async function fetchTrend(): Promise<TrendResponse> {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取趨勢資料失敗");
+    throw new Error(data?.error ?? "Failed to load trend data");
   }
 
   return data;

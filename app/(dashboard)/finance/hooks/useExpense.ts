@@ -8,7 +8,7 @@ async function fetchExpense(): Promise<ExpenseResponse> {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取支出資料失敗");
+    throw new Error(data?.error ?? "Failed to load expense data");
   }
 
   return data;

@@ -63,8 +63,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json<CategoryBreakdownResponse>({ categories });
   } catch (error) {
     const status = error instanceof NotionApiError ? error.status : 500;
-    const message = error instanceof Error ? error.message : "伺服器內部錯誤";
-    console.error("get-category-breakdown 錯誤:", message);
+    const message = error instanceof Error ? error.message : "Internal server error";
+    console.error("get-category-breakdown error:", message);
     return NextResponse.json<ApiErrorResponse>({ error: message }, { status });
   }
 }

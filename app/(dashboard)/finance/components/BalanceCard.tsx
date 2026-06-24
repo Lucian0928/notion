@@ -33,7 +33,7 @@ export function BalanceCard() {
 
         <div>
           {isError ? (
-            <div className="text-2xl font-black text-white tracking-tighter">連線失敗</div>
+            <div className="text-2xl font-black text-white tracking-tighter">Connection failed</div>
           ) : (
             <div
               className={`text-5xl font-black text-white tracking-tighter text-glow ${

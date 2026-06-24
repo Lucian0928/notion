@@ -61,3 +61,24 @@ export interface CategoryBreakdownResponse {
 }
 
 export type CategoryBreakdownRange = "this_month" | "last_month" | "last_3_months";
+
+export interface Account {
+  id: string;
+  cardName: string;
+  cardNumber: string;
+  currentBalance: number;
+}
+
+export interface AccountsResponse {
+  accounts: Account[];
+}
+
+export interface CreateAccountRequest {
+  cardName: string;
+  cardNumber: string;
+  initialBalance: number;
+}
+
+export interface CreateAccountResponse {
+  id: string;
+}

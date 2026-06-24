@@ -26,8 +26,8 @@ export async function GET() {
     return NextResponse.json<IncomeResponse>({ total });
   } catch (error) {
     const status = error instanceof NotionApiError ? error.status : 500;
-    const message = error instanceof Error ? error.message : "伺服器內部錯誤";
-    console.error("get-income 錯誤:", message);
+    const message = error instanceof Error ? error.message : "Internal server error";
+    console.error("get-income error:", message);
     return NextResponse.json<ApiErrorResponse>({ error: message }, { status });
   }
 }

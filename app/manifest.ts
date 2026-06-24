@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Finance Dashboard",
     short_name: "Finance",
-    description: "個人記帳與餘額儀表板",
+    description: "Personal finance and balance dashboard",
     start_url: "/finance",
     display: "standalone",
     background_color: "#0E0E12",

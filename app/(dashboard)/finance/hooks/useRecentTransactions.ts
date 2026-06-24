@@ -8,7 +8,7 @@ async function fetchRecentTransactions(): Promise<RecentTransactionsResponse> {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取交易紀錄失敗");
+    throw new Error(data?.error ?? "Failed to load transactions");
   }
 
   return data;

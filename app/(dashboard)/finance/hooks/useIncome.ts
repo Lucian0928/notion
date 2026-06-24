@@ -8,7 +8,7 @@ async function fetchIncome(): Promise<IncomeResponse> {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取收入資料失敗");
+    throw new Error(data?.error ?? "Failed to load income data");
   }
 
   return data;

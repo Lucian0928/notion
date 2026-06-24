@@ -25,7 +25,9 @@ export function ExpenseCard() {
 
         <div>
           {isError ? (
-            <div className="text-2xl font-black text-white mb-1 tracking-tighter">讀取錯誤</div>
+            <div className="text-2xl font-black text-white mb-1 tracking-tighter">
+              Failed to load
+            </div>
           ) : (
             <>
               <div

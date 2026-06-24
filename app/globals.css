@@ -29,6 +29,14 @@ body {
     text-shadow: 0 0 14px rgba(255, 255, 255, 0.28), 0 0 28px rgba(255, 255, 255, 0.08);
   }
 
+  .font-card-display {
+    font-family: var(--font-cormorant-garamond);
+  }
+
+  .font-card-mono {
+    font-family: var(--font-space-mono);
+  }
+
   /* Shared frosted-glass surface: a genuinely translucent (~6-12% alpha)
      fill + backdrop-filter blur so the page's gradients/noise actually
      show through and refract, a thin low-saturation border (no neon rim),

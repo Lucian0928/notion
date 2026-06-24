@@ -10,7 +10,7 @@ async function fetchCategoryBreakdown(
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取分類資料失敗");
+    throw new Error(data?.error ?? "Failed to load category data");
   }
 
   return data;

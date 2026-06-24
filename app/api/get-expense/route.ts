@@ -47,8 +47,8 @@ export async function GET() {
     return NextResponse.json<ExpenseResponse>({ total: totalThis, mom });
   } catch (error) {
     const status = error instanceof NotionApiError ? error.status : 500;
-    const message = error instanceof Error ? error.message : "伺服器內部錯誤";
-    console.error("get-expense 錯誤:", message);
+    const message = error instanceof Error ? error.message : "Internal server error";
+    console.error("get-expense error:", message);
     return NextResponse.json<ApiErrorResponse>({ error: message }, { status });
   }
 }

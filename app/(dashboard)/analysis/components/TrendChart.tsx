@@ -20,7 +20,7 @@ export function TrendChart() {
   const { data, isLoading, isError } = useTrend();
 
   if (isError) {
-    return <div className="text-sm text-white">讀取錯誤</div>;
+    return <div className="text-sm text-white">Failed to load</div>;
   }
 
   if (isLoading || !data) {
@@ -47,7 +47,7 @@ export function TrendChart() {
           <Line
             type="monotone"
             dataKey="income"
-            name="收入"
+            name="Income"
             stroke="#56D6AA"
             strokeWidth={2}
             dot={{ r: 3 }}
@@ -55,7 +55,7 @@ export function TrendChart() {
           <Line
             type="monotone"
             dataKey="expense"
-            name="支出"
+            name="Expense"
             stroke="#E460B0"
             strokeWidth={2}
             dot={{ r: 3 }}

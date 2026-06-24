@@ -1,7 +1,7 @@
 import { queryNotionDatabase } from "@/lib/notion";
 import type { NotionPage } from "@/types/notion";
 
-export const UNCATEGORIZED_LABEL = "未分類";
+export const UNCATEGORIZED_LABEL = "Uncategorized";
 
 /** id -> category name, built from the linked Expense Categories database. */
 export async function getExpenseCategoryMap(): Promise<Map<string, string>> {

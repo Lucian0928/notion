@@ -29,7 +29,7 @@ export function RecentTransactionsTable() {
         </div>
 
         {isError ? (
-          <div className="text-sm text-white">讀取錯誤</div>
+          <div className="text-sm text-white">Failed to load</div>
         ) : isLoading || !data ? (
           <div className="space-y-3">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -37,7 +37,7 @@ export function RecentTransactionsTable() {
             ))}
           </div>
         ) : data.transactions.length === 0 ? (
-          <div className="py-8 text-center text-sm text-neutral-500">還沒有交易紀錄</div>
+          <div className="py-8 text-center text-sm text-neutral-500">No transactions yet</div>
         ) : (
           <table className="w-full text-sm">
             <thead>

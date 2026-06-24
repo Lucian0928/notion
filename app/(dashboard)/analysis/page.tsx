@@ -13,7 +13,7 @@ export default function AnalysisPage() {
           <div className="card-panel p-6 min-h-[320px] flex flex-col">
             <div className="flex justify-between items-center mb-4">
               <span className="text-xs font-bold text-neutral-400 tracking-widest uppercase opacity-80">
-                收支趨勢（近 6 個月）
+                Income vs Expense (Last 6 Months)
               </span>
             </div>
             <TrendChart />

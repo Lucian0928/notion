@@ -14,7 +14,7 @@ export function CategoryBreakdownChart({ range }: { range: CategoryBreakdownRang
   const { data, isLoading, isError } = useCategoryBreakdown(range);
 
   if (isError) {
-    return <div className="text-sm text-white">讀取錯誤</div>;
+    return <div className="text-sm text-white">Failed to load</div>;
   }
 
   if (isLoading || !data) {
@@ -24,7 +24,7 @@ export function CategoryBreakdownChart({ range }: { range: CategoryBreakdownRang
   if (data.categories.length === 0) {
     return (
       <div className="h-64 flex items-center justify-center text-sm text-neutral-500">
-        這段期間沒有支出資料
+        No expense data for this period
       </div>
     );
   }

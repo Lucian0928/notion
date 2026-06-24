@@ -21,14 +21,15 @@ interface NotionQueryPage {
 async function notionQueryRequest(
   databaseId: string,
   body: Record<string, unknown>,
-  revalidate: number
+  revalidate: number,
+  tags?: string[]
 ): Promise<NotionQueryPage> {
   const apiKey = process.env.notion_api_key;
   if (!apiKey) {
-    throw new NotionApiError("找不到 Notion 金鑰 (notion_api_key)", 500);
+    throw new NotionApiError("Missing Notion API key (notion_api_key)", 500);
   }
   if (!databaseId) {
-    throw new NotionApiError("找不到 Notion 資料庫 ID", 500);
+    throw new NotionApiError("Missing Notion database ID", 500);
   }
 
   const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
@@ -39,14 +40,14 @@ async function notionQueryRequest(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
-    next: { revalidate },
+    next: { revalidate, tags },
   });
 
   const data = await response.json();
 
   if (!response.ok) {
     throw new NotionApiError(
-      `Notion API 錯誤 (${response.status}): ${data?.message ?? "未知錯誤"}`,
+      `Notion API error (${response.status}): ${data?.message ?? "Unknown error"}`,
       response.status
     );
   }
@@ -62,7 +63,7 @@ async function notionQueryRequest(
 export async function queryNotionDatabase(
   databaseId: string,
   filterBody: Record<string, unknown>,
-  options: { revalidate?: number } = {}
+  options: { revalidate?: number; tags?: string[] } = {}
 ): Promise<NotionPage[]> {
   const revalidate = options.revalidate ?? 300;
   const results: NotionPage[] = [];
@@ -72,7 +73,8 @@ export async function queryNotionDatabase(
     const data = await notionQueryRequest(
       databaseId,
       cursor ? { ...filterBody, start_cursor: cursor } : filterBody,
-      revalidate
+      revalidate,
+      options.tags
     );
 
     results.push(...(data.results ?? []));

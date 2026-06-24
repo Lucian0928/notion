@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -8,9 +8,21 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant-garamond",
+  subsets: ["latin"],
+  weight: ["600"],
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "Finance Dashboard",
-  description: "個人記帳與餘額儀表板",
+  description: "Personal finance and balance dashboard",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -37,7 +49,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-TW" className={`${plusJakartaSans.variable} h-full antialiased`}>
+    <html
+      lang="zh-TW"
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} ${spaceMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full font-sans text-gray-300 selection:bg-brand/30">
         {children}
       </body>

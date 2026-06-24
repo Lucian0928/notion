@@ -3,9 +3,9 @@
 import type { CategoryBreakdownRange } from "@/types/notion";
 
 const OPTIONS: { value: CategoryBreakdownRange; label: string }[] = [
-  { value: "this_month", label: "本月" },
-  { value: "last_month", label: "上月" },
-  { value: "last_3_months", label: "近 3 個月" },
+  { value: "this_month", label: "This Month" },
+  { value: "last_month", label: "Last Month" },
+  { value: "last_3_months", label: "Last 3 Months" },
 ];
 
 export function RangeSelect({

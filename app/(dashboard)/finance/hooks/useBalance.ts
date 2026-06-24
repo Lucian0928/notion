@@ -8,7 +8,7 @@ async function fetchBalance(): Promise<BalanceResponse> {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data?.error ?? "讀取餘額資料失敗");
+    throw new Error(data?.error ?? "Failed to load balance data");
   }
 
   return data;
