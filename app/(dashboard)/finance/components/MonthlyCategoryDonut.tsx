@@ -7,13 +7,13 @@ function formatCurrency(amount: number) {
   return "$" + amount.toLocaleString("en-US", { minimumFractionDigits: 0 });
 }
 
-export function MonthlyCategoryDonut() {
+export function MonthlyCategoryDonut({ className = "" }: { className?: string }) {
   const { data, isLoading, isError } = useCategoryBreakdown("this_month");
   const total = data?.categories.reduce((sum, c) => sum + c.total, 0) ?? 0;
 
   return (
-    <div className="card-liquid-glass p-6 min-h-[320px] min-w-0 flex flex-col">
-      <div className="relative z-10 flex flex-col flex-1">
+    <div className={`card-liquid-glass p-6 flex flex-col ${className}`}>
+      <div className="relative z-10 flex flex-col flex-1 min-h-0">
         <div className="flex justify-between items-center mb-4">
           <span className="text-xs font-bold text-neutral-400 tracking-widest uppercase opacity-80">
             Monthly Categories
@@ -29,7 +29,7 @@ export function MonthlyCategoryDonut() {
             No expenses this month
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col flex-1 min-h-0 gap-2">
             <DonutChart
               data={data.categories}
               category="name"
@@ -38,7 +38,7 @@ export function MonthlyCategoryDonut() {
               valueFormatter={formatCurrency}
               label={formatCurrency(total)}
             />
-            <div className="grid grid-cols-1 gap-2">
+            <div className="flex-1 min-h-0 overflow-y-auto grid grid-cols-1 gap-2 content-start">
               {data.categories.map((c, i) => {
                 const segment = GLOW_PALETTE[i % GLOW_PALETTE.length];
                 return (

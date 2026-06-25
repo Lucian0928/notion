@@ -17,13 +17,9 @@ export default function FinancePage() {
           <IncomeCard />
         </section>
 
-        <section className="max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2 min-w-0">
-            <RecentTransactionsTable />
-          </div>
-          <div className="min-w-0">
-            <MonthlyCategoryDonut />
-          </div>
+        <section className="max-w-5xl flex flex-col lg:flex-row items-stretch gap-8">
+          <RecentTransactionsTable className="lg:basis-2/3 min-w-0" />
+          <MonthlyCategoryDonut className="lg:basis-1/3 min-w-0" />
         </section>
       </div>
     </main>

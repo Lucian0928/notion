@@ -16,11 +16,11 @@ const TYPE_BADGE_CLASS: Record<string, string> = {
   Transfer: "badge-pill badge-pill-warning",
 };
 
-export function RecentTransactionsTable() {
+export function RecentTransactionsTable({ className = "" }: { className?: string }) {
   const { data, isLoading, isError } = useRecentTransactions();
 
   return (
-    <div className="card-liquid-glass p-6">
+    <div className={`card-liquid-glass p-6 flex flex-col ${className}`}>
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-4">
           <span className="text-xs font-bold text-neutral-400 tracking-widest uppercase opacity-80">
