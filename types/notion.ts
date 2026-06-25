@@ -67,6 +67,8 @@ export interface Account {
   cardName: string;
   cardNumber: string;
   currentBalance: number;
+  initialBalance: number;
+  background: string;
 }
 
 export interface AccountsResponse {
@@ -77,8 +79,25 @@ export interface CreateAccountRequest {
   cardName: string;
   cardNumber: string;
   initialBalance: number;
+  background: string;
 }
 
 export interface CreateAccountResponse {
   id: string;
+}
+
+export interface UpdateAccountRequest {
+  id: string;
+  cardName: string;
+  cardNumber: string;
+  initialBalance: number;
+  background: string;
+}
+
+export interface UpdateAccountResponse {
+  id: string;
+}
+
+export interface CardBackgroundsResponse {
+  backgrounds: string[];
 }

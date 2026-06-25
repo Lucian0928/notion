@@ -10,14 +10,14 @@ export function IncomeCard() {
   const { data, isLoading, isError } = useIncome();
 
   return (
-    <div className="relative card-premium-teal p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+    <div className="relative card-premium-teal p-4 min-h-[120px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
       <div className="relative z-10 h-full flex flex-col justify-between">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-white/50 tracking-widest uppercase">
             Monthly Income
           </span>
           <svg
-            className="w-5 h-5 text-white/40"
+            className="w-4 h-4 text-white/40"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -33,10 +33,10 @@ export function IncomeCard() {
 
         <div>
           {isError ? (
-            <div className="text-2xl font-black text-white tracking-tighter">Failed to load</div>
+            <div className="text-xl font-black text-white tracking-tighter">Failed to load</div>
           ) : (
             <div
-              className={`text-5xl font-black text-white tracking-tighter text-glow ${
+              className={`text-3xl font-black text-white tracking-tighter text-glow ${
                 isLoading ? "animate-pulse" : ""
               }`}
             >

@@ -8,7 +8,7 @@ import { RecentTransactionsTable } from "./components/RecentTransactionsTable";
 export default function FinancePage() {
   return (
     <main className="flex-1 p-10 overflow-y-auto relative z-10">
-      <div className="space-y-12">
+      <div className="space-y-12" style={{ zoom: 0.8 }}>
         <AccountsSection />
 
         <section className="max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8">

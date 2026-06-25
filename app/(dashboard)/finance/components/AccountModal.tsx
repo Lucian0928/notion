@@ -1,23 +1,52 @@
 "use client";
 
 import { useState } from "react";
+import type { Account } from "@/types/notion";
+import { useCardBackgrounds } from "../hooks/useCardBackgrounds";
 import { useCreateAccount } from "../hooks/useCreateAccount";
+import { useUpdateAccount } from "../hooks/useUpdateAccount";
 
-const BACKGROUND_OPTIONS = ["post-office"];
+export function AccountModal({ account, onClose }: { account?: Account; onClose: () => void }) {
+  const isEdit = Boolean(account);
+  const [cardName, setCardName] = useState(account?.cardName ?? "");
+  const [cardNumber, setCardNumber] = useState(account?.cardNumber ?? "");
+  const [initialBalance, setInitialBalance] = useState(
+    account ? String(account.initialBalance) : ""
+  );
+  const { data: backgroundsData } = useCardBackgrounds();
+  const backgroundOptions = backgroundsData?.backgrounds ?? [];
+  const [background, setBackground] = useState(account?.background ?? "");
 
-export function AddAccountModal({ onClose }: { onClose: () => void }) {
-  const [cardName, setCardName] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [initialBalance, setInitialBalance] = useState("");
-  const [background, setBackground] = useState(BACKGROUND_OPTIONS[0]);
-  const { mutate, isPending, error } = useCreateAccount();
+  const createAccount = useCreateAccount();
+  const updateAccount = useUpdateAccount();
+  const { isPending, error } = isEdit ? updateAccount : createAccount;
+
+  const resolvedBackground = background || backgroundOptions[0] || "post-office";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    mutate(
-      { cardName, cardNumber, initialBalance: Number(initialBalance) || 0 },
-      { onSuccess: onClose }
-    );
+    if (isEdit && account) {
+      updateAccount.mutate(
+        {
+          id: account.id,
+          cardName,
+          cardNumber,
+          initialBalance: Number(initialBalance) || 0,
+          background: resolvedBackground,
+        },
+        { onSuccess: onClose }
+      );
+    } else {
+      createAccount.mutate(
+        {
+          cardName,
+          cardNumber,
+          initialBalance: Number(initialBalance) || 0,
+          background: resolvedBackground,
+        },
+        { onSuccess: onClose }
+      );
+    }
   }
 
   return (
@@ -30,7 +59,7 @@ export function AddAccountModal({ onClose }: { onClose: () => void }) {
         onSubmit={handleSubmit}
         className="card-panel w-full max-w-sm p-6 space-y-4"
       >
-        <h2 className="text-lg font-bold text-white">Add Account</h2>
+        <h2 className="text-lg font-bold text-white">{isEdit ? "Edit Account" : "Add Account"}</h2>
 
         <div className="space-y-1">
           <label className="text-xs font-bold text-neutral-400 tracking-widest uppercase">
@@ -74,11 +103,11 @@ export function AddAccountModal({ onClose }: { onClose: () => void }) {
             Background Image
           </label>
           <select
-            value={background}
+            value={resolvedBackground}
             onChange={(e) => setBackground(e.target.value)}
             className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
           >
-            {BACKGROUND_OPTIONS.map((option) => (
+            {backgroundOptions.map((option) => (
               <option key={option} value={option} className="bg-neutral-900">
                 {option}
               </option>
@@ -101,7 +130,7 @@ export function AddAccountModal({ onClose }: { onClose: () => void }) {
             disabled={isPending}
             className="px-4 py-2 rounded-lg text-sm font-bold bg-brand text-white disabled:opacity-50"
           >
-            {isPending ? "Adding..." : "Add"}
+            {isPending ? "Saving..." : isEdit ? "Save" : "Add"}
           </button>
         </div>
       </form>

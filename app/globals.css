@@ -37,6 +37,16 @@ body {
     font-family: var(--font-space-mono);
   }
 
+  /* Hide the scrollbar track/thumb on horizontally-scrollable rows while
+     keeping them scrollable — used by the Accounts card carousel. */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Shared frosted-glass surface: a genuinely translucent (~6-12% alpha)
      fill + backdrop-filter blur so the page's gradients/noise actually
      show through and refract, a thin low-saturation border (no neon rim),

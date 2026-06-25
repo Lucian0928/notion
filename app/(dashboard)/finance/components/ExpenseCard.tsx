@@ -14,9 +14,9 @@ export function ExpenseCard() {
   const momColor = mom > 0 ? "text-[#E460B0]" : "text-[#76A88A]";
 
   return (
-    <div className="relative card-premium-pink p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+    <div className="relative card-premium-pink p-4 min-h-[120px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
       <div className="relative z-10 h-full flex flex-col justify-between">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-white/50 tracking-widest uppercase">
             Monthly Expense
           </span>
@@ -25,13 +25,13 @@ export function ExpenseCard() {
 
         <div>
           {isError ? (
-            <div className="text-2xl font-black text-white mb-1 tracking-tighter">
+            <div className="text-xl font-black text-white mb-1 tracking-tighter">
               Failed to load
             </div>
           ) : (
             <>
               <div
-                className={`text-5xl font-black text-white mb-1 tracking-tighter text-glow ${
+                className={`text-3xl font-black text-white mb-1 tracking-tighter text-glow ${
                   isLoading ? "animate-pulse" : ""
                 }`}
               >

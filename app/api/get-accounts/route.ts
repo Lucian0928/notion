@@ -19,6 +19,8 @@ export async function GET() {
       cardName: page.properties.Name?.title?.[0]?.plain_text ?? "",
       cardNumber: page.properties["Card Number"]?.rich_text?.[0]?.plain_text ?? "",
       currentBalance: page.properties["Current Balance"]?.formula?.number ?? 0,
+      initialBalance: page.properties.Initial?.number ?? 0,
+      background: page.properties.Background?.select?.name ?? "post-office",
     }));
 
     return NextResponse.json<AccountsResponse>({ accounts });
