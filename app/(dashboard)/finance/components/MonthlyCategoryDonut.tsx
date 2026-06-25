@@ -14,7 +14,7 @@ export function MonthlyCategoryDonut({ className = "" }: { className?: string })
   return (
     <div className={`card-liquid-glass p-6 flex flex-col ${className}`}>
       <div className="relative z-10 flex flex-col flex-1 min-h-0">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-neutral-400 tracking-widest uppercase opacity-80">
             Monthly Categories
           </span>
@@ -29,7 +29,14 @@ export function MonthlyCategoryDonut({ className = "" }: { className?: string })
             No expenses this month
           </div>
         ) : (
-          <div className="flex flex-col flex-1 min-h-0 gap-2">
+          // The legend is absolutely positioned (not normal flow) so its
+          // content — which can run to a dozen+ categories — never counts
+          // towards this card's own natural/intrinsic height. That keeps the
+          // card's natural size pinned to "header + donut chart" only, so
+          // when the parent flex row stretches both cards to match Recent
+          // Transactions' height, this card never balloons past it just
+          // because there happen to be a lot of categories this period.
+          <div className="relative flex-1 min-h-0">
             <DonutChart
               data={data.categories}
               category="name"
@@ -37,8 +44,9 @@ export function MonthlyCategoryDonut({ className = "" }: { className?: string })
               glow
               valueFormatter={formatCurrency}
               label={formatCurrency(total)}
+              className="-mt-4"
             />
-            <div className="flex-1 min-h-0 overflow-y-auto grid grid-cols-1 gap-2 content-start">
+            <div className="absolute inset-x-0 bottom-0 top-52 overflow-y-auto grid grid-cols-1 gap-2 content-start">
               {data.categories.map((c, i) => {
                 const segment = GLOW_PALETTE[i % GLOW_PALETTE.length];
                 return (
