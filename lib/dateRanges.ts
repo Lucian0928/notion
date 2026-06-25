@@ -15,6 +15,14 @@ export interface MonthLabel extends DateRange {
   month: string;
 }
 
+/** offsetYears: 0 = this year, -1 = last year, etc. */
+export function getYearRange(offsetYears = 0, now: Date = new Date()): DateRange {
+  const year = now.getFullYear() + offsetYears;
+  const start = new Date(year, 0, 1);
+  const end = new Date(year, 11, 31, 23, 59, 59);
+  return { start: start.toISOString(), end: end.toISOString() };
+}
+
 /** The last n months, oldest first, including the current month. */
 export function getLastNMonthsLabels(n: number, now: Date = new Date()): MonthLabel[] {
   const months: MonthLabel[] = [];

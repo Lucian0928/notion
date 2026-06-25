@@ -6,6 +6,8 @@ const OPTIONS: { value: CategoryBreakdownRange; label: string }[] = [
   { value: "this_month", label: "This Month" },
   { value: "last_month", label: "Last Month" },
   { value: "last_3_months", label: "Last 3 Months" },
+  { value: "last_6_months", label: "Last 6 Months" },
+  { value: "this_year", label: "This Year" },
 ];
 
 export function RangeSelect({

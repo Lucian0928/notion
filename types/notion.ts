@@ -60,7 +60,12 @@ export interface CategoryBreakdownResponse {
   categories: CategoryBreakdownItem[];
 }
 
-export type CategoryBreakdownRange = "this_month" | "last_month" | "last_3_months";
+export type CategoryBreakdownRange =
+  | "this_month"
+  | "last_month"
+  | "last_3_months"
+  | "last_6_months"
+  | "this_year";
 
 export interface Account {
   id: string;

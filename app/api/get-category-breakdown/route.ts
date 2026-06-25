@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getExpenseCategoryMap, getFirstRelationId, UNCATEGORIZED_LABEL } from "@/lib/categories";
-import { getMonthRange } from "@/lib/dateRanges";
+import { getMonthRange, getYearRange } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type {
   ApiErrorResponse,
@@ -17,6 +17,10 @@ function rangeFor(range: CategoryBreakdownRange) {
       return getMonthRange(-1);
     case "last_3_months":
       return { start: getMonthRange(-2).start, end: getMonthRange(0).end };
+    case "last_6_months":
+      return { start: getMonthRange(-5).start, end: getMonthRange(0).end };
+    case "this_year":
+      return getYearRange(0);
     case "this_month":
     default:
       return getMonthRange(0);
