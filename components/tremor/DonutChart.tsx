@@ -90,6 +90,16 @@ const GLOW_CAP_BULGE_DEGREES = (GLOW_STROKE_WIDTH / 2 / GLOW_RADIUS) * (180 / Ma
 // arcs (including their round end-caps) leave a real visible gap instead of
 // overlapping or touching.
 const GLOW_GAP_DEGREES = GLOW_CAP_BULGE_DEGREES + 2;
+// A category whose true share of the total is small (e.g. "Gifts" at 0.4%
+// of a month's spend) would get a raw angular span smaller than its own
+// round-cap bulge, so its dot bulges into its neighbors regardless of
+// stroke width — there's no fixed stroke thin enough to stay clear of an
+// arbitrarily small percentage. Instead, every segment gets at least this
+// much angle reserved up front; the rest of the circle is split among the
+// remaining ("normal-sized") segments proportionally to their value. The
+// label still shows the category's true percentage, only the drawn angle
+// is adjusted.
+const GLOW_MIN_SEGMENT_DEGREES = GLOW_GAP_DEGREES * 2 + 4;
 
 function polarToPoint(angleDeg: number) {
   const rad = (angleDeg * Math.PI) / 180;
@@ -111,7 +121,22 @@ function computeArcs<T extends object>(
   category: keyof T & string,
   value: keyof T & string
 ) {
-  const total = data.reduce((sum, entry) => sum + (Number(entry[value]) || 0), 0);
+  const rawValues = data.map((entry) => Number(entry[value]) || 0);
+  const total = rawValues.reduce((sum, v) => sum + v, 0);
+
+  // Segments whose natural share of 360° would be smaller than the minimum
+  // get pinned to the minimum; the remaining degrees are split among the
+  // rest in proportion to their value.
+  const isMinSegment = rawValues.map(
+    (v) => total > 0 && (v / total) * 360 < GLOW_MIN_SEGMENT_DEGREES
+  );
+  const minSegmentCount = isMinSegment.filter(Boolean).length;
+  const reservedDegrees = Math.min(360, minSegmentCount * GLOW_MIN_SEGMENT_DEGREES);
+  const remainingDegrees = 360 - reservedDegrees;
+  const remainingTotal = rawValues.reduce(
+    (sum, v, i) => (isMinSegment[i] ? sum : sum + v),
+    0
+  );
 
   const arcs: {
     key: string;
@@ -122,13 +147,18 @@ function computeArcs<T extends object>(
   }[] = [];
   let cumulativeAngle = 0;
   for (const [index, entry] of data.entries()) {
-    const raw = Number(entry[value]) || 0;
+    const raw = rawValues[index];
     const percent = total > 0 ? raw / total : 0;
+    const span = isMinSegment[index]
+      ? GLOW_MIN_SEGMENT_DEGREES
+      : remainingTotal > 0
+        ? (raw / remainingTotal) * remainingDegrees
+        : 0;
+
     const rawStart = cumulativeAngle;
-    const rawEnd = cumulativeAngle + percent * 360;
+    const rawEnd = cumulativeAngle + span;
     cumulativeAngle = rawEnd;
 
-    const span = rawEnd - rawStart;
     const inset = Math.max(0, Math.min(GLOW_GAP_DEGREES, span / 2 - 0.01));
 
     arcs.push({
