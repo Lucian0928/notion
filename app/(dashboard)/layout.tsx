@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.02 0.02"
+              baseFrequency="0.012 0.012"
               numOctaves={2}
               seed={92}
               result="noise"
@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <feDisplacementMap
               in="SourceGraphic"
               in2="blurred"
-              scale={23}
+              scale={85}
               xChannelSelector="R"
               yChannelSelector="G"
             />

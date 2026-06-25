@@ -10,7 +10,7 @@ export default function AnalysisPage() {
         </div>
 
         <section className="max-w-5xl">
-          <div className="card-panel p-6 min-h-[320px] flex flex-col">
+          <div className="card-liquid-glass p-6 min-h-[320px] flex flex-col">
             <div className="flex justify-between items-center mb-4">
               <span className="text-xs font-bold text-neutral-400 tracking-widest uppercase opacity-80">
                 Income vs Expense (Last 6 Months)

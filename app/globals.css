@@ -136,15 +136,15 @@ body {
      A tint-free material, distinct from the color-tinted *-premium-*
      cards: ::before is an inset shadow only (no background color),
      ::after does the actual blur + SVG ripple distortion (filter defined
-     once in app/(dashboard)/layout.tsx). Recipe is the user's own found
-     snippet, just made fluid-height instead of a fixed 400x300px demo
-     card, and border-radius matched to 20px for consistency with the
-     other panels on this page. */
+     once in app/(dashboard)/layout.tsx). Recipe matches the user's
+     original liquid-glass snippet verbatim (border-radius 28px, no
+     backdrop blur, white-toned shadows, baseFrequency 0.012, displacement
+     scale 85), just made fluid-height instead of a fixed 400x300px card. */
   .card-liquid-glass {
     position: relative;
-    border-radius: 20px;
+    border-radius: 28px;
     isolation: isolate;
-    box-shadow: 0 0 17px 1px rgba(201, 201, 201, 0.3);
+    box-shadow: 0px 0px 7px -8px rgba(255, 255, 255, 0.3);
   }
   .card-liquid-glass::before {
     content: "";
@@ -152,7 +152,8 @@ body {
     inset: 0;
     z-index: 0;
     border-radius: inherit;
-    box-shadow: inset 0 0 14px 2px rgba(124, 124, 124, 0.7);
+    box-shadow: inset 0 0 15px -8px rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0);
     pointer-events: none;
   }
   .card-liquid-glass::after {
@@ -161,9 +162,10 @@ body {
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     filter: url(#glass-distortion);
+    -webkit-filter: url(#glass-distortion);
     pointer-events: none;
   }
 
