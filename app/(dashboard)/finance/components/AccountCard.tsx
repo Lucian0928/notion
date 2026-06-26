@@ -25,16 +25,17 @@ export const AccountCard = forwardRef<
         backgroundPosition: "68% center",
       }}
     >
-      <span
-        className="absolute top-7 left-7 right-30 truncate font-card-display font-semibold uppercase tracking-[0.15em] text-white"
+      <div
+        className="absolute top-7 left-7 right-9 flex items-end justify-between gap-2"
         style={{ textShadow: "0 1px 3px rgba(0,0,0,0.4)" }}
       >
-        {cardName}
-      </span>
-
-      <span className="absolute top-7 right-9 font-card-mono text-sm text-white">
-        {formatBalance(currentBalance)}
-      </span>
+        <span className="truncate font-card-mono font-semibold uppercase tracking-[0.15em] text-white">
+          {cardName}
+        </span>
+        <span className="shrink-0 font-card-mono text-lg text-white">
+          {formatBalance(currentBalance)}
+        </span>
+      </div>
 
       <span className="absolute bottom-7 left-7 font-card-mono tracking-widest text-white">
         **** {cardNumber.slice(-4)}

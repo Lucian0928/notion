@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
+import { Cormorant_Garamond, Keania_One, Merriweather, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -12,6 +12,18 @@ const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant-garamond",
   subsets: ["latin"],
   weight: ["600"],
+});
+
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});
+
+const keaniaOne = Keania_One({
+  variable: "--font-keania-one",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 const spaceMono = Space_Mono({
@@ -51,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-TW"
-      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${plusJakartaSans.variable} ${cormorantGaramond.variable} ${spaceMono.variable} ${merriweather.variable} ${keaniaOne.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans text-gray-300 selection:bg-brand/30">
         {children}

@@ -30,11 +30,14 @@ body {
   }
 
   .font-card-display {
-    font-family: var(--font-cormorant-garamond);
+    font-family: var(--font-merriweather), serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
   }
 
   .font-card-mono {
-    font-family: var(--font-space-mono);
+    font-family: var(--font-keania-one), sans-serif;
+    font-weight: 400;
   }
 
   /* Hide the scrollbar track/thumb on horizontally-scrollable rows while
@@ -54,7 +57,8 @@ body {
      box-shadow. */
   .card-premium-pink,
   .card-premium-orange,
-  .card-premium-teal {
+  .card-premium-teal,
+  .card-premium-purple {
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -66,7 +70,8 @@ body {
 
   .card-premium-pink::before,
   .card-premium-orange::before,
-  .card-premium-teal::before {
+  .card-premium-teal::before,
+  .card-premium-purple::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -121,6 +126,19 @@ body {
     background: none;
   }
 
+  /* --- Savings card (purple) --- */
+  .card-premium-purple {
+    background: rgba(120, 60, 220, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(160, 100, 255, 0.2);
+    box-shadow: 0 0 30px rgba(140, 80, 255, 0.35), inset 0 0 70px rgba(170, 100, 255, 0.4),
+      inset 0 0 4px 2px rgba(255, 255, 255, 0.8);
+  }
+  .card-premium-purple::before {
+    background: none;
+  }
+
   /* --- Neutral dark-glass panel for charts --- */
   .card-panel {
     position: relative;
@@ -167,6 +185,51 @@ body {
     filter: url(#glass-distortion);
     -webkit-filter: url(#glass-distortion);
     pointer-events: none;
+  }
+
+  /* --- Sidebar liquid glass wrapper ---
+     Extremely translucent backdrop so the page gradients bleed through;
+     right edge drawn with inset box-shadow instead of a hard border. */
+  .sidebar-glass {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* --- Active nav item glass pill ---
+     Multi-layer inset shadows simulate the top/bottom edge highlights and
+     depth shadows of a glass bead — adapted from the liquid-glass CSS
+     reference snippet (dark-mode reflex values). */
+  .nav-item-active-glass {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      inset 2px 1px 0px -1px rgba(255, 255, 255, 0.27),
+      inset -1.5px -1px 0px -1px rgba(255, 255, 255, 0.24),
+      inset -2px -6px 1px -5px rgba(255, 255, 255, 0.18),
+      inset -1px 2px 3px -1px rgba(0, 0, 0, 0.4),
+      inset 0px -4px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  /* --- Sliding nav pill transition ---
+     Matches the switcher::after cubic-bezier from the reference snippet so
+     the indicator physically travels between items rather than blinking. */
+  .nav-pill-slide {
+    top: 0;
+    transition: transform 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1);
+  }
+
+  @keyframes navPillSquish {
+    0%   { scale: 1 1; }
+    50%  { scale: 1 1.08; }
+    100% { scale: 1 1; }
+  }
+
+  .nav-pill-squish {
+    animation: navPillSquish 440ms ease;
   }
 
   /* --- Pill-shaped status badges --- */

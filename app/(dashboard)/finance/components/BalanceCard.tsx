@@ -10,7 +10,7 @@ export function BalanceCard() {
   const { data, isLoading, isError } = useBalance();
 
   return (
-    <div className="relative card-premium-orange p-4 min-h-[120px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
+    <div className="relative card-premium-orange p-4 h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
       <div className="relative z-10 h-full flex flex-col justify-between">
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-white/50 tracking-widest uppercase">

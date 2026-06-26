@@ -5,10 +5,6 @@ export default function AnalysisPage() {
   return (
     <main className="flex-1 p-10 overflow-y-auto relative z-10">
       <div className="space-y-12">
-        <div className="max-w-5xl flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-white tracking-tight">Analysis</h1>
-        </div>
-
         <section className="max-w-5xl">
           <div className="card-liquid-glass p-6 min-h-[320px] flex flex-col">
             <div className="flex justify-between items-center mb-4">
