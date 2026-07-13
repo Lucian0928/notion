@@ -35,6 +35,19 @@ export interface RecentTransaction {
   amount: number;
   date: string;
   type: string;
+  /** "TWD" | "USD" — rows created before the Currency field default to "TWD". */
+  currency: string;
+}
+
+export interface NetWorthResponse {
+  /** twdTotal + usdTotal × rate; equals twdTotal when rate is unavailable. */
+  netWorthTWD: number;
+  /** Sum of all TWD account balances (signed — liabilities are negative). */
+  twdTotal: number;
+  /** Sum of all USD account balances, in USD. */
+  usdTotal: number;
+  /** Live USD→TWD rate, or null if the quote fetch failed. */
+  rate: number | null;
 }
 
 export interface RecentTransactionsResponse {
@@ -74,6 +87,8 @@ export interface Account {
   currentBalance: number;
   initialBalance: number;
   background: string;
+  /** "TWD" | "USD" — accounts created before the Currency field default to "TWD". */
+  currency: string;
 }
 
 export interface AccountsResponse {
@@ -85,6 +100,7 @@ export interface CreateAccountRequest {
   cardNumber: string;
   initialBalance: number;
   background: string;
+  currency: string;
 }
 
 export interface CreateAccountResponse {
@@ -97,6 +113,7 @@ export interface UpdateAccountRequest {
   cardNumber: string;
   initialBalance: number;
   background: string;
+  currency: string;
 }
 
 export interface UpdateAccountResponse {

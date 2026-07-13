@@ -2,8 +2,9 @@
 
 import { useRecentTransactions } from "../hooks/useRecentTransactions";
 
-function formatCurrency(amount: number) {
-  return "$" + amount.toLocaleString("en-US", { minimumFractionDigits: 2 });
+function formatCurrency(amount: number, currency: string) {
+  const prefix = currency === "USD" ? "US$" : "$";
+  return prefix + amount.toLocaleString("en-US", { minimumFractionDigits: 2 });
 }
 
 function formatDate(dateStr: string) {
@@ -52,7 +53,7 @@ export function RecentTransactionsTable({ className = "" }: { className?: string
               {data.transactions.map((t) => (
                 <tr key={t.id} className="border-t border-white/5">
                   <td className="py-3 text-white">{t.name || "—"}</td>
-                  <td className="py-3 text-white">{formatCurrency(t.amount)}</td>
+                  <td className="py-3 text-white">{formatCurrency(t.amount, t.currency)}</td>
                   <td className="py-3 text-neutral-400">{formatDate(t.date)}</td>
                   <td className="py-3">
                     <span className={TYPE_BADGE_CLASS[t.type] ?? "badge-pill"}>

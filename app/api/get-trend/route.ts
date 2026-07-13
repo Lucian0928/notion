@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAmountTWD } from "@/lib/amounts";
 import { getLastNMonthsLabels } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type { ApiErrorResponse, TrendMonth, TrendResponse } from "@/types/notion";
@@ -40,7 +41,7 @@ export async function GET() {
       let income = 0;
       let expense = 0;
       for (const page of results[i]) {
-        const amount = page.properties.Amount?.number ?? 0;
+        const amount = getAmountTWD(page);
         const type = page.properties.Type?.select?.name;
         if (type === "Income") income += amount;
         if (type === "Expense") expense += amount;

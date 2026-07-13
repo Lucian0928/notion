@@ -16,6 +16,7 @@ export function AccountModal({ account, onClose }: { account?: Account; onClose:
   const { data: backgroundsData } = useCardBackgrounds();
   const backgroundOptions = backgroundsData?.backgrounds ?? [];
   const [background, setBackground] = useState(account?.background ?? "");
+  const [currency, setCurrency] = useState(account?.currency ?? "TWD");
 
   const createAccount = useCreateAccount();
   const updateAccount = useUpdateAccount();
@@ -33,6 +34,7 @@ export function AccountModal({ account, onClose }: { account?: Account; onClose:
           cardNumber,
           initialBalance: Number(initialBalance) || 0,
           background: resolvedBackground,
+          currency,
         },
         { onSuccess: onClose }
       );
@@ -43,6 +45,7 @@ export function AccountModal({ account, onClose }: { account?: Account; onClose:
           cardNumber,
           initialBalance: Number(initialBalance) || 0,
           background: resolvedBackground,
+          currency,
         },
         { onSuccess: onClose }
       );
@@ -96,6 +99,28 @@ export function AccountModal({ account, onClose }: { account?: Account; onClose:
             placeholder="0"
             className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-white outline-none focus:border-white/30"
           />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs font-bold text-neutral-400 tracking-widest uppercase">
+            Currency
+          </label>
+          <div className="flex gap-2">
+            {["TWD", "USD"].map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setCurrency(option)}
+                className={`flex-1 rounded-lg border px-3 py-2 text-sm font-bold transition-colors ${
+                  currency === option
+                    ? "border-white/40 bg-white/15 text-white"
+                    : "border-white/10 bg-white/5 text-neutral-400 hover:text-white"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="space-y-1">

@@ -21,6 +21,7 @@ export async function GET() {
       currentBalance: page.properties["Current Balance"]?.formula?.number ?? 0,
       initialBalance: page.properties.Initial?.number ?? 0,
       background: page.properties.Background?.select?.name ?? "post-office",
+      currency: page.properties.Currency?.select?.name ?? "TWD",
     }));
 
     return NextResponse.json<AccountsResponse>({ accounts });

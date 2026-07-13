@@ -21,6 +21,7 @@ export async function GET() {
       amount: page.properties.Amount?.number ?? 0,
       date: page.properties.Date?.date?.start ?? "",
       type: page.properties.Type?.select?.name ?? "",
+      currency: page.properties.Currency?.select?.name ?? "TWD",
     }));
 
     return NextResponse.json<RecentTransactionsResponse>({ transactions });

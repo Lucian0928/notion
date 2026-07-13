@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAmountTWD } from "@/lib/amounts";
 import { getMonthRange } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type { ApiErrorResponse, IncomeResponse } from "@/types/notion";
@@ -21,7 +22,7 @@ export async function GET() {
       },
     });
 
-    const total = pages.reduce((sum, page) => sum + (page.properties.Amount?.number ?? 0), 0);
+    const total = pages.reduce((sum, page) => sum + getAmountTWD(page), 0);
 
     return NextResponse.json<IncomeResponse>({ total });
   } catch (error) {

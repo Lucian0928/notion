@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAmountTWD } from "@/lib/amounts";
 import { getExpenseCategoryMap, getFirstRelationId, UNCATEGORIZED_LABEL } from "@/lib/categories";
 import { getMonthRange, getYearRange } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
@@ -54,7 +55,7 @@ export async function GET(request: NextRequest) {
 
     const totals = new Map<string, number>();
     for (const page of pages) {
-      const amount = page.properties.Amount?.number ?? 0;
+      const amount = getAmountTWD(page);
       const categoryId = getFirstRelationId(page, "Expense Categories");
       const name = (categoryId && categoryMap.get(categoryId)) || UNCATEGORIZED_LABEL;
       totals.set(name, (totals.get(name) ?? 0) + amount);

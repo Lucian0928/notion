@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAmountTWD } from "@/lib/amounts";
 import { getMonthRange } from "@/lib/dateRanges";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type { ApiErrorResponse, ExpenseResponse } from "@/types/notion";
@@ -7,7 +8,7 @@ import type { NotionPage } from "@/types/notion";
 export const revalidate = 300;
 
 function sumAmount(pages: NotionPage[]) {
-  return pages.reduce((sum, page) => sum + (page.properties.Amount?.number ?? 0), 0);
+  return pages.reduce((sum, page) => sum + getAmountTWD(page), 0);
 }
 
 function expenseFilter(start: string, end: string) {

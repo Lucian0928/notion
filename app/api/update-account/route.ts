@@ -15,6 +15,7 @@ export async function PATCH(request: Request) {
     const cardNumber = body.cardNumber?.trim();
     const initialBalance = body.initialBalance ?? 0;
     const background = body.background?.trim();
+    const currency = body.currency === "USD" ? "USD" : "TWD";
 
     if (!id || !cardName || !cardNumber || !background) {
       throw new NotionApiError("Account ID, Card Name, Card Number, and Background are required", 400);
@@ -36,6 +37,7 @@ export async function PATCH(request: Request) {
           "Card Number": { rich_text: [{ text: { content: cardNumber } }] },
           Initial: { number: initialBalance },
           Background: { select: { name: background } },
+          Currency: { select: { name: currency } },
         },
       }),
     });

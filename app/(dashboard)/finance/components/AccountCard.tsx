@@ -1,15 +1,16 @@
 import { forwardRef } from "react";
 import type { Account } from "@/types/notion";
 
-function formatBalance(amount: number) {
-  return "NTD " + amount.toLocaleString("en-US", { minimumFractionDigits: 0 });
+function formatBalance(amount: number, currency: string) {
+  const prefix = currency === "USD" ? "USD " : "NTD ";
+  return prefix + amount.toLocaleString("en-US", { minimumFractionDigits: 0 });
 }
 
 export const AccountCard = forwardRef<
   HTMLButtonElement,
   { account: Account; onClick: () => void; isActive: boolean }
 >(function AccountCard({ account, onClick, isActive }, ref) {
-  const { id, cardName, cardNumber, currentBalance, background } = account;
+  const { id, cardName, cardNumber, currentBalance, background, currency } = account;
 
   return (
     <button
@@ -33,7 +34,7 @@ export const AccountCard = forwardRef<
           {cardName}
         </span>
         <span className="shrink-0 font-card-mono text-lg text-white">
-          {formatBalance(currentBalance)}
+          {formatBalance(currentBalance, currency)}
         </span>
       </div>
 

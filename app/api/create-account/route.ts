@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     const cardNumber = body.cardNumber?.trim();
     const initialBalance = body.initialBalance ?? 0;
     const background = body.background?.trim() || "post-office";
+    const currency = body.currency === "USD" ? "USD" : "TWD";
 
     if (!cardName || !cardNumber) {
       throw new NotionApiError("Card Name and Card Number are required", 400);
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
           Initial: { number: initialBalance },
           Status: { select: { name: "Spendable" } },
           Background: { select: { name: background } },
+          Currency: { select: { name: currency } },
         },
       }),
     });
