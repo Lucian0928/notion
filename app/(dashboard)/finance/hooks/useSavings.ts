@@ -1,9 +1,9 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type { AccountsResponse } from "@/types/notion";
+import type { BalanceResponse } from "@/types/notion";
 
-async function fetchSavings(): Promise<AccountsResponse> {
+async function fetchSavings(): Promise<BalanceResponse> {
   const res = await fetch("/api/get-savings");
   const data = await res.json();
 
@@ -15,12 +15,5 @@ async function fetchSavings(): Promise<AccountsResponse> {
 }
 
 export function useSavings() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["savings"],
-    queryFn: fetchSavings,
-  });
-
-  const savings = data?.accounts[0];
-
-  return { savings, isLoading, isError };
+  return useQuery({ queryKey: ["savings"], queryFn: fetchSavings });
 }

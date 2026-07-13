@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { fetchUsdTwdRate, sumBalancesTWD } from "@/lib/fx";
 import { NotionApiError, queryNotionDatabase } from "@/lib/notion";
 import type { ApiErrorResponse, BalanceResponse } from "@/types/notion";
 
@@ -8,17 +9,21 @@ export async function GET() {
   const databaseId = process.env.accounts_database_id ?? "";
 
   try {
-    const pages = await queryNotionDatabase(databaseId, {
-      filter: {
-        property: "Status",
-        select: { equals: "Spendable" },
-      },
-    });
+    const [pages, rate] = await Promise.all([
+      queryNotionDatabase(databaseId, {
+        filter: {
+          property: "Status",
+          select: { equals: "Spendable" },
+        },
+      }),
+      fetchUsdTwdRate(),
+    ]);
 
-    const total = pages.reduce((sum, page) => {
-      const balance = page.properties["Current Balance"]?.formula?.number ?? 0;
-      return sum + balance;
-    }, 0);
+    const accounts = pages.map((page) => ({
+      balance: page.properties["Current Balance"]?.formula?.number ?? 0,
+      currency: page.properties.Currency?.select?.name ?? "TWD",
+    }));
+    const total = sumBalancesTWD(accounts, rate);
 
     return NextResponse.json<BalanceResponse>({ total });
   } catch (error) {

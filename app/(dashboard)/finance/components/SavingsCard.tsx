@@ -7,7 +7,7 @@ function formatCurrency(amount: number) {
 }
 
 export function SavingsCard() {
-  const { savings, isLoading, isError } = useSavings();
+  const { data, isLoading, isError } = useSavings();
 
   return (
     <div className="relative card-premium-purple p-4 h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1 duration-300">
@@ -40,11 +40,7 @@ export function SavingsCard() {
                 isLoading ? "animate-pulse" : ""
               }`}
             >
-              {isLoading
-                ? "Loading..."
-                : savings
-                ? formatCurrency(savings.currentBalance)
-                : "No savings account"}
+              {isLoading ? "Loading..." : formatCurrency(data!.total)}
             </div>
           )}
         </div>

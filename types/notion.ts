@@ -39,17 +39,6 @@ export interface RecentTransaction {
   currency: string;
 }
 
-export interface NetWorthResponse {
-  /** twdTotal + usdTotal × rate; equals twdTotal when rate is unavailable. */
-  netWorthTWD: number;
-  /** Sum of all TWD account balances (signed — liabilities are negative). */
-  twdTotal: number;
-  /** Sum of all USD account balances, in USD. */
-  usdTotal: number;
-  /** Live USD→TWD rate, or null if the quote fetch failed. */
-  rate: number | null;
-}
-
 export interface RecentTransactionsResponse {
   transactions: RecentTransaction[];
 }

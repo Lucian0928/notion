@@ -5,7 +5,6 @@ import { IncomeCard } from "./components/IncomeCard";
 import { SavingsCard } from "./components/SavingsCard";
 import { StocksCard } from "./components/StocksCard";
 import { MonthlyCategoryDonut } from "./components/MonthlyCategoryDonut";
-import { NetWorthCard } from "./components/NetWorthCard";
 import { RecentTransactionsTable } from "./components/RecentTransactionsTable";
 
 export default function FinancePage() {
@@ -15,8 +14,6 @@ export default function FinancePage() {
         <AccountsSection />
 
         <section className="max-w-5xl flex flex-col gap-8">
-          <NetWorthCard />
-
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:basis-2/3 min-w-0 grid grid-cols-2 gap-4">
               <BalanceCard />
